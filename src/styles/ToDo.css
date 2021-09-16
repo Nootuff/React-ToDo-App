@@ -1,0 +1,14 @@
+.ToDo{
+    border: 1px solid blue;
+    width: 80%;
+    margin: auto;
+}
+
+.ToDo-form{
+    border: 1px solid red;
+    display: none;
+}
+
+.mystyle{
+    display: block;
+}
