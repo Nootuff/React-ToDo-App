@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import EditTodoForm from "./EditTodoForm";
 import '../styles/ToDo.css';
 
 class Todo extends Component {
   constructor(props) {
     super(props);
+    this.state = { taskEdit: ""};
     this.handleDelete = this.handleDelete.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
     this.showEdit = this.showEdit.bind(this);
@@ -14,14 +14,13 @@ class Todo extends Component {
     this.props.destroyerFunc(this.props.id);
   }
 
-  handleEdit() {
-    alert("hello")
+  handleEdit(event) {
+    event.preventDefault(); 
+   console.log("submitted")
   }
 
   showEdit() {
-    var element = document.getElementsByClassName("ToDo-form");
-    element[0].classList.toggle("mystyle");
-
+    document.getElementById(this.props.id).classList.toggle("mystyle");
   }
 
   render() {
@@ -30,16 +29,17 @@ class Todo extends Component {
         <h2>{this.props.body}</h2>
         <button onClick={this.showEdit}>Show edit form</button>
         <button onClick={this.handleDelete}>X</button>
-        <div className="ToDo-form">
+        <div className="ToDo-form" id={this.props.id}>
           <form>
             <label htmlFor="editBody">Edit task </label>
             <input
               type="text"
               name="editBody" /*Name must be the same as state value the input is meant to update.*/
-              value={this.props.body}
+              placeholder={this.props.body}
               id="editBody"
+              className="ToDo-edit-input"
             />
-            <button onClick>Submit</button>
+            <button onClick={this.handleEdit}>Submit</button>
           </form>
           <button onClick={this.showEdit}>Close</button>
         </div>
