@@ -10,34 +10,48 @@ class TodoList extends Component {
         };
         this.create = this.create.bind(this);
         this.remove = this.remove.bind(this);
+        this.edit = this.edit.bind(this);
     }
 
-    create(newToDo) {
+    create(lamp) {
         this.setState({
-            toDos: [...this.state.toDos, newToDo]
+            toDos: [...this.state.toDos, lamp]
         })
-      }
+    }
 
-      remove(passedId) {
+    remove(passedId) {
         this.setState({
-          toDos: this.state.toDos.filter(toDo => toDo.id !== passedId)
+            toDos: this.state.toDos.filter(toDo => toDo.id !== passedId)
         });
-      }
+    }
+
+    edit(newEdit, editId) {
+        let stateHolder = [...this.state.toDos];
+        for (let i = 0; i < stateHolder.length; i++) {
+            if (stateHolder[i].id === editId) {
+                stateHolder[i].taskBody = newEdit;
+            }
+        }
+        this.setState({
+            toDos: stateHolder
+        })
+    }
 
     render() {
-        const toDoList = this.state.toDos.map(value => 
-            <Todo 
-            key={value.id} 
-            id={value.id} 
-            body={value.taskBody}
-            destroyerFunc={this.remove}
+        const toDoList = this.state.toDos.map(value =>
+            <Todo
+                key={value.id}
+                id={value.id}
+                body={value.taskBody}
+                destroyerFunc={this.remove}
+                changeFunc={this.change}
+                editFunc={this.edit}
             />
         )
         return (
             <div className="">
-                <h2>TodoList Component</h2>
                 <NewTodoForm creatorFunc={this.create} />
-               {toDoList}
+                {toDoList}
             </div>
         )
     }
