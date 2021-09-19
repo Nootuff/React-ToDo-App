@@ -13,20 +13,12 @@
     display: block;
 }
 
-.done{
+.completed{
     text-decoration: line-through;
+    color: gray;
 }
-
-.fade-animate {
-    animation: fade-out 0.6s forwards;
-  }
-  
-  @keyframes fade-out {
-    0%{opacity: 1;}
-    70%{opacity: 0;}
-    100%{opacity: 0;}
-  }
 
 .ToDo-edit-input{
     border: 1px solid green;
 }
+

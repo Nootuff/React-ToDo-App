@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import NewTodoForm from "./NewTodoForm";
 import Todo from "./Todo";
+import '../styles/ToDoList.css';
 
-class TodoList extends Component {
+class ToDoList extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -10,10 +11,12 @@ class TodoList extends Component {
         };
         this.create = this.create.bind(this);
         this.remove = this.remove.bind(this);
+        this.removeComplete = this.removeComplete.bind(this);
         this.edit = this.edit.bind(this);
+        this.toggleCompletion = this.toggleCompletion.bind(this);
     }
 
-    create(lamp) {
+    create(lamp) { //Lamp cloud be anything, just symbolizes the first passed argument.
         this.setState({
             toDos: [...this.state.toDos, lamp]
         })
@@ -25,11 +28,42 @@ class TodoList extends Component {
         });
     }
 
-    edit(newEdit, editId) {
+    removeComplete() {
+        let unCompleted = [];
+        for (let i = 0; i < this.state.toDos.length; i++) {
+            if (this.state.toDos[i].completed === false) {
+                unCompleted.push(this.state.toDos[i])
+            } 
+        }
+        let completed = document.querySelectorAll(".completed");
+        for (let i = 0; i < completed.length; i++) {
+            completed[i].classList.add("fade-animate");
+        }
+        setTimeout(function () {
+            this.setState({
+                toDos: unCompleted
+            })
+        }.bind(this), 500)
+    }
+
+    edit(newBody, newNotes, editId) {
+        let stateHolder = [...this.state.toDos]; //Holds everything currently in state.
+        for (let i = 0; i < stateHolder.length; i++) { //Loop through everything in stateHolder.
+            if (stateHolder[i].id === editId) { //If the id of the current object is the same as the id that is passed in...
+                stateHolder[i].taskBody = newBody; //Update its body with the new body that was passed in.
+                stateHolder[i].taskNotes = newNotes; 
+            }
+        }
+        this.setState({
+            toDos: stateHolder //Set the toDos state to the updated stateHolder.
+        })
+    }
+
+    toggleCompletion(completedId) {
         let stateHolder = [...this.state.toDos];
         for (let i = 0; i < stateHolder.length; i++) {
-            if (stateHolder[i].id === editId) {
-                stateHolder[i].taskBody = newEdit;
+            if (stateHolder[i].id === completedId) {
+                stateHolder[i].completed = !stateHolder[i].completed;
             }
         }
         this.setState({
@@ -38,23 +72,28 @@ class TodoList extends Component {
     }
 
     render() {
-        const toDoList = this.state.toDos.map(value =>
+        const allToDos = this.state.toDos.map(value =>
             <Todo
                 key={value.id}
                 id={value.id}
                 body={value.taskBody}
+                notes={value.taskNotes}
+                completed={value.completed}
                 destroyerFunc={this.remove}
-                changeFunc={this.change}
+                completeToggle={this.toggleCompletion}
                 editFunc={this.edit}
             />
         )
         return (
             <div className="">
                 <NewTodoForm creatorFunc={this.create} />
-                {toDoList}
+                <button onClick={this.removeComplete}>Delete all Complete</button>
+                <ul>
+                    {allToDos}
+                </ul>
             </div>
         )
     }
 }
 
-export default TodoList;
+export default ToDoList;
