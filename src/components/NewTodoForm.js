@@ -13,6 +13,8 @@ class NewTodoForm extends Component {
   }
 
   handleChange(event) {
+    if(event.value)
+    console.log(event.value)
     this.setState({
       [event.target.name]: event.target.value
     });
@@ -26,6 +28,8 @@ class NewTodoForm extends Component {
   }
 
   render() {
+
+
     return (
       <form onSubmit={this.handleSubmit} className="">
         <h2>Enter New ToDo</h2>
@@ -42,7 +46,9 @@ class NewTodoForm extends Component {
         <br />
         <textarea id="taskNotes" value={this.state.taskNotes} name="taskNotes" onChange={this.handleChange} rows="4" cols="50" />
         <br />
-        <button>I need to do this</button>
+       
+       {this.state.taskBody && <button>I need to do this</button>} {/*This is how to you write a ternay operator with only one condition in react */}
+        {/*{(this.state.taskBody) ? <button>I need to do this</button>}*/}
       </form>
     )
   }

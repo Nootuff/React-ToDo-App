@@ -58,7 +58,7 @@ class Todo extends Component {
         <button onClick={this.toggleEdit}>Show edit form</button>
         <button onClick={this.handleDelete}>X</button>
         <div className={"ToDo-form ToDo-form-" + currentId} >
-          <form>
+          <form onSubmit={this.handleEdit}>
             <label htmlFor="editBody">Edit task </label>
             <input
               type="text"
@@ -72,7 +72,7 @@ class Todo extends Component {
             <br />
             <textarea id="editNotes" value={this.state.editNotes} name="editNotes" onChange={this.handleChange} rows="4" cols="50" />
             <br />
-            <button onClick={this.handleEdit}>Submit</button>
+            {this.state.editBody && <button>Update</button>}
           </form>
           <button onClick={this.toggleEdit}>Close</button>
         </div>
