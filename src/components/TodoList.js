@@ -76,10 +76,10 @@ class ToDoList extends Component {
             <Todo
             data={value}
                 key={value.id}
-                id={value.id}
+                //id={value.id}
                 //body={value.taskBody}
                 //notes={value.taskNotes}
-                completed={value.completed}
+                //completed={value.completed}
                 destroyerFunc={this.remove}
                 completeToggle={this.toggleCompletion}
                 editFunc={this.edit}

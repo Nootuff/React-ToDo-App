@@ -18,9 +18,9 @@ class Todo extends Component {
   }
 
   handleDelete() {
-    document.getElementById(this.props.id).classList.add("fade-animate");
+    document.getElementById(this.props.data.id).classList.add("fade-animate");
     setTimeout(function () {
-      this.props.destroyerFunc(this.props.id);
+      this.props.destroyerFunc(this.props.data.id);
     }.bind(this), 500)
   }
 
@@ -32,23 +32,23 @@ class Todo extends Component {
 
   handleEdit(event) {
     event.preventDefault();
-    let editId = this.props.id;
+    let editId = this.props.data.id;
     this.props.editFunc(this.state.editBody, this.state.editNotes, editId)
     //this.setState({ editBody: "",  editNotes: "" });
     this.toggleEdit()
   }
 
   handleToggle(){
-  this.props.completeToggle(this.props.id)
+  this.props.completeToggle(this.props.data.id)
   }
 
   toggleEdit() {
-    let form = document.getElementsByClassName("ToDo-form-" + this.props.id);
+    let form = document.getElementsByClassName("ToDo-form-" + this.props.data.id);
     form[0].classList.toggle("show");
   }
 
   render() {
-    const currentId = this.props.id;
+    const currentId = this.props.data.id;
     const completeOrNo = this.props.data.completed ? "completed" : ""
     return (
       <li className={"ToDo " + completeOrNo} id={currentId}>
