@@ -6,8 +6,8 @@ class Todo extends Component {
   constructor(props) {
     super(props);
     this.state = { 
-      editBody: "",
-      editNotes: ""
+      editBody: this.props.data.taskBody,
+      editNotes: this.props.data.taskNotes
   };
     this.handleDelete = this.handleDelete.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
@@ -34,7 +34,7 @@ class Todo extends Component {
     event.preventDefault();
     let editId = this.props.id;
     this.props.editFunc(this.state.editBody, this.state.editNotes, editId)
-    this.setState({ editBody: "",  editNotes: "" });
+    //this.setState({ editBody: "",  editNotes: "" });
     this.toggleEdit()
   }
 
@@ -49,11 +49,11 @@ class Todo extends Component {
 
   render() {
     const currentId = this.props.id;
-    const completeOrNo = this.props.completed ? "completed" : ""
+    const completeOrNo = this.props.data.completed ? "completed" : ""
     return (
       <li className={"ToDo " + completeOrNo} id={currentId}>
-        <h2 className={"Todo-body-" + currentId + " " + completeOrNo} onClick={this.handleToggle}>{this.props.body}</h2>
-        <p>{this.props.notes}</p>
+        <h2 className={"Todo-body-" + currentId + " " + completeOrNo} onClick={this.handleToggle}>{this.props.data.taskBody}</h2>
+        <p>{this.props.data.taskNotes}</p>
         <button onClick={this.handleToggle}>done</button>
         <button onClick={this.toggleEdit}>Show edit form</button>
         <button onClick={this.handleDelete}>X</button>

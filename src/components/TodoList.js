@@ -74,10 +74,11 @@ class ToDoList extends Component {
     render() {
         const allToDos = this.state.toDos.map(value =>
             <Todo
+            data={value}
                 key={value.id}
                 id={value.id}
-                body={value.taskBody}
-                notes={value.taskNotes}
+                //body={value.taskBody}
+                //notes={value.taskNotes}
                 completed={value.completed}
                 destroyerFunc={this.remove}
                 completeToggle={this.toggleCompletion}
