@@ -1,7 +1,8 @@
 .ToDo{
-    border: 1px solid blue;
+  border-radius: 5px;
     width: 80%;
     margin: auto;
+    margin-bottom: 10px;
 }
 
 .ToDo-form{
@@ -20,5 +21,17 @@
 
 .ToDo-edit-input{
     border: 1px solid green;
+}
+
+.High{
+    border: 4px solid red;
+}
+
+.Medium{
+    border: 4px solid blue;
+}
+
+.Low{
+    border: 4px solid green;
 }
 

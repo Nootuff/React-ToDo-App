@@ -52,8 +52,11 @@ class Todo extends Component {
   render() {
     const currentId = this.props.data.id;
     const completeOrNo = this.props.data.completed ? "completed" : ""
+    const priorityLvl = this.props.data.priority;
+    const priorityColor = priorityLvl == "High" ? "High" : priorityLvl == "Medium" ? "Medium" : "Low";
+
     return (
-      <li className={"ToDo " + completeOrNo} id={currentId}>
+      <li className={"ToDo " + completeOrNo + " " + priorityColor} id={currentId}>
         <h2 className={"Todo-body-" + currentId + " " + completeOrNo} onClick={this.handleToggle}>{this.props.data.taskBody}</h2>
         <p>{this.props.data.taskNotes}</p>
         <p>{this.props.data.priority}</p>
@@ -66,7 +69,7 @@ class Todo extends Component {
             <input
               type="text"
               name="editBody" /*Name must be the same as state value the input is meant to update.*/
-              //              placeholder={this.props.body}
+              //placeholder={this.props.body}
               id="editBody"
               className="ToDo-edit-input"
               value={this.state.editBody}
