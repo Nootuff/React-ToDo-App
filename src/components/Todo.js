@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import '../styles/ToDo.css';
-//import { Test } from "../HelperFunctions"
+import { showToggler } from "../HelperFunctions"
 
 class Todo extends Component {
   constructor(props) {
@@ -45,10 +45,11 @@ class Todo extends Component {
 
   toggleEdit() {
     let form = document.getElementsByClassName("ToDo-form-" + this.props.data.id);
+    //showToggler(this.props.data.id)
     form[0].classList.toggle("show");
     this.setState({ editBody: this.props.data.taskBody, editNotes: this.props.data.taskNotes, editPriority: this.props.data.priority });
   }
-
+  
   render() {
     const currentId = this.props.data.id;
     const completeOrNo = this.props.data.completed ? "completed" : ""
@@ -56,12 +57,13 @@ class Todo extends Component {
     const priorityColor = priorityLvl == "High" ? "High" : priorityLvl == "Medium" ? "Medium" : "Low";
 
     return (
-      <li className={"ToDo " + completeOrNo + " " + priorityColor} id={currentId}>
+      <li className={"ToDo " + " " + priorityColor} id={currentId}>
         <h2 className={"Todo-body-" + currentId + " " + completeOrNo} onClick={this.handleToggle}>{this.props.data.taskBody}</h2>
-        <p>{this.props.data.taskNotes}</p>
+        <p className={completeOrNo}
+        >{this.props.data.taskNotes}</p>
         <p>{this.props.data.priority}</p>
         <button onClick={this.handleToggle}>done</button>
-        <button onClick={this.toggleEdit}>Show edit form</button>
+        <button className="showHide" onClick={this.toggleEdit}>Show edit form</button>
         <button onClick={this.handleDelete}>X</button>
         <div className={"ToDo-form ToDo-form-" + currentId} >
           <form onSubmit={this.handleEdit}>
@@ -76,7 +78,7 @@ class Todo extends Component {
               onChange={this.handleChange}
             />
             <br />
-            <label htmlFor="priority">Choose priority </label>
+            <label htmlFor="priority">Choose priority</label>
             <select
               name="editPriority"
               className="TodoForm-select"

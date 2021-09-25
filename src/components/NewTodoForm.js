@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { v4 as uuidv4 } from 'uuid'; //Imports the uuid npm package. 
+import { showToggler } from "../HelperFunctions"
 
 class NewTodoForm extends Component {
   constructor(props) {
@@ -12,14 +13,20 @@ class NewTodoForm extends Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleToggle = this.handleToggle.bind(this);
   }
 
   handleChange(event) {
-    if (event.value)
-      console.log(event.value)
     this.setState({
       [event.target.name]: event.target.value
     });
+  }
+
+  handleToggle() {
+    let form = document.getElementsByClassName("ToDo-form");
+    //showToggler(this.props.data.id)
+    form[0].classList.toggle("show");
+    //this.setState({ editBody: this.props.data.taskBody, editNotes: this.props.data.taskNotes, editPriority: this.props.data.priority });
   }
 
   handleSubmit(event) {
@@ -55,17 +62,19 @@ class NewTodoForm extends Component {
           <option value="Medium">Medium</option>
           <option value="Low">Low</option>
         </select>
-        <br />
-        <textarea
-          id="taskNotes"
-          name="taskNotes"
-          value={this.state.taskNotes}
-          onChange={this.handleChange}
-          rows="4" cols="50"
-        />
+        <p className="showHide" onClick={this.handleToggle}>Notes</p>
+        <div className="ToDo-form">
+          <textarea
+            id="taskNotes"
+            name="taskNotes"
+            value={this.state.taskNotes}
+            onChange={this.handleChange}
+            rows="4" cols="50"
+          />
+        </div>
         <br />
 
-        {this.state.taskBody && <button>I need to do this</button>} {/*This is how to you write a ternay operator with only one condition in react */}
+        {this.state.taskBody && <button onClick={this.handleSubmit} >I need to do this</button>} {/*This is how to you write a ternay operator with only one condition in react */}
         {/*{(this.state.taskBody) ? <button>I need to do this</button>}*/}
       </form>
     )

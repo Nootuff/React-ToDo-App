@@ -8,4 +8,11 @@
       alert("Test")
   }
 
-export { Test }; 
+  function showToggler(id) {
+   let form = document.getElementsByClassName("ToDo-form-" + id);
+   //alert(id)
+   //form[0].classList.toggle("show");
+   //this.setState({ editBody: this.props.data.taskBody, editNotes: this.props.data.taskNotes, editPriority: this.props.data.priority });
+  }
+
+export { Test, showToggler }; 
