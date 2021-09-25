@@ -6,15 +6,17 @@ class NewTodoForm extends Component {
     super(props);
     this.state = {
       taskBody: "",
-      taskNotes: ""
+      taskNotes: "",
+      completed: false,
+      priority: "Medium"
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(event) {
-    if(event.value)
-    console.log(event.value)
+    if (event.value)
+      console.log(event.value)
     this.setState({
       [event.target.name]: event.target.value
     });
@@ -22,32 +24,48 @@ class NewTodoForm extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    const newToDo = { ...this.state, id: uuidv4(), completed: false }
+    const newToDo = { ...this.state, id: uuidv4() }
     this.props.creatorFunc(newToDo);
-    this.setState({ taskBody: "", taskNotes: "" }); //Clears the form by setting state back to its defaults. 
+    this.setState({ taskBody: "", taskNotes: "", priority: "Medium" }); //Clears the form by setting state back to its defaults. 
   }
 
   render() {
-
-
     return (
       <form onSubmit={this.handleSubmit} className="">
         <h2>Enter New ToDo</h2>
-
         <label htmlFor="taskBody">Task </label>
         <input
           type="text"
-          placeholder="New todo"
+          id="taskBody"
           name="taskBody" /*Name must be the same as state value the input is meant to update.*/
           value={this.state.taskBody}
-          id="taskBody"
+          placeholder="New todo"
           onChange={this.handleChange}
         />
         <br />
-        <textarea id="taskNotes" value={this.state.taskNotes} name="taskNotes" onChange={this.handleChange} rows="4" cols="50" />
+        <label htmlFor="priority">Choose priority </label>
+        <select
+          name="priority"
+          className="TodoForm-select"
+          //defaultValue={"Medium"}
+          value={this.state.priority}
+          onChange={this.handleChange}
+        >
+          <option value="High">High</option>
+          <option value="Medium">Medium</option>
+          <option value="Low">Low</option>
+        </select>
         <br />
-       
-       {this.state.taskBody && <button>I need to do this</button>} {/*This is how to you write a ternay operator with only one condition in react */}
+        <textarea
+          id="taskNotes"
+          name="taskNotes"
+          value={this.state.taskNotes}
+          onChange={this.handleChange}
+          rows="4" cols="50"
+        />
+        <br />
+
+        {this.state.taskBody && <button>I need to do this</button>} {/*This is how to you write a ternay operator with only one condition in react */}
         {/*{(this.state.taskBody) ? <button>I need to do this</button>}*/}
       </form>
     )

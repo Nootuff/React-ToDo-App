@@ -46,12 +46,13 @@ class ToDoList extends Component {
         }.bind(this), 500)
     }
 
-    edit(newBody, newNotes, editId) {
+    edit(data, editId) {
         let stateHolder = [...this.state.toDos]; //Holds everything currently in state.
         for (let i = 0; i < stateHolder.length; i++) { //Loop through everything in stateHolder.
             if (stateHolder[i].id === editId) { //If the id of the current object is the same as the id that is passed in...
-                stateHolder[i].taskBody = newBody; //Update its body with the new body that was passed in.
-                stateHolder[i].taskNotes = newNotes; 
+                stateHolder[i].taskBody = data.editBody; //Update its body with the new body that was passed in.
+                stateHolder[i].taskNotes = data.editNotes; 
+                stateHolder[i].priority = data.editPriority; 
             }
         }
         this.setState({
@@ -72,7 +73,7 @@ class ToDoList extends Component {
     }
 
     render() {
-        const allToDos = this.state.toDos.map(value =>
+        const allToDos = this.state.toDos.slice(0).reverse().map(value => //Runs map in reverse, newest ToDos displayed at top.
             <Todo
             data={value}
                 key={value.id}

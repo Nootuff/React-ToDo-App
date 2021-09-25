@@ -5,10 +5,11 @@ import '../styles/ToDo.css';
 class Todo extends Component {
   constructor(props) {
     super(props);
-    this.state = { 
+    this.state = {
       editBody: this.props.data.taskBody,
-      editNotes: this.props.data.taskNotes
-  };
+      editNotes: this.props.data.taskNotes,
+      editPriority: this.props.data.priority
+    };
     this.handleDelete = this.handleDelete.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
     this.toggleEdit = this.toggleEdit.bind(this);
@@ -33,18 +34,19 @@ class Todo extends Component {
   handleEdit(event) {
     event.preventDefault();
     let editId = this.props.data.id;
-    this.props.editFunc(this.state.editBody, this.state.editNotes, editId)
+    this.props.editFunc(this.state, editId)
     //this.setState({ editBody: "",  editNotes: "" });
     this.toggleEdit()
   }
 
-  handleToggle(){
-  this.props.completeToggle(this.props.data.id)
+  handleToggle() {
+    this.props.completeToggle(this.props.data.id)
   }
 
   toggleEdit() {
     let form = document.getElementsByClassName("ToDo-form-" + this.props.data.id);
     form[0].classList.toggle("show");
+    this.setState({ editBody: this.props.data.taskBody, editNotes: this.props.data.taskNotes, editPriority: this.props.data.priority });
   }
 
   render() {
@@ -54,6 +56,7 @@ class Todo extends Component {
       <li className={"ToDo " + completeOrNo} id={currentId}>
         <h2 className={"Todo-body-" + currentId + " " + completeOrNo} onClick={this.handleToggle}>{this.props.data.taskBody}</h2>
         <p>{this.props.data.taskNotes}</p>
+        <p>{this.props.data.priority}</p>
         <button onClick={this.handleToggle}>done</button>
         <button onClick={this.toggleEdit}>Show edit form</button>
         <button onClick={this.handleDelete}>X</button>
@@ -63,14 +66,33 @@ class Todo extends Component {
             <input
               type="text"
               name="editBody" /*Name must be the same as state value the input is meant to update.*/
-//              placeholder={this.props.body}
+              //              placeholder={this.props.body}
               id="editBody"
               className="ToDo-edit-input"
               value={this.state.editBody}
               onChange={this.handleChange}
             />
             <br />
-            <textarea id="editNotes" value={this.state.editNotes} name="editNotes" onChange={this.handleChange} rows="4" cols="50" />
+            <label htmlFor="priority">Choose priority </label>
+            <select
+              name="editPriority"
+              className="TodoForm-select"
+              //defaultValue={"Medium"}
+              value={this.state.editPriority}
+              onChange={this.handleChange}
+            >
+              <option value="High">High</option>
+              <option value="Medium">Medium</option>
+              <option value="Low">Low</option>
+            </select>
+            <br />
+            <textarea
+              id="editNotes"
+              value={this.state.editNotes}
+              name="editNotes"
+              onChange={this.handleChange}
+              rows="4" cols="50"
+            />
             <br />
             {this.state.editBody && <button>Update</button>}
           </form>
