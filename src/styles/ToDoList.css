@@ -3,12 +3,16 @@ ul{
   list-style-type: none;
 }
 
+textarea{
+  border: blueviolet 3px solid;
+  resize: none;
+}
+
 .showHide{
   padding: 2px;
 border: 2px solid blueviolet;
 background: none;
 display: inline-block;
-
 }
 
 .ToDo-form{

@@ -1,13 +1,21 @@
 .ToDo{
   border-radius: 5px;
   width: 80%;
-margin: auto;
+  margin: auto;
+  max-height: 500px;
+  overflow-y: scroll;
   margin-bottom: 10px;
 }
 
-.completed{
+.ToDo-text{
+  opacity: 1;
+  position: relative;
+  transition: all .5s ease-in-out;
+}
+
+.ToDo-text.completed{
   text-decoration: line-through;
-  color: gray;
+  opacity: 0.6;
 }
 
 .ToDo-edit-input{

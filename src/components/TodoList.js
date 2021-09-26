@@ -14,12 +14,29 @@ class ToDoList extends Component {
         this.removeComplete = this.removeComplete.bind(this);
         this.edit = this.edit.bind(this);
         this.toggleCompletion = this.toggleCompletion.bind(this);
+
+        this.dataRetrieval = this.dataRetrieval.bind(this);
+
     }
 
-    create(lamp) { //Lamp cloud be anything, just symbolizes the first passed argument.
+    create(data) { //Data could be anything, just symbolizes the first passed argument.
+        var holder = [...this.state.toDos, data]
         this.setState({
-            toDos: [...this.state.toDos, lamp]
+            toDos: [...this.state.toDos, data]
         })
+        window.localStorage.setItem('data', JSON.stringify(holder));
+    }
+
+    dataRetrieval() {
+        const retrievedData = localStorage.getItem('data')
+        const showMe = JSON.parse(localStorage.getItem("data"));
+        console.log(showMe)
+        /*
+         //alert("this")
+         this.setState({
+             toDos: retrievedData
+         })
+         */
     }
 
     remove(passedId) {
@@ -33,7 +50,7 @@ class ToDoList extends Component {
         for (let i = 0; i < this.state.toDos.length; i++) {
             if (this.state.toDos[i].completed === false) {
                 unCompleted.push(this.state.toDos[i])
-            } 
+            }
         }
         let completed = document.querySelectorAll(".completed");
         for (let i = 0; i < completed.length; i++) {
@@ -51,8 +68,8 @@ class ToDoList extends Component {
         for (let i = 0; i < stateHolder.length; i++) { //Loop through everything in stateHolder.
             if (stateHolder[i].id === editId) { //If the id of the current object is the same as the id that is passed in...
                 stateHolder[i].taskBody = data.editBody; //Update its body with the new body that was passed in.
-                stateHolder[i].taskNotes = data.editNotes; 
-                stateHolder[i].priority = data.editPriority; 
+                stateHolder[i].taskNotes = data.editNotes;
+                stateHolder[i].priority = data.editPriority;
             }
         }
         this.setState({
@@ -75,7 +92,7 @@ class ToDoList extends Component {
     render() {
         const allToDos = this.state.toDos.slice(0).reverse().map(value => //Runs map in reverse, newest ToDos displayed at top.
             <Todo
-            data={value}
+                data={value}
                 key={value.id}
                 //id={value.id}
                 //body={value.taskBody}
@@ -86,13 +103,15 @@ class ToDoList extends Component {
                 editFunc={this.edit}
             />
         )
+      
         return (
-            <div className="">
+            <div onLoad={this.dataRetrieval()} className="">
                 <NewTodoForm creatorFunc={this.create} />
                 <button onClick={this.removeComplete}>Delete all Complete</button>
                 <ul>
                     {allToDos}
                 </ul>
+
             </div>
         )
     }

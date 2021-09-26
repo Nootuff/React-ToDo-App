@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { v4 as uuidv4 } from 'uuid'; //Imports the uuid npm package. 
-import { showToggler } from "../HelperFunctions"
+//import { showToggler } from "../HelperFunctions"
 
 class NewTodoForm extends Component {
   constructor(props) {
@@ -33,6 +33,7 @@ class NewTodoForm extends Component {
     event.preventDefault();
     const newToDo = { ...this.state, id: uuidv4() }
     this.props.creatorFunc(newToDo);
+    this.handleToggle();
     this.setState({ taskBody: "", taskNotes: "", priority: "Medium" }); //Clears the form by setting state back to its defaults. 
   }
 

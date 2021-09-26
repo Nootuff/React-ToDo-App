@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import '../styles/ToDo.css';
-import { showToggler } from "../HelperFunctions"
+//import { showToggler } from "../HelperFunctions"
 
 class Todo extends Component {
   constructor(props) {
@@ -49,18 +49,17 @@ class Todo extends Component {
     form[0].classList.toggle("show");
     this.setState({ editBody: this.props.data.taskBody, editNotes: this.props.data.taskNotes, editPriority: this.props.data.priority });
   }
-  
+
   render() {
     const currentId = this.props.data.id;
     const completeOrNo = this.props.data.completed ? "completed" : ""
     const priorityLvl = this.props.data.priority;
-    const priorityColor = priorityLvl == "High" ? "High" : priorityLvl == "Medium" ? "Medium" : "Low";
+    const priorityColor = priorityLvl === "High" ? "High" : priorityLvl === "Medium" ? "Medium" : "Low";
 
     return (
-      <li className={"ToDo " + " " + priorityColor} id={currentId}>
-        <h2 className={"Todo-body-" + currentId + " " + completeOrNo} onClick={this.handleToggle}>{this.props.data.taskBody}</h2>
-        <p className={completeOrNo}
-        >{this.props.data.taskNotes}</p>
+      <li className={"ToDo" + " " + priorityColor} id={currentId}>
+        <h2 className={"ToDo-text Todo-body-" + currentId + " " + completeOrNo} onClick={this.handleToggle}>{this.props.data.taskBody}</h2>
+        <p className={"ToDo-text" + " " + completeOrNo}>{this.props.data.taskNotes}</p>
         <p>{this.props.data.priority}</p>
         <button onClick={this.handleToggle}>done</button>
         <button className="showHide" onClick={this.toggleEdit}>Show edit form</button>
