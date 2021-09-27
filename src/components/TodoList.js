@@ -7,7 +7,7 @@ class ToDoList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            toDos: [] //All created toDos will be stored in here. 
+            toDos: JSON.parse(localStorage.getItem("data")) || [] //All created toDos will be stored in here. 
         };
         this.create = this.create.bind(this);
         this.remove = this.remove.bind(this);
@@ -15,7 +15,7 @@ class ToDoList extends Component {
         this.edit = this.edit.bind(this);
         this.toggleCompletion = this.toggleCompletion.bind(this);
 
-        this.dataRetrieval = this.dataRetrieval.bind(this);
+       //this.onLoad = this.onLoad.bind(this);
 
     }
 
@@ -24,20 +24,27 @@ class ToDoList extends Component {
         this.setState({
             toDos: [...this.state.toDos, data]
         })
-        window.localStorage.setItem('data', JSON.stringify(holder));
+    window.localStorage.setItem('data', JSON.stringify(holder));
     }
 
-    dataRetrieval() {
-        const retrievedData = localStorage.getItem('data')
+    /*
+    onLoad() {
+       // const retrievedData = localStorage.getItem('data')
         const showMe = JSON.parse(localStorage.getItem("data"));
-        console.log(showMe)
-        /*
-         //alert("this")
-         this.setState({
-             toDos: retrievedData
-         })
-         */
-    }
+        //console.log(showMe)
+ 
+      // console.log(showMe)
+       /*this.setState({
+        toDos: [...showMe]
+    })
+    if(showMe !== null ){
+        for (let i = 0; i < showMe.length; i++) {
+            //allData.push(showMe[i])
+            console.log(showMe[i])
+            }
+        }
+    } 
+*/
 
     remove(passedId) {
         this.setState({
@@ -105,7 +112,7 @@ class ToDoList extends Component {
         )
       
         return (
-            <div onLoad={this.dataRetrieval()} className="">
+            <div /*onLoad={this.onLoad()}*/ className="">
                 <NewTodoForm creatorFunc={this.create} />
                 <button onClick={this.removeComplete}>Delete all Complete</button>
                 <ul>
