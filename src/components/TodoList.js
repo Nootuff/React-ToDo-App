@@ -95,6 +95,7 @@ class ToDoList extends Component {
         this.setState({
             toDos: stateHolder
         })
+        window.localStorage.setItem('data', JSON.stringify(stateHolder));
     }
 
     render() {
