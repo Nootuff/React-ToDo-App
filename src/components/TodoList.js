@@ -7,7 +7,7 @@ class ToDoList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            toDos: JSON.parse(localStorage.getItem("data")) || [] //All created toDos will be stored in here. 
+            toDos: JSON.parse(localStorage.getItem("data")) || [] //All created toDos will be stored in here, or an array of objects will be retreived from localStorage. 
         };
         this.create = this.create.bind(this);
         this.remove = this.remove.bind(this);
@@ -20,11 +20,11 @@ class ToDoList extends Component {
     }
 
     create(data) { //Data could be anything, just symbolizes the first passed argument.
-        var holder = [...this.state.toDos, data]
+        let stateHolder = [...this.state.toDos, data]
         this.setState({
-            toDos: [...this.state.toDos, data]
+            toDos: stateHolder
         })
-    window.localStorage.setItem('data', JSON.stringify(holder));
+    window.localStorage.setItem('data', JSON.stringify(stateHolder));
     }
 
     /*
@@ -82,6 +82,7 @@ class ToDoList extends Component {
         this.setState({
             toDos: stateHolder //Set the toDos state to the updated stateHolder.
         })
+        window.localStorage.setItem('data', JSON.stringify(stateHolder));
     }
 
     toggleCompletion(completedId) {
