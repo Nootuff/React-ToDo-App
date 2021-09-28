@@ -52,7 +52,7 @@ class ToDoList extends Component {
         window.localStorage.setItem('data', JSON.stringify(newState));
     }
 
-    removeComplete() {
+    removeComplete() { //Removes all tasks tagged with completed.
         let unCompleted = [];
         for (let i = 0; i < this.state.toDos.length; i++) {
             if (this.state.toDos[i].completed === false) {
@@ -68,6 +68,7 @@ class ToDoList extends Component {
                 toDos: unCompleted
             })
         }.bind(this), 500)
+        window.localStorage.setItem('data', JSON.stringify(unCompleted));
     }
 
     edit(data, editId) {
