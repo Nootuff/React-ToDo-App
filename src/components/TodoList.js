@@ -14,9 +14,7 @@ class ToDoList extends Component {
         this.removeComplete = this.removeComplete.bind(this);
         this.edit = this.edit.bind(this);
         this.toggleCompletion = this.toggleCompletion.bind(this);
-
        //this.onLoad = this.onLoad.bind(this);
-
     }
 
     create(data) { //Data could be anything, just symbolizes the first passed argument.
@@ -47,9 +45,11 @@ class ToDoList extends Component {
 */
 
     remove(passedId) {
+        let newState = this.state.toDos.filter(toDo => toDo.id !== passedId)  // Sets value to new array created from from all toDos where id does not = the id of the todo taht was passed to this function when the delete button was pushed in its component. 
         this.setState({
-            toDos: this.state.toDos.filter(toDo => toDo.id !== passedId)
+            toDos: newState
         });
+        window.localStorage.setItem('data', JSON.stringify(newState));
     }
 
     removeComplete() {
