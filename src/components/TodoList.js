@@ -117,7 +117,7 @@ class ToDoList extends Component {
         return (
             <div /*onLoad={this.onLoad()}*/ className="">
                 <NewTodoForm creatorFunc={this.create} />
-                <button onClick={this.removeComplete}>Delete all Complete</button>
+                <button className="button" onClick={this.removeComplete}>Delete all Complete</button>
                 <ul>
                     {allToDos}
                 </ul>

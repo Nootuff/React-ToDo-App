@@ -9,6 +9,10 @@ textarea{
 
 }
 
+.button{
+  cursor: pointer;
+}
+
 
 .showHide{
   padding: 2px;

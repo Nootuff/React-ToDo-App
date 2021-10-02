@@ -57,7 +57,7 @@ class NewTodoForm extends Component {
         <label htmlFor="priority">Choose priority </label>
         <select
           name="priority"
-          className="TodoForm-select"
+          className="TodoForm-select button"
           //defaultValue={"Medium"}
           value={this.state.priority}
           onChange={this.handleChange}
@@ -66,7 +66,7 @@ class NewTodoForm extends Component {
           <option value="Medium">Medium</option>
           <option value="Low">Low</option>
         </select>
-        <p className="showHide" onClick={this.handleToggle}>Notes</p>
+        <p className="showHide button" onClick={this.handleToggle}>Notes</p>
         <div className="ToDo-form">
           <textarea
             id="taskNotes"
@@ -78,7 +78,7 @@ class NewTodoForm extends Component {
         </div>
         <br />
 
-        {this.state.taskBody && <button onClick={this.handleSubmit} >I need to do this</button>} {/*This is how to you write a ternay operator with only one condition in react */}
+        {this.state.taskBody && <button className="button" onClick={this.handleSubmit} >I need to do this</button>} {/*This is how to you write a ternay operator with only one condition in react */}
         {/*{(this.state.taskBody) ? <button>I need to do this</button>}*/}
       </form>
     )

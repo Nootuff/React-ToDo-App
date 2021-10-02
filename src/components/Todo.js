@@ -61,10 +61,10 @@ class Todo extends Component {
         <h2 className={"ToDo-text Todo-body-" + currentId + " " + completeOrNo} onClick={this.handleToggle}>{this.props.data.taskBody}</h2>
         <p className={"ToDo-text ToDo-notes" + " " + completeOrNo}>{this.props.data.taskNotes}</p>
         <p>Priority: {this.props.data.priority}</p>
-        <button onClick={this.handleToggle}>Complete</button>
+        <button className="button" onClick={this.handleToggle}>Complete</button>
         <br />
-        <button className="showHide" onClick={this.toggleEdit}>Show edit form</button>
-        <button className="ToDo-x-button" onClick={this.handleDelete}>X</button>
+        <button className="showHide button" onClick={this.toggleEdit}>Show edit form</button>
+        <button className="ToDo-x-button button" onClick={this.handleDelete}>X</button>
         <div className={"ToDo-form ToDo-form-" + currentId} >
           <form onSubmit={this.handleEdit}>
             <label htmlFor="editBody">Edit task </label>
@@ -81,7 +81,7 @@ class Todo extends Component {
             <label htmlFor="priority">Choose priority</label>
             <select
               name="editPriority"
-              className="TodoForm-select"
+              className="TodoForm-select button"
               //defaultValue={"Medium"}
               value={this.state.editPriority}
               onChange={this.handleChange}
@@ -99,9 +99,9 @@ class Todo extends Component {
               rows="4" cols="50"
             />
             <br />
-            {this.state.editBody && <button>Update</button>}
+            {this.state.editBody && <button className="button">Update</button>}
           </form>
-          <button onClick={this.toggleEdit}>Close</button>
+          <button className="button" onClick={this.toggleEdit}>Close</button>
         </div>
       </li>
     )
