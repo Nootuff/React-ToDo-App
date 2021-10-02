@@ -46,7 +46,7 @@ class Todo extends Component {
   toggleEdit() {
     let form = document.getElementsByClassName("ToDo-form-" + this.props.data.id);
     //showToggler(this.props.data.id)
-    form[0].classList.toggle("show");
+    form[0].classList.toggle("show-edit");
     this.setState({ editBody: this.props.data.taskBody, editNotes: this.props.data.taskNotes, editPriority: this.props.data.priority });
   }
 
@@ -59,11 +59,12 @@ class Todo extends Component {
     return (
       <li className={"ToDo" + " " + priorityColor} id={currentId}>
         <h2 className={"ToDo-text Todo-body-" + currentId + " " + completeOrNo} onClick={this.handleToggle}>{this.props.data.taskBody}</h2>
-        <p className={"ToDo-text" + " " + completeOrNo}>{this.props.data.taskNotes}</p>
-        <p>{this.props.data.priority}</p>
-        <button onClick={this.handleToggle}>done</button>
+        <p className={"ToDo-text ToDo-notes" + " " + completeOrNo}>{this.props.data.taskNotes}</p>
+        <p>Priority: {this.props.data.priority}</p>
+        <button onClick={this.handleToggle}>Complete</button>
+        <br />
         <button className="showHide" onClick={this.toggleEdit}>Show edit form</button>
-        <button onClick={this.handleDelete}>X</button>
+        <button className="ToDo-x-button" onClick={this.handleDelete}>X</button>
         <div className={"ToDo-form ToDo-form-" + currentId} >
           <form onSubmit={this.handleEdit}>
             <label htmlFor="editBody">Edit task </label>

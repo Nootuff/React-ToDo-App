@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { v4 as uuidv4 } from 'uuid'; //Imports the uuid npm package. 
+import '../styles/NewTodoForm.css';
 //import { showToggler } from "../HelperFunctions"
 
 class NewTodoForm extends Component {
@@ -16,6 +17,8 @@ class NewTodoForm extends Component {
     this.handleToggle = this.handleToggle.bind(this);
   }
 
+  form = document.getElementsByClassName("ToDo-form");
+
   handleChange(event) {
     this.setState({
       [event.target.name]: event.target.value
@@ -23,9 +26,9 @@ class NewTodoForm extends Component {
   }
 
   handleToggle() {
-    let form = document.getElementsByClassName("ToDo-form");
+    //let form = document.getElementsByClassName("ToDo-form");
     //showToggler(this.props.data.id)
-    form[0].classList.toggle("show");
+    this.form[0].classList.toggle("show-create");
     //this.setState({ editBody: this.props.data.taskBody, editNotes: this.props.data.taskNotes, editPriority: this.props.data.priority });
   }
 
@@ -33,7 +36,7 @@ class NewTodoForm extends Component {
     event.preventDefault();
     const newToDo = { ...this.state, id: uuidv4() }
     this.props.creatorFunc(newToDo);
-    this.handleToggle();
+    this.form[0].classList.remove("show-create");
     this.setState({ taskBody: "", taskNotes: "", priority: "Medium" }); //Clears the form by setting state back to its defaults. 
   }
 

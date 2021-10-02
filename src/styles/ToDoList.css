@@ -6,7 +6,9 @@ ul{
 textarea{
   border: blueviolet 3px solid;
   resize: none;
+
 }
+
 
 .showHide{
   padding: 2px;
@@ -21,9 +23,14 @@ display: inline-block;
   transition: all .5s ease-in-out;
 }
 
-.show{
+.show-create{
+  height: 80px;
+}
+
+.show-edit{
   height: 250px;
 }
+
 
 .TodoForm-select {
   display: block;
