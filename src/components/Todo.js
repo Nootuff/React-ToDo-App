@@ -1,3 +1,96 @@
+import React, { useState } from "react";
+
+function Todo(props) {
+
+  let values = {
+    taskBody: props.todos.taskBody,//props.todos.taskBody,
+    taskNotes: props.todos.taskNotes,//props.todos.taskNotes,
+    completed: props.todos.completed,//props.todos.completed,
+    priority: props.todos.priority,//props.todos.priority,
+    id: props.todos.id
+  }
+
+  const [state, setState] = useState(values);
+
+  const handleEditChangeFunc = (event) => { //You could put more arguments in here to make this into a reusable hook 
+    const { name, value } = event.target; //Destructured const
+    setState({
+      ...state,
+      [name]: value,
+
+    });
+  }
+
+
+  return (
+    <li id={props.todos.id} style={{ border: "1px solid black", marginBottom: "10px" }}>
+      <h2>
+        {props.todos.taskBody}
+      </h2>
+
+      <h4>{props.todos.taskNotes}</h4>
+
+      <h4>{props.todos.priority}</h4>
+      <h4>{(props.todos.completed === true) ? "complete" : "incomplete"}</h4>
+      <h4>{props.todos.id}</h4>
+      <form >
+        <label htmlFor="editBody">Edit task </label>
+        <input
+          type="text"
+          name="taskBody" /*Name must be the same as state value the input is meant to update.*/
+          //placeholder={props.todos.taskBody}
+          id="taskBody"
+          className="ToDo-edit-input"
+          value={state.taskBody}
+          onChange={handleEditChangeFunc}
+        />
+        <br />
+        <label htmlFor="priority">Choose priority</label>
+        <select
+          name="priority"
+          className="TodoForm-select button"
+          value={state.priority}
+        //value={state.priority}
+        onChange={handleEditChangeFunc}
+        >
+          <option value="High">High</option>
+          <option value="Medium">Medium</option>
+          <option value="Low">Low</option>
+        </select>
+        <br />
+        <textarea
+          id="taskNotes"
+          value={state.taskNotes}
+          name="taskNotes"
+          onChange={handleEditChangeFunc}
+          rows="4" cols="50"
+        />
+        <br />
+        <button className="button"
+        onClick={(event) => {
+         event.preventDefault();
+          props.editFunc(state)
+        }}
+        >Update todo</button>
+      </form>
+      <button onClick={(event) => {
+        event.preventDefault();
+        props.deleteFunc(props.todos.id)
+      }}
+      >
+        Delete todo
+      </button>
+      <br />
+      <button  onClick={() => {props.toggleComplete(props.todos)}}  /*onClick={()=>{props.setValues(!props.todos.completed)}} */ >Complete</button> {/*Doesn't work */}
+    </li>
+  );
+}
+
+export default Todo;
+
+
+//Class based build below
+/*
 import React, { Component } from "react";
 import '../styles/ToDo.css';
 //import { showToggler } from "../HelperFunctions"
@@ -76,7 +169,7 @@ class Todo extends Component {
             <label htmlFor="editBody">Edit task </label>
             <input
               type="text"
-              name="editBody" /*Name must be the same as state value the input is meant to update.*/
+              name="editBody" /*Name must be the same as state value the input is meant to update.
               //placeholder={this.props.body}
               id="editBody"
               className="ToDo-edit-input"
@@ -115,3 +208,5 @@ class Todo extends Component {
 }
 
 export default Todo;
+
+*/

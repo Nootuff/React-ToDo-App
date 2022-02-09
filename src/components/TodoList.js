@@ -1,9 +1,52 @@
+import React, { useState } from "react";
+import NewTodoForm from "./NewTodoForm";
+import Todo from "./Todo";
+import useInputState from "../hooks/useInputState";
+import useLocalStorage from "../hooks/useLocalStorage";
+
+function ToDoList() {
+    const [values, setValues, handleChangeFunc] = useInputState();
+    const [todos, submitFunc, deleteFunc, editFunc, toggleComplete, deleteComplete] = useLocalStorage();
+  
+    const lister = todos.slice(0).reverse().map((num) =>
+        <Todo
+            key={num.id}
+            todos={num}
+            deleteFunc={deleteFunc}
+            editFunc={editFunc}
+            toggleComplete={toggleComplete}
+        />
+    );
+
+    return (
+        <div >
+            <h1>HooksToDoList</h1>
+            <NewTodoForm
+                handleChangeFunc={handleChangeFunc}
+                submitFunc={submitFunc}
+                values={values}
+                setValues={setValues}
+            />
+            <button  onClick={() => {deleteComplete()}}  >Delete all complete</button>
+            <ul>
+                {lister}
+            </ul>
+        </div>
+    );
+}
+
+export default ToDoList;
+
+
+//Class based build below
+
+/*
 import React, { Component } from "react";
 import NewTodoForm from "./NewTodoForm";
 import Todo from "./Todo";
 import '../styles/ToDoList.css';
 
-//Final class based submit
+
 
 class ToDoList extends Component {
     constructor(props) {
@@ -44,7 +87,7 @@ class ToDoList extends Component {
             }
         }
     } 
-*/
+
 
     remove(passedId) {
         let newState = this.state.toDos.filter(toDo => toDo.id !== passedId)  // Sets value to new array created from from all toDos where id does not = the id of the todo taht was passed to this function when the delete button was pushed in its component. 
@@ -78,7 +121,7 @@ class ToDoList extends Component {
         console.log(prevState.toDos)
         console.log(this.state.toDos)
      }
-*/
+
 
     edit(data, editId) {
         let stateHolder = [...this.state.toDos]; //Holds everything currently in state.
@@ -124,7 +167,7 @@ class ToDoList extends Component {
         )
       
         return (
-            <div /*onLoad={this.onLoad()}*/ className="">
+            <div /*onLoad={this.onLoad()} className="">
                 <NewTodoForm creatorFunc={this.create} />
                 <button className="button" onClick={this.removeComplete}>Delete all Complete</button>
                 <ul>
@@ -137,3 +180,5 @@ class ToDoList extends Component {
 }
 
 export default ToDoList;
+
+*/

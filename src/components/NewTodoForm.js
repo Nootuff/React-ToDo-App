@@ -1,3 +1,68 @@
+import { v4 as uuidv4 } from 'uuid'; //Imports the uuid npm package. 
+
+function NewTodoForm(props) {
+
+    return (
+  <div >
+<h1>NewTodoForm component</h1>
+<form  className="">
+        <h2>Enter New ToDo</h2>
+        <label htmlFor="taskBody">Task </label>
+        <input
+          type="text"
+          id="taskBody"
+          name="taskBody" /*Name must be the same as state value the input is meant to update.*/
+          value={props.values.taskBody}
+          placeholder="New todo"
+          onChange={props.handleChangeFunc}
+        
+        />
+        <br />
+        <label htmlFor="priority">Choose priority </label>
+        <select
+          name="priority"
+          className="TodoForm-select button"
+        
+          value={props.values.priority}
+          onChange={props.handleChangeFunc}
+        >
+          <option value="High">High</option>
+          <option value="Medium">Medium</option>
+          <option value="Low">Low</option>
+        </select>
+        <p className="showHide button" /*onClick={this.handleToggle}*/>Notes</p>
+        <div className="ToDo-form">
+          <textarea
+            id="taskNotes"
+            name="taskNotes"
+           value={props.values.taskNotes}
+           onChange={props.handleChangeFunc}
+            rows="4" cols="50"
+          />
+        </div>
+        <br />
+
+<button
+ onClick={(event) => {
+    event.preventDefault();
+    props.submitFunc({...props.values, id:uuidv4(), completed: false }); //Handles submission.
+    props.setValues({ taskBody: "", taskNotes: "", priority: "Medium" }); //Changes the fields back to blank for a new todo to be input
+    //console.log()
+}}
+>I need to do this</button>
+
+      {/*  {this.state.taskBody && <button className="button" onClick={this.handleSubmit} >I need to do this</button>} This is how to you write a ternay operator with only one condition in react */}
+   
+      </form>
+
+  </div>
+);
+}
+
+export default NewTodoForm;
+
+//Class based build below
+/*
 import React, { Component } from "react";
 import { v4 as uuidv4 } from 'uuid'; //Imports the uuid npm package. 
 import '../styles/NewTodoForm.css';
@@ -48,7 +113,7 @@ class NewTodoForm extends Component {
         <input
           type="text"
           id="taskBody"
-          name="taskBody" /*Name must be the same as state value the input is meant to update.*/
+          name="taskBody" /*Name must be the same as state value the input is meant to update.
           value={this.state.taskBody}
           placeholder="New todo"
           onChange={this.handleChange}
@@ -78,11 +143,13 @@ class NewTodoForm extends Component {
         </div>
         <br />
 
-        {this.state.taskBody && <button className="button" onClick={this.handleSubmit} >I need to do this</button>} {/*This is how to you write a ternay operator with only one condition in react */}
-        {/*{(this.state.taskBody) ? <button>I need to do this</button>}*/}
+        {this.state.taskBody && <button className="button" onClick={this.handleSubmit} >I need to do this</button>} {/*This is how to you write a ternay operator with only one condition in react }
+        {/*{(this.state.taskBody) ? <button>I need to do this</button>}}
       </form>
     )
   }
 }
 
 export default NewTodoForm;
+
+*/
