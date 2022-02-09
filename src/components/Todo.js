@@ -39,6 +39,12 @@ class Todo extends Component {
     this.toggleEdit()
   }
 
+  componentDidUpdate(prevProps, prevState){
+    console.log("toDo componentDidUpdate")
+    console.log(prevProps.data.taskBody) //Not working, supposed to show previous props, no idea why it doesn;t work.
+    console.log(this.props.data.taskBody)
+ }
+
   handleToggle() {
     this.props.completeToggle(this.props.data.id)
   }

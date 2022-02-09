@@ -3,6 +3,8 @@ import NewTodoForm from "./NewTodoForm";
 import Todo from "./Todo";
 import '../styles/ToDoList.css';
 
+//Final class based submit
+
 class ToDoList extends Component {
     constructor(props) {
         super(props);
@@ -70,6 +72,13 @@ class ToDoList extends Component {
         }.bind(this), 500)
         window.localStorage.setItem('data', JSON.stringify(unCompleted));
     }
+
+/*    componentDidUpdate(prevProps, prevState){ 
+        console.log("ToDoList componentDidUpdate")
+        console.log(prevState.toDos)
+        console.log(this.state.toDos)
+     }
+*/
 
     edit(data, editId) {
         let stateHolder = [...this.state.toDos]; //Holds everything currently in state.
