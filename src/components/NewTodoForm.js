@@ -1,6 +1,10 @@
+import React, { useState } from "react";
 import { v4 as uuidv4 } from 'uuid'; //Imports the uuid npm package. 
+import Collapse from 'react-bootstrap/Collapse';
+import Button from 'react-bootstrap/Button';
 
 function NewTodoForm(props) {
+  const [open, setOpen] = useState(false);
 
     return (
   <div >
@@ -30,8 +34,19 @@ function NewTodoForm(props) {
           <option value="Medium">Medium</option>
           <option value="Low">Low</option>
         </select>
-        <p className="showHide button" /*onClick={this.handleToggle}*/>Notes</p>
-        <div className="ToDo-form">
+        <br />
+        <Button
+        onClick={() => setOpen(!open)}
+        aria-controls="example-collapse-text"
+        aria-expanded={open}
+      >
+        Notes
+      </Button>
+
+      <br />
+      <br />
+      <Collapse in={open}>
+        <div>
           <textarea
             id="taskNotes"
             name="taskNotes"
@@ -40,7 +55,9 @@ function NewTodoForm(props) {
             rows="4" cols="50"
           />
         </div>
+        </Collapse>
         <br />
+        
 
 <button
  onClick={(event) => {
@@ -54,6 +71,10 @@ function NewTodoForm(props) {
       {/*  {this.state.taskBody && <button className="button" onClick={this.handleSubmit} >I need to do this</button>} This is how to you write a ternay operator with only one condition in react */}
    
       </form>
+
+     
+      
+
 
   </div>
 );

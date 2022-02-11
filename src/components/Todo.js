@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
 
 function Todo(props) {
 
@@ -23,16 +25,17 @@ function Todo(props) {
 
 
   return (
-    <li id={props.todos.id} style={{ border: "1px solid black", marginBottom: "10px" }}>
+    <li id={props.todos.id} style={{ marginBottom: "10px" }}>
+     <Card border={props.todos.priority === 'High' ? 'danger' : props.todos.priority === 'Medium' ? 'primary' : 'success'} style={{border: "3px solid", marginBottom: "10px" }}>
       <h2>
         {props.todos.taskBody}
       </h2>
 
       <h4>{props.todos.taskNotes}</h4>
 
+      
       <h4>{props.todos.priority}</h4>
       <h4>{(props.todos.completed === true) ? "complete" : "incomplete"}</h4>
-      <h4>{props.todos.id}</h4>
       <form >
         <label htmlFor="editBody">Edit task </label>
         <input
@@ -73,15 +76,20 @@ function Todo(props) {
         }}
         >Update todo</button>
       </form>
-      <button onClick={(event) => {
+      <Button
+      variant="primary"
+      onClick={(event) => {
         event.preventDefault();
         props.deleteFunc(props.todos.id)
       }}
       >
         Delete todo
-      </button>
+      </Button>
+
+    
       <br />
-      <button  onClick={() => {props.toggleComplete(props.todos)}}  /*onClick={()=>{props.setValues(!props.todos.completed)}} */ >Complete</button> {/*Doesn't work */}
+      <button  onClick={() => {props.toggleComplete(props.todos)}}  /*onClick={()=>{props.setValues(!props.todos.completed)}} */ >Complete</button> 
+      </Card>
     </li>
   );
 }
