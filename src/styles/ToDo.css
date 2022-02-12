@@ -1,62 +1,6 @@
-.ToDo{
-  border-radius: 5px;
-  width: 60%;
-  margin: auto;
-  padding: 10px;
-  max-height: 500px;
-  overflow-y: scroll;
-  margin-bottom: 20px;
- /* -webkit-box-shadow: 5px 7px 15px 5px #000000; */
- box-shadow: 5px 7px 15px 0px #000000;
- position: relative;
-}
-
-
-.ToDo::-webkit-scrollbar {
-  display: none;
-}
-
-.ToDo-notes{
-  
-}
-
-
-
-.ToDo-x-button{
-  position: absolute; 
-  top: 0;
-   right: 0;
-   background: red;
-   border: none;
-  font-size: 25px;
-  border-bottom-left-radius: 5px;
-}
-
-.ToDo-text{
-  opacity: 1;
-  position: relative;
-  transition: all .5s ease-in-out;
-}
-
-.ToDo-text.completed{
-  text-decoration: line-through;
-  opacity: 0.6;
-}
-
-.ToDo-edit-input{
- 
-}
-
-/*Priority styles*/
-.High{
-  border: 4px solid red;
-}
-
-.Medium{
-  border: 4px solid blue;
-}
-
-.Low{
-  border: 4px solid green;
+.Todo{
+    padding: 0;
+    list-style-type: none;
+    margin-bottom: 10px;
 }
 

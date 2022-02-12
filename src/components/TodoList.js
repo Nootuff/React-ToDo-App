@@ -1,13 +1,19 @@
 import React, { useState } from "react";
 import NewTodoForm from "./NewTodoForm";
 import Todo from "./Todo";
+import DeleteComplete from "./DeleteComplete";
+import '../styles/TodoList.css';
+
 import useInputState from "../hooks/useInputState";
+import useTransition from "../hooks/useTransition";
 import useLocalStorage from "../hooks/useLocalStorage";
 
 function ToDoList() {
     const [values, setValues, handleChangeFunc] = useInputState();
     const [todos, submitFunc, deleteFunc, editFunc, toggleComplete, deleteComplete] = useLocalStorage();
-  
+  //const [open, setOpen] = useTransition();
+
+
     const lister = todos.slice(0).reverse().map((num) =>
         <Todo
             key={num.id}
@@ -27,7 +33,10 @@ function ToDoList() {
                 values={values}
                 setValues={setValues}
             />
-            <button  onClick={() => {deleteComplete()}}  >Delete all complete</button>
+
+<DeleteComplete deleteComplete={deleteComplete}/>
+
+            
             <ul>
                 {lister}
             </ul>

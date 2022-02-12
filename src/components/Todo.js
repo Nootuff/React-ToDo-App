@@ -2,10 +2,13 @@ import React, { useState } from "react";
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Collapse from 'react-bootstrap/Collapse';
+import '../styles/Todo.css';
+
 
 function Todo(props) {
-  const [open, setOpen] = useState(false);
-
+  const [open, setOpen] = useState(true);
+  const [openNotes, setOpenNotes] = useState(false);
+ 
   let values = {
     taskBody: props.todos.taskBody,
     taskNotes: props.todos.taskNotes,
@@ -27,7 +30,11 @@ function Todo(props) {
 
 
   return (
-    <li id={props.todos.id} style={{ marginBottom: "10px" }}>
+    <li 
+    className="Todo"
+    id={props.todos.id} 
+    >
+      <Collapse in={open}>
       <Card border={props.todos.priority === 'High' ? 'danger' : props.todos.priority === 'Medium' ? 'primary' : 'success'} 
       style={{ border: "3px solid", marginBottom: "10px" }}>
         <section 
@@ -38,7 +45,6 @@ function Todo(props) {
         </h2>
         <h4>{props.todos.taskNotes}</h4>
         <h4>{props.todos.priority}</h4>
-        <h4>{(props.todos.completed === true) ? "complete" : "incomplete"}</h4>
         </section>
         <Button
           variant="success"
@@ -47,13 +53,13 @@ function Todo(props) {
           Complete
         </Button>
         <Button
-          onClick={() => setOpen(!open)}
+          onClick={() => setOpenNotes(!openNotes)}
           aria-controls="example-collapse-text"
-          aria-expanded={open}
+          aria-expanded={openNotes}
         >
           Edit
         </Button>
-        <Collapse in={open}>
+        <Collapse in={openNotes}>
           <form >
             <label htmlFor="editBody">Edit task </label>
             <input
@@ -90,10 +96,10 @@ function Todo(props) {
             <Button
               variant="primary"
             disabled={state.taskBody === "" ? true : false}
-              //disabled={true}
+              
               onClick={(event) => {
                 event.preventDefault();
-                setOpen(false)
+                setOpenNotes(false)
                 props.editFunc(state)
               }}
             >Update todo</Button>
@@ -101,14 +107,17 @@ function Todo(props) {
         </Collapse>
         <Button
           variant="danger"
+          
           onClick={() => {
-            props.deleteFunc(props.todos.id)
+            setOpen(false)
+            setTimeout(/*props.deleteFunc(props.todos.id)*/ ()=>{props.deleteFunc(props.todos.id); }, 300);
           }}
         >
           Delete todo
         </Button>
         
       </Card>
+      </Collapse>
     </li>
   );
 }

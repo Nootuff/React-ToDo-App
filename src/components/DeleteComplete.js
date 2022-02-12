@@ -1,9 +1,13 @@
 import Button from 'react-bootstrap/Button';
 
-function DeleteComplete() {
+function DeleteComplete(props) {
     return (
-       <Button variant="danger">Delete All Complete</Button> 
+       <Button 
+       variant="danger"
+       onClick={() => {props.deleteComplete()}} 
+       >
+           Delete All Complete</Button> 
     )
 }
 
-export default Todo;
+export default DeleteComplete;
