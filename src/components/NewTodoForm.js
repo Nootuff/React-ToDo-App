@@ -5,11 +5,12 @@ import Button from 'react-bootstrap/Button';
 
 function NewTodoForm(props) {
   const [open, setOpen] = useState(false);
+  const [openNotes, setOpenNotes] = useState(false);
 
-    return (
-  <div >
-<h1>NewTodoForm component</h1>
-<form  className="">
+  return (
+    <div >
+      <h1>NewTodoForm component</h1>
+      <form style={{ border: "1px solid red" }} >
         <h2>Enter New ToDo</h2>
         <label htmlFor="taskBody">Task </label>
         <input
@@ -17,67 +18,63 @@ function NewTodoForm(props) {
           id="taskBody"
           name="taskBody" /*Name must be the same as state value the input is meant to update.*/
           value={props.values.taskBody}
+          onClick={() => setOpen(true)}
+          //aria-controls="example-collapse-text"
+          aria-expanded={open}
           placeholder="New todo"
           onChange={props.handleChangeFunc}
-        
         />
         <br />
-        <label htmlFor="priority">Choose priority </label>
-        <select
-          name="priority"
-          className="TodoForm-select button"
-        
-          value={props.values.priority}
-          onChange={props.handleChangeFunc}
-        >
-          <option value="High">High</option>
-          <option value="Medium">Medium</option>
-          <option value="Low">Low</option>
-        </select>
-        <br />
-        <Button
-        onClick={() => setOpen(!open)}
-        aria-controls="example-collapse-text"
-        aria-expanded={open}
-      >
-        Notes
-      </Button>
-
-      <br />
-      <br />
-      <Collapse in={open}>
-        <div>
-          <textarea
-            id="taskNotes"
-            name="taskNotes"
-           value={props.values.taskNotes}
-           onChange={props.handleChangeFunc}
-            rows="4" cols="50"
-          />
-        </div>
+        <Collapse in={open}>
+          <div>
+            <label htmlFor="priority">Choose priority </label>
+            <select
+              name="priority"
+              className="TodoForm-select button"
+              value={props.values.priority}
+              onChange={props.handleChangeFunc}
+            >
+              <option value="High">High</option>
+              <option value="Medium">Medium</option>
+              <option value="Low">Low</option>
+            </select>
+            <br />
+            <Button
+              onClick={() => setOpenNotes(!openNotes)}
+              //aria-controls="example-collapse-text"
+              aria-expanded={openNotes}
+            >
+              Notes
+            </Button>
+            <br />
+            <Collapse in={openNotes}>
+              <div>
+                <textarea
+                  id="taskNotes"
+                  name="taskNotes"
+                  value={props.values.taskNotes}
+                  onChange={props.handleChangeFunc}
+                  rows="4" cols="50"
+                />
+              </div>
+            </Collapse>
+            <br />
+            <Button
+              disabled={props.values.taskBody === "" ? true : false}
+              onClick={(event) => {
+                event.preventDefault();
+                setOpenNotes(false); //Closes notes section again.
+                props.submitFunc({ ...props.values, id: uuidv4(), completed: false }); //Handles submission.
+                props.setValues({ taskBody: "", taskNotes: "", priority: "Medium" }); //Changes the fields back to blank for a new todo to be input
+                //console.log()
+              }}
+            >I need to do this</Button>
+          </div>
         </Collapse>
-        <br />
-        
 
-<button
- onClick={(event) => {
-    event.preventDefault();
-    props.submitFunc({...props.values, id:uuidv4(), completed: false }); //Handles submission.
-    props.setValues({ taskBody: "", taskNotes: "", priority: "Medium" }); //Changes the fields back to blank for a new todo to be input
-    //console.log()
-}}
->I need to do this</button>
-
-      {/*  {this.state.taskBody && <button className="button" onClick={this.handleSubmit} >I need to do this</button>} This is how to you write a ternay operator with only one condition in react */}
-   
       </form>
-
-     
-      
-
-
-  </div>
-);
+    </div>
+  );
 }
 
 export default NewTodoForm;

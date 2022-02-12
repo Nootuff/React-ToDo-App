@@ -1,18 +1,20 @@
 import React, { useState } from "react";
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import Collapse from 'react-bootstrap/Collapse';
 
 function Todo(props) {
+  const [open, setOpen] = useState(false);
 
   let values = {
-    taskBody: props.todos.taskBody,//props.todos.taskBody,
-    taskNotes: props.todos.taskNotes,//props.todos.taskNotes,
-    completed: props.todos.completed,//props.todos.completed,
-    priority: props.todos.priority,//props.todos.priority,
+    taskBody: props.todos.taskBody,
+    taskNotes: props.todos.taskNotes,
+    completed: props.todos.completed,
+    priority: props.todos.priority,
     id: props.todos.id
   }
 
-  const [state, setState] = useState(values);
+  const [state, setState] = useState(values); //Maybe a better namd than "state"
 
   const handleEditChangeFunc = (event) => { //You could put more arguments in here to make this into a reusable hook 
     const { name, value } = event.target; //Destructured const
@@ -26,69 +28,86 @@ function Todo(props) {
 
   return (
     <li id={props.todos.id} style={{ marginBottom: "10px" }}>
-     <Card border={props.todos.priority === 'High' ? 'danger' : props.todos.priority === 'Medium' ? 'primary' : 'success'} style={{border: "3px solid", marginBottom: "10px" }}>
-      <h2>
-        {props.todos.taskBody}
-      </h2>
-
-      <h4>{props.todos.taskNotes}</h4>
-
-      
-      <h4>{props.todos.priority}</h4>
-      <h4>{(props.todos.completed === true) ? "complete" : "incomplete"}</h4>
-      <form >
-        <label htmlFor="editBody">Edit task </label>
-        <input
-          type="text"
-          name="taskBody" /*Name must be the same as state value the input is meant to update.*/
-          //placeholder={props.todos.taskBody}
-          id="taskBody"
-          className="ToDo-edit-input"
-          value={state.taskBody}
-          onChange={handleEditChangeFunc}
-        />
-        <br />
-        <label htmlFor="priority">Choose priority</label>
-        <select
-          name="priority"
-          className="TodoForm-select button"
-          value={state.priority}
-        //value={state.priority}
-        onChange={handleEditChangeFunc}
+      <Card border={props.todos.priority === 'High' ? 'danger' : props.todos.priority === 'Medium' ? 'primary' : 'success'} 
+      style={{ border: "3px solid", marginBottom: "10px" }}>
+        <section 
+        style={{ textDecoration: props.todos.completed && "line-through" /* The && is a ternary with a single condistion (props.todos.completed === true) ? "line-through" : "none" */ }}
         >
-          <option value="High">High</option>
-          <option value="Medium">Medium</option>
-          <option value="Low">Low</option>
-        </select>
-        <br />
-        <textarea
-          id="taskNotes"
-          value={state.taskNotes}
-          name="taskNotes"
-          onChange={handleEditChangeFunc}
-          rows="4" cols="50"
-        />
-        <br />
-        <button className="button"
-        onClick={(event) => {
-         event.preventDefault();
-          props.editFunc(state)
-        }}
-        >Update todo</button>
-      </form>
-      <Button
-      variant="primary"
-      onClick={(event) => {
-        event.preventDefault();
-        props.deleteFunc(props.todos.id)
-      }}
-      >
-        Delete todo
-      </Button>
-
-    
-      <br />
-      <button  onClick={() => {props.toggleComplete(props.todos)}}  /*onClick={()=>{props.setValues(!props.todos.completed)}} */ >Complete</button> 
+        <h2>
+          {props.todos.taskBody}
+        </h2>
+        <h4>{props.todos.taskNotes}</h4>
+        <h4>{props.todos.priority}</h4>
+        <h4>{(props.todos.completed === true) ? "complete" : "incomplete"}</h4>
+        </section>
+        <Button
+          variant="success"
+          onClick={() => { props.toggleComplete(props.todos) }}
+        >
+          Complete
+        </Button>
+        <Button
+          onClick={() => setOpen(!open)}
+          aria-controls="example-collapse-text"
+          aria-expanded={open}
+        >
+          Edit
+        </Button>
+        <Collapse in={open}>
+          <form >
+            <label htmlFor="editBody">Edit task </label>
+            <input
+              type="text"
+              name="taskBody" /*Name must be the same as state value the input is meant to update.*/
+              //placeholder={props.todos.taskBody}
+              id="taskBody"
+              className="ToDo-edit-input"
+              value={state.taskBody}
+              onChange={handleEditChangeFunc}
+            />
+            <br />
+            <label htmlFor="priority">Set priority</label>
+            <select
+              name="priority"
+              className="TodoForm-select button"
+              value={state.priority}
+              //value={state.priority}
+              onChange={handleEditChangeFunc}
+            >
+              <option value="High">High</option>
+              <option value="Medium">Medium</option>
+              <option value="Low">Low</option>
+            </select>
+            <br />
+            <textarea
+              id="taskNotes"
+              value={state.taskNotes}
+              name="taskNotes"
+              onChange={handleEditChangeFunc}
+              rows="4" cols="50"
+            />
+            <br />
+            <Button
+              variant="primary"
+            disabled={state.taskBody === "" ? true : false}
+              //disabled={true}
+              onClick={(event) => {
+                event.preventDefault();
+                setOpen(false)
+                props.editFunc(state)
+              }}
+            >Update todo</Button>
+          </form>
+        </Collapse>
+        <Button
+          variant="danger"
+          onClick={() => {
+            props.deleteFunc(props.todos.id)
+          }}
+        >
+          Delete todo
+        </Button>
+        
       </Card>
     </li>
   );
