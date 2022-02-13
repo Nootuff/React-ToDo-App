@@ -2,11 +2,14 @@ import React, { useState } from "react";
 
 export default transition => {
 
-    const [open, setOpen] = useState(true);
+    const [shrink, setShrink] = useState(true);
 
 
+    const multShrink = () => {
+        setShrink(!shrink)
+    }
 
 
-    return [open, setOpen];
+    return [shrink, multShrink];
 
 }

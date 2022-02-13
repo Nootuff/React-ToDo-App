@@ -34,23 +34,25 @@ function Todo(props) {
     className="Todo"
     id={props.todos.id} 
     >
+      {/*<Collapse in={props.shrink}>*/}
       <Collapse in={open}>
       <Card border={props.todos.priority === 'High' ? 'danger' : props.todos.priority === 'Medium' ? 'primary' : 'success'} 
       style={{ border: "3px solid", marginBottom: "10px" }}>
         <section 
-        style={{ textDecoration: props.todos.completed && "line-through" /* The && is a ternary with a single condistion (props.todos.completed === true) ? "line-through" : "none" */ }}
+        style={{ textDecoration: props.todos.completed && "line-through" /* The && is a ternary with a single condistion */ }}
         >
         <h2>
           {props.todos.taskBody}
         </h2>
         <h4>{props.todos.taskNotes}</h4>
-        <h4>{props.todos.priority}</h4>
+        <h4>Priority: {props.todos.priority}</h4>
+<h5>Posted: {props.todos.datePosted}</h5>
         </section>
         <Button
           variant="success"
           onClick={() => { props.toggleComplete(props.todos) }}
         >
-          Complete
+          Done!
         </Button>
         <Button
           onClick={() => setOpenNotes(!openNotes)}
@@ -107,10 +109,9 @@ function Todo(props) {
         </Collapse>
         <Button
           variant="danger"
-          
           onClick={() => {
-            setOpen(false)
-            setTimeout(/*props.deleteFunc(props.todos.id)*/ ()=>{props.deleteFunc(props.todos.id); }, 300);
+            setOpen(false);
+            setTimeout(()=>{props.deleteFunc(props.todos.id); }, 300);
           }}
         >
           Delete todo
@@ -118,6 +119,7 @@ function Todo(props) {
         
       </Card>
       </Collapse>
+     {/* </Collapse> */}
     </li>
   );
 }

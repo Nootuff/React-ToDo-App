@@ -3,6 +3,7 @@ import React, { useState } from "react";
 export default search => {
 
     const [todos, setTodos] = useState(JSON.parse(localStorage.getItem("todoData")) || []);
+    //const [srunk, setShrunk] = useState(true)
 
 
     const submitFunc = (data) => {

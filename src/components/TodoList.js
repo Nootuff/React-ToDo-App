@@ -2,17 +2,17 @@ import React, { useState } from "react";
 import NewTodoForm from "./NewTodoForm";
 import Todo from "./Todo";
 import DeleteComplete from "./DeleteComplete";
+import Footer from "./Footer";
 import '../styles/TodoList.css';
 
 import useInputState from "../hooks/useInputState";
-import useTransition from "../hooks/useTransition";
 import useLocalStorage from "../hooks/useLocalStorage";
+import useTransition from "../hooks/useTransition";
 
 function ToDoList() {
     const [values, setValues, handleChangeFunc] = useInputState();
     const [todos, submitFunc, deleteFunc, editFunc, toggleComplete, deleteComplete] = useLocalStorage();
-  //const [open, setOpen] = useTransition();
-
+    const [shrink, multShrink] = useTransition(); //Its ok not to do this. 
 
     const lister = todos.slice(0).reverse().map((num) =>
         <Todo
@@ -25,7 +25,8 @@ function ToDoList() {
     );
 
     return (
-        <div >
+        <div className="Todo-list">
+            <div className="Wrapper">
             <h1>HooksToDoList</h1>
             <NewTodoForm
                 handleChangeFunc={handleChangeFunc}
@@ -34,12 +35,14 @@ function ToDoList() {
                 setValues={setValues}
             />
 
-<DeleteComplete deleteComplete={deleteComplete}/>
+<DeleteComplete /*multShrink={multShrink}*/ deleteComplete={deleteComplete}/>
 
             
-            <ul>
+            <ul className="List">
                 {lister}
             </ul>
+            </div>
+            <Footer />
         </div>
     );
 }

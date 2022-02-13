@@ -2,10 +2,13 @@ import React, { useState } from "react";
 import { v4 as uuidv4 } from 'uuid'; //Imports the uuid npm package. 
 import Collapse from 'react-bootstrap/Collapse';
 import Button from 'react-bootstrap/Button';
+import useDate from "../hooks/useDate";
 
 function NewTodoForm(props) {
   const [open, setOpen] = useState(false);
   const [openNotes, setOpenNotes] = useState(false);
+  const [datePosted] = useDate();
+
 
   return (
     <div >
@@ -64,7 +67,7 @@ function NewTodoForm(props) {
               onClick={(event) => {
                 event.preventDefault();
                 setOpenNotes(false); //Closes notes section again.
-                props.submitFunc({ ...props.values, id: uuidv4(), completed: false }); //Handles submission.
+                props.submitFunc({ ...props.values, id: uuidv4(), completed: false, datePosted: datePosted() }); //Handles submission.
                 props.setValues({ taskBody: "", taskNotes: "", priority: "Medium" }); //Changes the fields back to blank for a new todo to be input
                 //console.log()
               }}
