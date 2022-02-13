@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import NewTodoForm from "./NewTodoForm";
 import Todo from "./Todo";
 import DeleteComplete from "./DeleteComplete";
+import Header from "./Header";
 import Footer from "./Footer";
+
 import '../styles/TodoList.css';
 
 import useInputState from "../hooks/useInputState";
@@ -26,8 +28,8 @@ function ToDoList() {
 
     return (
         <div className="Todo-list">
+            <Header />
             <div className="Wrapper">
-            <h1>HooksToDoList</h1>
             <NewTodoForm
                 handleChangeFunc={handleChangeFunc}
                 submitFunc={submitFunc}
