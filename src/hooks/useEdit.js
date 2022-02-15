@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 
+/*
 const updatedValuesObj = {
     taskBody: "",
     taskNotes: "",
@@ -7,6 +8,7 @@ const updatedValuesObj = {
     priority: "",
     //id: ""
 };
+*/
 
 export default edit => {
     const [todos, setTodos] = useState(JSON.parse(localStorage.getItem("hooksTodos")) || []);

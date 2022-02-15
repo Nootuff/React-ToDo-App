@@ -2,18 +2,22 @@ import React, { useState } from "react";
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Collapse from 'react-bootstrap/Collapse';
+import useDate from "../hooks/useDate";
 import '../styles/Todo.css';
 
 
 function Todo(props) {
   const [open, setOpen] = useState(true);
   const [openNotes, setOpenNotes] = useState(false);
- 
+  const [datePosted] = useDate()
+
   let values = {
     taskBody: props.todos.taskBody,
     taskNotes: props.todos.taskNotes,
     completed: props.todos.completed,
     priority: props.todos.priority,
+    datePosted: props.todos.datePosted,
+    deadline: props.todos.deadline,
     id: props.todos.id
   }
 
@@ -24,102 +28,123 @@ function Todo(props) {
     setState({
       ...state,
       [name]: value,
-
     });
   }
 
+  function convertDigitIn(str) { //Used to convert the deadline to a display date. You could make multiple different versions of this propr replacing the - / with properties that are set by arguments on invocation. 
+    return str.split('-').reverse().join('-');
+  }
+
+  function isLater(deadline, today) {
+    return deadline > today
+  }
+
+  var today = datePosted() //got to change this name
+
+  function convertBack(str) {
+    return str.split('/').reverse().join('-');
+  }
+  //Got to clean all the above functions up first.
+
+  const deadlineDisplay = (props.todos.deadline) !== "" && <h5 style={{ color: isLater(convertDigitIn(props.todos.deadline), datePosted()) ? null : "red" }}>Deadline: {convertDigitIn(props.todos.deadline)}</h5>;
 
   return (
-    <li 
-    className="Todo"
-    id={props.todos.id} 
+    <li
+      className="Todo"
+      id={props.todos.id}
     >
       {/*<Collapse in={props.shrink}>*/}
       <Collapse in={open}>
-      <Card border={props.todos.priority === 'High' ? 'danger' : props.todos.priority === 'Medium' ? 'primary' : 'success'} 
-      style={{ border: "3px solid", marginBottom: "10px" }}>
-        <section 
-        style={{ textDecoration: props.todos.completed && "line-through" /* The && is a ternary with a single condistion */ }}
-        >
-        <h2>
-          {props.todos.taskBody}
-        </h2>
-        <h4>{props.todos.taskNotes}</h4>
-        <h4>Priority: {props.todos.priority}</h4>
-<h5>Posted: {props.todos.datePosted}</h5>
-        </section>
-        <Button
-          variant="success"
-          onClick={() => { props.toggleComplete(props.todos) }}
-        >
-          Done!
-        </Button>
-        <Button
-          onClick={() => setOpenNotes(!openNotes)}
-          aria-controls="example-collapse-text"
-          aria-expanded={openNotes}
-        >
-          Edit
-        </Button>
-        <Collapse in={openNotes}>
-          <form >
-            <label htmlFor="editBody">Edit task </label>
-            <input
-              type="text"
-              name="taskBody" /*Name must be the same as state value the input is meant to update.*/
-              //placeholder={props.todos.taskBody}
-              id="taskBody"
-              className="ToDo-edit-input"
-              value={state.taskBody}
-              onChange={handleEditChangeFunc}
-            />
+        <Card border={props.todos.priority === 'High' ? 'danger' : props.todos.priority === 'Medium' ? 'primary' : 'success'}
+          style={{ border: "3px solid", marginBottom: "10px" }}>
+          <section
+            style={{ textDecoration: props.todos.completed && "line-through" /* The && is a ternary with a single condistion */ }}
+          >
+            <h2>
+              {props.todos.taskBody}
+            </h2>
+            <h4>{props.todos.taskNotes}</h4>
+            <h4>Priority: {props.todos.priority}</h4>
+            <h5>Posted: {props.todos.datePosted}</h5>
+
+            {deadlineDisplay}
+          </section>
+          <Button
+            variant="success"
+            onClick={() => { props.toggleComplete(props.todos) }}
+          >
+            Done!
+          </Button>
+          <Button
+            onClick={() => setOpenNotes(!openNotes)}
+            aria-controls="example-collapse-text"
+            aria-expanded={openNotes}
+          >
+            Edit
+          </Button>
+          <Collapse in={openNotes}>
+            <form >
+              <label htmlFor="editBody">Edit task </label>
+              <input
+                type="text"
+                name="taskBody" /*Name must be the same as state value the input is meant to update.*/
+                //placeholder={props.todos.taskBody}
+                id="taskBody"
+                value={state.taskBody}
+                onChange={handleEditChangeFunc}
+              />
+              <br />
+              <label htmlFor="priority">Set priority</label>
+              <select
+                name="priority"
+                className="TodoForm-select button"
+                value={state.priority}
+                //value={state.priority}
+                onChange={handleEditChangeFunc}
+              >
+                <option value="High">High</option>
+                <option value="Medium">Medium</option>
+                <option value="Low">Low</option>
+              </select>
+              <br />
+              <textarea
+                id="taskNotes"
+                value={state.taskNotes}
+                name="taskNotes"
+                onChange={handleEditChangeFunc}
+                rows="4" cols="50"
+              />
+              <br />
+              <label htmlFor="deadline">Change deadline:</label>
+            <input type="date" onChange={handleEditChangeFunc} value={state.deadline} onKeyDown={(e) => e.preventDefault()} id="deadline" min={convertBack(today)} name="deadline"></input>
+            <Button  variant="danger" onClick={handleEditChangeFunc} name="deadline" value="" >Remove Deadline</Button>
             <br />
-            <label htmlFor="priority">Set priority</label>
-            <select
-              name="priority"
-              className="TodoForm-select button"
-              value={state.priority}
-              //value={state.priority}
-              onChange={handleEditChangeFunc}
-            >
-              <option value="High">High</option>
-              <option value="Medium">Medium</option>
-              <option value="Low">Low</option>
-            </select>
-            <br />
-            <textarea
-              id="taskNotes"
-              value={state.taskNotes}
-              name="taskNotes"
-              onChange={handleEditChangeFunc}
-              rows="4" cols="50"
-            />
-            <br />
-            <Button
-              variant="primary"
-            disabled={state.taskBody === "" ? true : false}
-              
-              onClick={(event) => {
-                event.preventDefault();
-                setOpenNotes(false)
-                props.editFunc(state)
-              }}
-            >Update todo</Button>
-          </form>
-        </Collapse>
-        <Button
-          variant="danger"
-          onClick={() => {
-            setOpen(false);
-            setTimeout(()=>{props.deleteFunc(props.todos.id); }, 300);
-          }}
-        >
-          Delete todo
-        </Button>
-        
-      </Card>
+
+              <Button
+                variant="primary"
+                disabled={state.taskBody === "" ? true : false}
+
+                onClick={(event) => {
+                  event.preventDefault();
+                  setOpenNotes(false)
+                  props.editFunc(state)
+                }}
+              >Update todo</Button>
+            </form>
+          </Collapse>
+          <Button
+            variant="danger"
+            onClick={() => {
+              setOpen(false);
+              setTimeout(() => { props.deleteFunc(props.todos.id); }, 300);
+            }}
+          >
+            Delete todo
+          </Button>
+
+        </Card>
       </Collapse>
-     {/* </Collapse> */}
+      {/* </Collapse> */}
     </li>
   );
 }

@@ -5,7 +5,8 @@ const initialValues = {
     taskBody: "",
     taskNotes: "",
     //completed: false,
-    priority: "Medium"
+    priority: "Medium",
+    deadline: ""
     //id: ""
 };
 

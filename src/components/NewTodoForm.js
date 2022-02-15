@@ -9,12 +9,20 @@ function NewTodoForm(props) {
   const [openNotes, setOpenNotes] = useState(false);
   const [datePosted] = useDate();
 
+  
+var today = datePosted() //got to change this name
+
+
+function convertDigitIn(str) {
+  return str.split('/').reverse().join('-');
+}
+
+//console.log(convertDigitIn(today))
 
   return (
     <div >
-      <h1>NewTodoForm component</h1>
       <form style={{ border: "1px solid red" }} >
-        <h2>Enter New ToDo</h2>
+        <h2>Enter New Todo</h2>
         <label htmlFor="taskBody">Task </label>
         <input
           type="text"
@@ -62,16 +70,19 @@ function NewTodoForm(props) {
               </div>
             </Collapse>
             <br />
-            <Button
-              disabled={props.values.taskBody === "" ? true : false}
-              onClick={(event) => {
-                event.preventDefault();
-                setOpenNotes(false); //Closes notes section again.
-                props.submitFunc({ ...props.values, id: uuidv4(), completed: false, datePosted: datePosted() }); //Handles submission.
-                props.setValues({ taskBody: "", taskNotes: "", priority: "Medium" }); //Changes the fields back to blank for a new todo to be input
-                //console.log()
-              }}
-            >I need to do this</Button>
+            <label htmlFor="deadline">Deadline:</label>
+            <input type="date" onChange={props.handleChangeFunc} value={props.values.deadline} onKeyDown={(e) => e.preventDefault()} id="deadline" min={convertDigitIn(today)} name="deadline"></input>
+              <br />
+              <Button
+                disabled={props.values.taskBody === "" ? true : false}
+                onClick={(event) => {
+                  event.preventDefault();
+                  setOpenNotes(false); //Closes notes section again.
+                  props.submitFunc({ ...props.values, id: uuidv4(), completed: false, datePosted: datePosted() }); //Handles submission.
+                  props.setValues({ taskBody: "", taskNotes: "", priority: "Medium", deadline:"" }); //Changes the fields back to blank for a new todo to be input
+                  //console.log()
+                }}
+              >I need to do this</Button>
           </div>
         </Collapse>
 

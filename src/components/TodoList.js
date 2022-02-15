@@ -11,7 +11,7 @@ import useInputState from "../hooks/useInputState";
 import useLocalStorage from "../hooks/useLocalStorage";
 import useTransition from "../hooks/useTransition";
 
-function ToDoList() {
+function TodoList() {
     const [values, setValues, handleChangeFunc] = useInputState();
     const [todos, submitFunc, deleteFunc, editFunc, toggleComplete, deleteComplete] = useLocalStorage();
     const [shrink, multShrink] = useTransition(); //Its ok not to do this. 
@@ -49,7 +49,7 @@ function ToDoList() {
     );
 }
 
-export default ToDoList;
+export default TodoList;
 
 
 //Class based build below

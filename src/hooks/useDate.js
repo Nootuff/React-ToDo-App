@@ -10,5 +10,9 @@ export default date => {
         return dd + '/' + mm + '/' + yyyy;
       } 
 
+      var dateConverter = (str, split, join)  => {
+
+      }
+
     return [datePosted];
 }

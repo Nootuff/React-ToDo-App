@@ -14,7 +14,7 @@ export default search => {
     }
 
     const deleteFunc = (passedId) => {
-        let newList = todos.filter(toDo => toDo.id !== passedId)  // Sets value to new array created from from all toDos where id does not = the id of the todo taht was passed to this function when the delete button was pushed in its component. 
+        let newList = todos.filter(todo => todo.id !== passedId)  // Sets value to new array created from from all toDos where id does not = the id of the todo taht was passed to this function when the delete button was pushed in its component. 
         setTodos(newList)
         //alert("delete this")
         //console.log(newState)
