@@ -9,7 +9,7 @@ import '../styles/Todo.css';
 function Todo(props) {
   const [open, setOpen] = useState(true);
   const [openNotes, setOpenNotes] = useState(false);
-  const [datePosted] = useDate()
+  const [currDate, dateConverter] = useDate()
 
   let values = {
     taskBody: props.todos.taskBody,
@@ -23,44 +23,46 @@ function Todo(props) {
 
   const [state, setState] = useState(values); //Maybe a better namd than "state"
 
-  const handleEditChangeFunc = (event) => { //You could put more arguments in here to make this into a reusable hook 
-    const { name, value } = event.target; //Destructured const
+  const handleEditChangeFunc = (event) => { //If you can't solve this issue then just leave it. 
+    const { name, value } = event.target; 
     setState({
       ...state,
       [name]: value,
     });
   }
 
+  /*
   function convertDigitIn(str) { //Used to convert the deadline to a display date. You could make multiple different versions of this propr replacing the - / with properties that are set by arguments on invocation. 
     return str.split('-').reverse().join('-');
-  }
+  } */
 
-  function isLater(deadline, today) {
+  function isLater(deadline, today) { //Move this to a hook? where would it go? 
     return deadline > today
   }
 
-  var today = datePosted() //got to change this name
+  //var today = currDate() //got to change this name
 
+  /*
   function convertBack(str) {
     return str.split('/').reverse().join('-');
-  }
-  //Got to clean all the above functions up first.
+  } */
 
-  const deadlineDisplay = (props.todos.deadline) !== "" && <h5 style={{ color: isLater(convertDigitIn(props.todos.deadline), datePosted()) ? null : "red" }}>Deadline: {convertDigitIn(props.todos.deadline)}</h5>;
+
+  const deadlineDisplay = (props.todos.deadline) !== "" && <h5 style={{ color: isLater(dateConverter(props.todos.deadline , '-', '-'), currDate()) ? null : "red" }}>Deadline: {dateConverter(props.todos.deadline , '-', '/')}</h5>; 
 
   return (
     <li
-      className="Todo"
+      className="Todo shadow"
       id={props.todos.id}
     >
-      {/*<Collapse in={props.shrink}>*/}
+      
       <Collapse in={open}>
         <Card border={props.todos.priority === 'High' ? 'danger' : props.todos.priority === 'Medium' ? 'primary' : 'success'}
           style={{ border: "3px solid", marginBottom: "10px" }}>
           <section
             style={{ textDecoration: props.todos.completed && "line-through" /* The && is a ternary with a single condistion */ }}
           >
-            <h2>
+            <h2 onClick={() => { props.toggleComplete(props.todos) }}>
               {props.todos.taskBody}
             </h2>
             <h4>{props.todos.taskNotes}</h4>
@@ -116,7 +118,7 @@ function Todo(props) {
               />
               <br />
               <label htmlFor="deadline">Change deadline:</label>
-            <input type="date" onChange={handleEditChangeFunc} value={state.deadline} onKeyDown={(e) => e.preventDefault()} id="deadline" min={convertBack(today)} name="deadline"></input>
+            <input type="date" onChange={handleEditChangeFunc} value={state.deadline} onKeyDown={(e) => e.preventDefault()} id="deadline" min={dateConverter(currDate(), '/', '-')} name="deadline"></input>
             <Button  variant="danger" onClick={handleEditChangeFunc} name="deadline" value="" >Remove Deadline</Button>
             <br />
 
@@ -144,7 +146,7 @@ function Todo(props) {
 
         </Card>
       </Collapse>
-      {/* </Collapse> */}
+     
     </li>
   );
 }

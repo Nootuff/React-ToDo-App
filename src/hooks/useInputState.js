@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { v4 as uuidv4 } from 'uuid'; //Imports the uuid npm package. 
 
-const initialValues = {
+const initialTodo = {
     taskBody: "",
     taskNotes: "",
     //completed: false,
@@ -10,8 +10,15 @@ const initialValues = {
     //id: ""
 };
 
+const initialProject = {
+    projName: "",
+    projNotes: "",
+};
+
 export default input => {
-    const [values, setValues] = useState(initialValues);
+    const [values, setValues] = useState(initialTodo);
+    const [projData, setProjData] = useState(initialProject);
+
 
     const handleChangeFunc = (event) => {
         const { name, value } = event.target; //Destructured const
@@ -22,7 +29,14 @@ export default input => {
         });
     }
 
+    const handleProjChangeFunc = (event) => {
+        const { name, value } = event.target; 
+        setProjData({
+            ...projData,
+            [name]: value,
+        });
+    }
     
 
-    return [values, setValues, handleChangeFunc];
+    return [values, setValues, projData, setProjData, handleChangeFunc, handleProjChangeFunc];
 }

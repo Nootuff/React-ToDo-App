@@ -1,58 +1,101 @@
 import React, { useState } from "react";
 
-export default search => {
+const initialStorage = {
+    home: [
+        {
+            "taskBody": "Placeholder 1",
+            "taskNotes": "Some notes here",
+            "priority": "Medium",
+            "id": "1",
+            "completed": false,
+            "deadline": "",
+            "datePosted": "19/02/2022"
+        },
+        {
+            "taskBody": "Placeholder 2",
+            "taskNotes": "Some more here",
+            "priority": "high",
+            "id": "2",
+            "completed": false,
+            "deadline": "",
+            "datePosted": "19/02/2022"
+        }
+    ],
+    dailies: [],
+    projects: []
+};
 
-    const [todos, setTodos] = useState(JSON.parse(localStorage.getItem("todoData")) || []);
-    //const [srunk, setShrunk] = useState(true)
+/*
+const initialStorage = {
+    home: [],
+    dailies: []
+}
+*/
 
+export default storage => {
+
+    const [todos, setTodos] = useState(JSON.parse(localStorage.getItem("hooksTodos")) || initialStorage);
 
     const submitFunc = (data) => {
-        let stateHolder = [...todos, data]
+        let stateHolder = todos;
+        let dataholder = [...todos.home, data]
+        stateHolder.home = dataholder;
+        console.log(stateHolder)
+        window.localStorage.setItem('hooksTodos', JSON.stringify(stateHolder));
+    }
+
+    const submitProject = (data) => {
+        let stateHolder = { ...todos };
+        //var name = data.projName.replace(/\s/g, ''); Is this still needed?
+     
+        let dataholder = [...todos.projects, data ]
+        stateHolder.projects = dataholder;
+        console.log(stateHolder)
         setTodos(stateHolder)
-        //console.log(data)
-        window.localStorage.setItem('todoData', JSON.stringify(stateHolder));
+        window.localStorage.setItem('hooksTodos', JSON.stringify(stateHolder)) 
     }
 
     const deleteFunc = (passedId) => {
-        let newList = todos.filter(todo => todo.id !== passedId)  // Sets value to new array created from from all toDos where id does not = the id of the todo taht was passed to this function when the delete button was pushed in its component. 
-        setTodos(newList)
-        //alert("delete this")
-        //console.log(newState)
-        window.localStorage.setItem('todoData', JSON.stringify(newList));
+        let newList = todos.home.filter(toDo => toDo.id !== passedId)
+        let stateHolder = { ...todos }; //The three dots are what make the change register and trigger the re-render.
+        stateHolder.home = newList;
+        setTodos(stateHolder)
+        window.localStorage.setItem('hooksTodos', JSON.stringify(stateHolder)) //send the value of "state" to localstorage 
     }
 
     const editFunc = (data) => {
-        let stateHolder = [...todos];
-
-        for (let i = 0; i < stateHolder.length; i++) { //Loop through everything in stateHolder.
-            if (stateHolder[i].id === data.id) { //If the id of the current object is the same as the id that is passed in...
-                stateHolder[i] = data //Update its data with the new data that was passed in.
+        let stateHolder = { ...todos };
+        for (let i = 0; i < stateHolder.home.length; i++) { //Loop through everything in stateHolder.
+            if (stateHolder.home[i].id === data.id) { //If the id of the current object is the same as the id that is passed in...
+                // stateHolder[i].taskBody = data.editBody; //Update its body with the new body that was passed in.
+                stateHolder.home[i] = data
             }
         }
         setTodos(stateHolder)
-        window.localStorage.setItem('todoData', JSON.stringify(stateHolder));
-        //console.log(data)
+        window.localStorage.setItem('hooksTodos', JSON.stringify(stateHolder));
+        console.log(data)
     }
 
     const toggleComplete = (data) => {
-        let stateHolder = [...todos];
-        for (let i = 0; i < stateHolder.length; i++) {
-            if (stateHolder[i].id === data.id) {
-                stateHolder[i].completed = !stateHolder[i].completed
+        let stateHolder = { ...todos };
+        for (let i = 0; i < stateHolder.home.length; i++) {
+            if (stateHolder.home[i].id === data.id) {
+                stateHolder.home[i].completed = !stateHolder.home[i].completed
             }
         }
         setTodos(stateHolder)
-        window.localStorage.setItem('todoData', JSON.stringify(stateHolder));
+        window.localStorage.setItem('hooksTodos', JSON.stringify(stateHolder));
     }
 
     const deleteComplete = () => {
-        let stateHolder = [...todos];
-        let incomplete = stateHolder.filter(test => test.completed === false)
-        setTodos(incomplete)
-        window.localStorage.setItem('todoData', JSON.stringify(incomplete));
+        let stateHolder = { ...todos };
+        let incomplete = todos.home.filter(test => test.completed === false)
+        stateHolder.home = incomplete;
+        setTodos(stateHolder)
+        window.localStorage.setItem('hooksTodos', JSON.stringify(stateHolder));
     }
 
 
-    return [todos, submitFunc, deleteFunc, editFunc, toggleComplete, deleteComplete];
+    return [todos, submitFunc, submitProject, deleteFunc, editFunc, toggleComplete, deleteComplete];
 
 }

@@ -1,7 +1,13 @@
 import React, { useState } from "react";
 import NewTodoForm from "./NewTodoForm";
-import Todo from "./Todo";
+import NewProjectForm from "./NewProjectForm";
+
 import DeleteComplete from "./DeleteComplete";
+import ListComponent from "./ListComponent";
+import ProjectTodosList from "./ProjectTodosList";
+
+
+import ProjectList from "./ProjectList";
 import Header from "./Header";
 import Footer from "./Footer";
 
@@ -9,40 +15,56 @@ import '../styles/TodoList.css';
 
 import useInputState from "../hooks/useInputState";
 import useLocalStorage from "../hooks/useLocalStorage";
-import useTransition from "../hooks/useTransition";
+import useView from "../hooks/useView";
+//import useTransition from "../hooks/useTransition";
 
 function TodoList() {
-    const [values, setValues, handleChangeFunc] = useInputState();
-    const [todos, submitFunc, deleteFunc, editFunc, toggleComplete, deleteComplete] = useLocalStorage();
-    const [shrink, multShrink] = useTransition(); //Its ok not to do this. 
+    const [values, setValues, projData, setProjData, handleChangeFunc, handleProjChangeFunc] = useInputState();
+    const [todos, submitFunc, submitProject, deleteFunc, editFunc, toggleComplete, deleteComplete] = useLocalStorage();
+    const [home, setHome, view, showProject] = useView();
 
-    const lister = todos.slice(0).reverse().map((num) =>
-        <Todo
-            key={num.id}
-            todos={num}
-            deleteFunc={deleteFunc}
-            editFunc={editFunc}
-            toggleComplete={toggleComplete}
-        />
-    );
+    // const [shrink, multShrink] = useTransition(); //Its ok not to do this. 
 
     return (
         <div className="Todo-list">
             <Header />
             <div className="Wrapper">
-            <NewTodoForm
-                handleChangeFunc={handleChangeFunc}
-                submitFunc={submitFunc}
-                values={values}
-                setValues={setValues}
-            />
+                <NewTodoForm
+                    handleChangeFunc={handleChangeFunc}
+                    submitFunc={submitFunc}
+                    values={values}
+                    setValues={setValues}
+                />
+                <NewProjectForm
+                    projData={projData}
 
-<DeleteComplete /*multShrink={multShrink}*/ deleteComplete={deleteComplete}/>
+                    setProjData={setProjData}
+                    handleProjChangeFunc={handleProjChangeFunc}
+                    submitProject={submitProject}
+                />
 
-            
-            <ul className="List">
-                {lister}
-            </ul>
+                <DeleteComplete /*multShrink={multShrink}*/ deleteComplete={deleteComplete} />
+                {/*lister*/}
+
+                <ProjectList
+                    projects={todos.projects}
+                    showProject={showProject}
+                    setHome={setHome}
+                />
+
+                {home &&
+                    <ListComponent
+                        todos={todos}
+                        deleteFunc={deleteFunc}
+                        editFunc={editFunc}
+                        toggleComplete={toggleComplete}
+                    />
+                }
+                <ProjectTodosList />
+
+                <ul className="List">
+
+                </ul>
             </div>
             <Footer />
         </div>

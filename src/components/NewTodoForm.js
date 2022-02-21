@@ -7,17 +7,7 @@ import useDate from "../hooks/useDate";
 function NewTodoForm(props) {
   const [open, setOpen] = useState(false);
   const [openNotes, setOpenNotes] = useState(false);
-  const [datePosted] = useDate();
-
-  
-var today = datePosted() //got to change this name
-
-
-function convertDigitIn(str) {
-  return str.split('/').reverse().join('-');
-}
-
-//console.log(convertDigitIn(today))
+  const [currDate, dateConverter] = useDate();
 
   return (
     <div >
@@ -71,14 +61,14 @@ function convertDigitIn(str) {
             </Collapse>
             <br />
             <label htmlFor="deadline">Deadline:</label>
-            <input type="date" onChange={props.handleChangeFunc} value={props.values.deadline} onKeyDown={(e) => e.preventDefault()} id="deadline" min={convertDigitIn(today)} name="deadline"></input>
+            <input type="date" onChange={props.handleChangeFunc} value={props.values.deadline} onKeyDown={(e) => e.preventDefault()} id="deadline" min={dateConverter(currDate(), '/', '-')} name="deadline"></input>
               <br />
               <Button
                 disabled={props.values.taskBody === "" ? true : false}
                 onClick={(event) => {
                   event.preventDefault();
                   setOpenNotes(false); //Closes notes section again.
-                  props.submitFunc({ ...props.values, id: uuidv4(), completed: false, datePosted: datePosted() }); //Handles submission.
+                  props.submitFunc({ ...props.values, id: uuidv4(), completed: false, datePosted: currDate() }); //Handles submission.
                   props.setValues({ taskBody: "", taskNotes: "", priority: "Medium", deadline:"" }); //Changes the fields back to blank for a new todo to be input
                   //console.log()
                 }}
