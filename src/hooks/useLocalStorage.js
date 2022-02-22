@@ -36,7 +36,7 @@ export default storage => {
 
     const [todos, setTodos] = useState(JSON.parse(localStorage.getItem("hooksTodos")) || initialStorage);
 
-    const submitFunc = (data) => {
+    const submitTodo = (data) => {
         let stateHolder = todos;
         let dataholder = [...todos.home, data]
         stateHolder.home = dataholder;
@@ -47,12 +47,22 @@ export default storage => {
     const submitProject = (data) => {
         let stateHolder = { ...todos };
         //var name = data.projName.replace(/\s/g, ''); Is this still needed?
-     
-        let dataholder = [...todos.projects, data ]
+        let dataholder = [...todos.projects, data]
         stateHolder.projects = dataholder;
         console.log(stateHolder)
         setTodos(stateHolder)
-        window.localStorage.setItem('hooksTodos', JSON.stringify(stateHolder)) 
+        window.localStorage.setItem('hooksTodos', JSON.stringify(stateHolder))
+    }
+
+    const submitProjectTodo = (data, viewId) => {
+        let stateHolder = { ...todos };
+        for (let i = 0; i < stateHolder.projects.length; i++) {
+            if (stateHolder.projects[i].projId === viewId) {
+                stateHolder.projects[i].projTodos.push(data);
+            }
+        }
+        setTodos(stateHolder)
+        window.localStorage.setItem('hooksTodos', JSON.stringify(stateHolder));
     }
 
     const deleteFunc = (passedId) => {
@@ -61,6 +71,10 @@ export default storage => {
         stateHolder.home = newList;
         setTodos(stateHolder)
         window.localStorage.setItem('hooksTodos', JSON.stringify(stateHolder)) //send the value of "state" to localstorage 
+    }
+
+    const deleteProjectTodo = (data, viewId) => {
+        alert("deleteProjectTodo")
     }
 
     const editFunc = (data) => {
@@ -76,6 +90,10 @@ export default storage => {
         console.log(data)
     }
 
+    const editProjectTodo = (data, viewId) => {
+        alert("editProjectTodo")
+    }
+
     const toggleComplete = (data) => {
         let stateHolder = { ...todos };
         for (let i = 0; i < stateHolder.home.length; i++) {
@@ -87,6 +105,10 @@ export default storage => {
         window.localStorage.setItem('hooksTodos', JSON.stringify(stateHolder));
     }
 
+    const completeProjectTodo = (data, viewId) => {
+        alert("completeProjectTodo")
+    }
+
     const deleteComplete = () => {
         let stateHolder = { ...todos };
         let incomplete = todos.home.filter(test => test.completed === false)
@@ -96,6 +118,6 @@ export default storage => {
     }
 
 
-    return [todos, submitFunc, submitProject, deleteFunc, editFunc, toggleComplete, deleteComplete];
+    return [todos, submitTodo, submitProject, submitProjectTodo, deleteFunc, deleteProjectTodo, editFunc, editProjectTodo, toggleComplete, completeProjectTodo, deleteComplete];
 
 }

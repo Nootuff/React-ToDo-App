@@ -1,9 +1,10 @@
 import Todo from "./Todo";
 
 function ListComponent(props) {
-    
+
     const list = props.todos.home.slice(0).reverse().map((num) =>
         <Todo
+            home={props.home}
             key={num.id}
             todos={num}
             deleteFunc={props.deleteFunc}
@@ -13,9 +14,9 @@ function ListComponent(props) {
     );
 
     return (
-            <ul className="List">
-                {list}
-            </ul>
+        <ul className="List">
+            {list}
+        </ul>
     );
 }
 

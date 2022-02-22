@@ -20,10 +20,20 @@ import useView from "../hooks/useView";
 
 function TodoList() {
     const [values, setValues, projData, setProjData, handleChangeFunc, handleProjChangeFunc] = useInputState();
-    const [todos, submitFunc, submitProject, deleteFunc, editFunc, toggleComplete, deleteComplete] = useLocalStorage();
+    const [todos, submitTodo, submitProject, submitProjectTodo, deleteFunc, deleteProjectTodo, editFunc, editProjectTodo, toggleComplete, completeProjectTodo, deleteComplete] = useLocalStorage();
     const [home, setHome, view, showProject] = useView();
 
     // const [shrink, multShrink] = useTransition(); //Its ok not to do this. 
+
+    let viewedProject;
+    //console.log(view)
+    for (let i = 0; i < todos.projects.length; i++) {
+        // console.log("project")
+        if (todos.projects[i].projId === view) {
+            viewedProject = todos.projects[i];
+            //  console.log(viewedProject)
+        }
+    }
 
     return (
         <div className="Todo-list">
@@ -31,13 +41,15 @@ function TodoList() {
             <div className="Wrapper">
                 <NewTodoForm
                     handleChangeFunc={handleChangeFunc}
-                    submitFunc={submitFunc}
+                    submitTodo={submitTodo}
                     values={values}
                     setValues={setValues}
+                    home={home}
+                    submitProjectTodo={submitProjectTodo}
+                    view={view}
                 />
                 <NewProjectForm
                     projData={projData}
-
                     setProjData={setProjData}
                     handleProjChangeFunc={handleProjChangeFunc}
                     submitProject={submitProject}
@@ -50,18 +62,25 @@ function TodoList() {
                     projects={todos.projects}
                     showProject={showProject}
                     setHome={setHome}
+                    view={view}
                 />
-
-                {home &&
+                {home ?
                     <ListComponent
+                        home={home}
                         todos={todos}
                         deleteFunc={deleteFunc}
                         editFunc={editFunc}
                         toggleComplete={toggleComplete}
                     />
+                    :
+                    <ProjectTodosList
+                        home={home}
+                        todos={viewedProject}
+                        deleteProjectTodo={deleteProjectTodo}
+                        editProjectTodo={editProjectTodo}
+                        completeProjectTodo={completeProjectTodo}
+                    />
                 }
-                <ProjectTodosList />
-
                 <ul className="List">
 
                 </ul>
