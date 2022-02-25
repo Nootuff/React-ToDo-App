@@ -79,6 +79,7 @@ function TodoList() {
                         deleteProjectTodo={deleteProjectTodo}
                         editProjectTodo={editProjectTodo}
                         completeProjectTodo={completeProjectTodo}
+                        view={view}
                     />
                 }
                 <ul className="List">

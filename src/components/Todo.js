@@ -11,7 +11,7 @@ function Todo(props) {
   const [openNotes, setOpenNotes] = useState(false);
   const [currDate, dateConverter] = useDate()
 
-  let values = {
+  let values = { //Stores all the todo's details for them to be updated when editing.
     taskBody: props.todos.taskBody,
     taskNotes: props.todos.taskNotes,
     completed: props.todos.completed,
@@ -63,14 +63,10 @@ function Todo(props) {
             style={{ textDecoration: props.todos.completed && "line-through" /* The && is a ternary with a single condistion */ }}
           >
             <h2 onClick={() => {
-
-              
-                props.home ?
+              props.home ?
                 props.toggleComplete(props.todos)
                 :
-                props.completeProjectTodo()
-              
-
+                props.completeProjectTodo(props.view, props.todos)
             }}>
               {props.todos.taskBody}
             </h2>
@@ -82,15 +78,11 @@ function Todo(props) {
           </section>
           <Button
             variant="success"
-            onClick={() => { 
-              
-              
-                props.home ?
+            onClick={() => {
+              props.home ?
                 props.toggleComplete(props.todos)
                 :
-                props.completeProjectTodo("nothing")
-              
-            
+                props.completeProjectTodo(props.view, props.todos)
             }}
           >
             Done!
@@ -147,13 +139,10 @@ function Todo(props) {
                 onClick={(event) => {
                   event.preventDefault();
                   setOpenNotes(false)
-                  
-                    props.home ?
+                  props.home ?
                     props.editFunc(state)
                     :
-                    props.editProjectTodo()
-                  
-                  
+                    props.editProjectTodo(props.view, state)
                 }}
               >Update todo</Button>
             </form>
@@ -162,24 +151,20 @@ function Todo(props) {
             variant="danger"
             onClick={() => {
               setOpen(false);
-              setTimeout(() => { 
-                
+              setTimeout(() => {
                 {
                   props.home ?
-                  props.deleteFunc(props.todos.id)
-                  :
-                  props.deleteProjectTodo();
-                }   
-              
+                    props.deleteFunc(props.todos.id)
+                    :
+                    props.deleteProjectTodo(props.view, props.todos.id);
+                }
               }, 300);
             }}
           >
             Delete todo
           </Button>
-
         </Card>
       </Collapse>
-
     </li>
   );
 }

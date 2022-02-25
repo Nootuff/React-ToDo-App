@@ -25,13 +25,6 @@ const initialStorage = {
     projects: []
 };
 
-/*
-const initialStorage = {
-    home: [],
-    dailies: []
-}
-*/
-
 export default storage => {
 
     const [todos, setTodos] = useState(JSON.parse(localStorage.getItem("hooksTodos")) || initialStorage);
@@ -73,8 +66,16 @@ export default storage => {
         window.localStorage.setItem('hooksTodos', JSON.stringify(stateHolder)) //send the value of "state" to localstorage 
     }
 
-    const deleteProjectTodo = (data, viewId) => {
-        alert("deleteProjectTodo")
+    const deleteProjectTodo = (viewId, passedId) => {
+        let stateHolder = { ...todos };
+        for (let i = 0; i < stateHolder.projects.length; i++) {
+            if (stateHolder.projects[i].projId === viewId) {
+                let newList = stateHolder.projects[i].projTodos.filter(toDo => toDo.id !== passedId)
+                stateHolder.projects[i].projTodos = newList
+            }
+        }
+        setTodos(stateHolder)
+        window.localStorage.setItem('hooksTodos', JSON.stringify(stateHolder))
     }
 
     const editFunc = (data) => {
@@ -90,8 +91,19 @@ export default storage => {
         console.log(data)
     }
 
-    const editProjectTodo = (data, viewId) => {
-        alert("editProjectTodo")
+    const editProjectTodo = (viewId, data) => {
+        let stateHolder = { ...todos };
+        for (let i = 0; i < stateHolder.projects.length; i++){ //Loop through everything in the projects array in stateHolder.
+            if (stateHolder.projects[i].projId === viewId) { //If project[i] is the project user is currently viewing...
+                for (let v = 0; v < stateHolder.projects[i].projTodos.length; v++) { //Loop through its array of todos.
+                    if (stateHolder.projects[i].projTodos[v].id === data.id) { //If its id matches the id in the passed in data...
+                        stateHolder.projects[i].projTodos[v] = data //Replace that project's data with the passed in data from the form.
+                    }
+                }
+            }
+        }
+        setTodos(stateHolder)
+        window.localStorage.setItem('hooksTodos', JSON.stringify(stateHolder))
     }
 
     const toggleComplete = (data) => {
@@ -105,8 +117,10 @@ export default storage => {
         window.localStorage.setItem('hooksTodos', JSON.stringify(stateHolder));
     }
 
-    const completeProjectTodo = (data, viewId) => {
-        alert("completeProjectTodo")
+    const completeProjectTodo = (viewId, data) => {
+        let stateHolder = { ...todos };
+
+        alert(viewId)
     }
 
     const deleteComplete = () => {

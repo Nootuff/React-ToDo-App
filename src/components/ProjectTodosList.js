@@ -13,6 +13,7 @@ function ProjectTodosList(props) {
             deleteProjectTodo={props.deleteProjectTodo}
             editProjectTodo={props.editProjectTodo}
             completeProjectTodo={props.completeProjectTodo}
+            view={props.view}
         />
     );
 
