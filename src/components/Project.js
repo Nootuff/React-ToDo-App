@@ -14,4 +14,4 @@ function Project(props) {
      );
 }
 
-export default Project;
+//export default Project;

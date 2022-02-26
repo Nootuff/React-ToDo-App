@@ -1,22 +1,28 @@
 import Todo from "./Todo";
+import EditProjectForm from "./Forms/EditProjectForm";
 
 function ListComponent(props) {
 
-    const list = props.todos.home.slice(0).reverse().map((num) =>
+    const list = props.viewedProject.projTodos.slice(0).reverse().map((num) =>
         <Todo
-            home={props.home}
             key={num.id}
             todos={num}
-            deleteFunc={props.deleteFunc}
-            editFunc={props.editFunc}
+            deleteTodo={props.deleteTodo}
+            editTodo={props.editTodo}
             toggleComplete={props.toggleComplete}
+            proj={props.proj}
         />
     );
 
     return (
+        <div>
+            <h1>{props.viewedProject.projName}</h1>
+            <h2>{props.viewedProject.projNotes }</h2>
+           { props.viewedProject.projId.length > 1 ? <EditProjectForm /> : null }
         <ul className="List">
             {list}
         </ul>
+        </div>
     );
 }
 

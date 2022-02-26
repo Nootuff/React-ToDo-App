@@ -1,20 +1,21 @@
-import Project from "./Project";
-
 function ProjectList(props) {
-//The component that lists all your projects names
-  const lister = props.projects.slice(0).reverse().map((num) =>
-    <Project showProject={props.showProject} project={num} />
+
+  //Just a list of buttons to change projects
+
+  const list = props.projects.slice(2).reverse().map((num) =>
+    <li>
+      <button
+        style={{ color: props.proj === num.projId ? "red" : "black" }}
+        onClick={() => { props.setProj(num.projId) }}>{num.projName + " " + num.projTodos.length}
+      </button>
+    </li>
   );
 
   return (
-    <div className="List">
-      <b> ProjectList {props.view}</b>
-      <br />
-      <button onClick={() => {
-        props.setHome(true)
-      }}>Home</button>
-      {lister}
-    </div>
+    <ul className="List">
+      <b>Current project id: {props.proj}</b>
+      {list}
+    </ul>
   );
 }
 

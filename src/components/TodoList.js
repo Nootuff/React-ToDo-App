@@ -4,8 +4,8 @@ import NewProjectForm from "./NewProjectForm";
 
 import DeleteComplete from "./DeleteComplete";
 import ListComponent from "./ListComponent";
-import ProjectTodosList from "./ProjectTodosList";
-
+//import ProjectTodosList from "./ProjectTodosList";
+import Todo from "./Todo";
 
 import ProjectList from "./ProjectList";
 import Header from "./Header";
@@ -20,18 +20,15 @@ import useView from "../hooks/useView";
 
 function TodoList() {
     const [values, setValues, projData, setProjData, handleChangeFunc, handleProjChangeFunc] = useInputState();
-    const [todos, submitTodo, submitProject, submitProjectTodo, deleteFunc, deleteProjectTodo, editFunc, editProjectTodo, toggleComplete, completeProjectTodo, deleteComplete] = useLocalStorage();
-    const [home, setHome, view, showProject] = useView();
-
+    const [todos, submitProject, submitTodo, deleteTodo, editTodo, toggleComplete, deleteComplete] = useLocalStorage();
+    const [proj, setProj] = useView();
     // const [shrink, multShrink] = useTransition(); //Its ok not to do this. 
 
     let viewedProject;
-    //console.log(view)
-    for (let i = 0; i < todos.projects.length; i++) {
-        // console.log("project")
-        if (todos.projects[i].projId === view) {
-            viewedProject = todos.projects[i];
-            //  console.log(viewedProject)
+
+    for (let i = 0; i < todos.projects.length; i++) { //Checks for currently viewed project. Do you even need this 
+        if (todos.projects[i].projId === proj) {
+            viewedProject = todos.projects[i];    
         }
     }
 
@@ -44,9 +41,7 @@ function TodoList() {
                     submitTodo={submitTodo}
                     values={values}
                     setValues={setValues}
-                    home={home}
-                    submitProjectTodo={submitProjectTodo}
-                    view={view}
+                    proj={proj}
                 />
                 <NewProjectForm
                     projData={projData}
@@ -56,35 +51,33 @@ function TodoList() {
                 />
 
                 <DeleteComplete /*multShrink={multShrink}*/ deleteComplete={deleteComplete} />
-                {/*lister*/}
+                <br />
+            
+            <br /> {/*Put these central control buttons in their  own componeont */}
+            <button
+                onClick={() => { setProj("1") }}
+                style={{ color: proj === "1" ? "red" : "black" }} >
+                {todos.projects[0].projName + " " + todos.projects[0].projTodos.length}
+            </button>
+            <br />
+            <button
+                onClick={() => { setProj("2") }}
+                style={{ color: proj === "2" ? "red" : "black" }} >
+                {todos.projects[1].projName + " " + todos.projects[1].projTodos.length}
+            </button>
 
                 <ProjectList
                     projects={todos.projects}
-                    showProject={showProject}
-                    setHome={setHome}
-                    view={view}
+                    proj={proj}
+                    setProj={setProj} 
                 />
-                {home ?
-                    <ListComponent
-                        home={home}
-                        todos={todos}
-                        deleteFunc={deleteFunc}
-                        editFunc={editFunc}
-                        toggleComplete={toggleComplete}
+                <ListComponent
+                       deleteTodo={deleteTodo}
+                       editTodo={editTodo}
+                       toggleComplete={toggleComplete}
+                       proj={proj}
+                       viewedProject={viewedProject}
                     />
-                    :
-                    <ProjectTodosList
-                        home={home}
-                        todos={viewedProject}
-                        deleteProjectTodo={deleteProjectTodo}
-                        editProjectTodo={editProjectTodo}
-                        completeProjectTodo={completeProjectTodo}
-                        view={view}
-                    />
-                }
-                <ul className="List">
-
-                </ul>
             </div>
             <Footer />
         </div>

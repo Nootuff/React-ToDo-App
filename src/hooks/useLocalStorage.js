@@ -1,45 +1,54 @@
 import React, { useState } from "react";
 
 const initialStorage = {
-    home: [
+    projects: [
         {
-            "taskBody": "Placeholder 1",
-            "taskNotes": "Some notes here",
-            "priority": "Medium",
-            "id": "1",
-            "completed": false,
-            "deadline": "",
-            "datePosted": "19/02/2022"
+            projId: "1",
+            projName: "Home ",
+            projNotes: "",
+            projTodos: [{
+                "taskBody": "Placeholder 1",
+                "taskNotes": "Some notes here",
+                "priority": "Medium",
+                "id": "1",
+                "completed": false,
+                "deadline": "",
+                "datePosted": "19/02/2022"
+            },
+            {
+                "taskBody": "Placeholder 2",
+                "taskNotes": "Some more here",
+                "priority": "high",
+                "id": "2",
+                "completed": false,
+                "deadline": "",
+                "datePosted": "19/02/2022"
+            }]
         },
         {
-            "taskBody": "Placeholder 2",
-            "taskNotes": "Some more here",
-            "priority": "high",
-            "id": "2",
-            "completed": false,
-            "deadline": "",
-            "datePosted": "19/02/2022"
-        }
-    ],
-    dailies: [],
-    projects: []
+            projId: "2",
+            projName: "Dailies ",
+            projNotes: "Tasks you need to do everyday! ",
+            projTodos: []
+        }//,
+        /*{
+            projId: "3",
+            projName: "Your deleted todos ",
+            projNotes: "These will be automatically deleted after 3 days.",
+            projTodos: []
+        }*/
+
+    ]
+
 };
 
 export default storage => {
 
     const [todos, setTodos] = useState(JSON.parse(localStorage.getItem("hooksTodos")) || initialStorage);
 
-    const submitTodo = (data) => {
-        let stateHolder = todos;
-        let dataholder = [...todos.home, data]
-        stateHolder.home = dataholder;
-        console.log(stateHolder)
-        window.localStorage.setItem('hooksTodos', JSON.stringify(stateHolder));
-    }
-
     const submitProject = (data) => {
         let stateHolder = { ...todos };
-        //var name = data.projName.replace(/\s/g, ''); Is this still needed?
+        //var name = data.projName.replace(/\s/g, ''); //Is this still needed?
         let dataholder = [...todos.projects, data]
         stateHolder.projects = dataholder;
         console.log(stateHolder)
@@ -47,53 +56,34 @@ export default storage => {
         window.localStorage.setItem('hooksTodos', JSON.stringify(stateHolder))
     }
 
-    const submitProjectTodo = (data, viewId) => {
+    const submitTodo = (data, viewId) => {
         let stateHolder = { ...todos };
         for (let i = 0; i < stateHolder.projects.length; i++) {
             if (stateHolder.projects[i].projId === viewId) {
-                stateHolder.projects[i].projTodos.push(data);
+                let dataholder = [...stateHolder.projects[i].projTodos, data]
+                stateHolder.projects[i].projTodos = dataholder
             }
+            console.log(stateHolder)
+            setTodos(stateHolder)
+            window.localStorage.setItem('hooksTodos', JSON.stringify(stateHolder));
         }
-        setTodos(stateHolder)
-        window.localStorage.setItem('hooksTodos', JSON.stringify(stateHolder));
     }
 
-    const deleteFunc = (passedId) => {
-        let newList = todos.home.filter(toDo => toDo.id !== passedId)
-        let stateHolder = { ...todos }; //The three dots are what make the change register and trigger the re-render.
-        stateHolder.home = newList;
-        setTodos(stateHolder)
-        window.localStorage.setItem('hooksTodos', JSON.stringify(stateHolder)) //send the value of "state" to localstorage 
-    }
-
-    const deleteProjectTodo = (viewId, passedId) => {
+    const deleteTodo = (dataId, viewId) => {
         let stateHolder = { ...todos };
         for (let i = 0; i < stateHolder.projects.length; i++) {
             if (stateHolder.projects[i].projId === viewId) {
-                let newList = stateHolder.projects[i].projTodos.filter(toDo => toDo.id !== passedId)
-                stateHolder.projects[i].projTodos = newList
+                let newList = stateHolder.projects[i].projTodos.filter(toDo => toDo.id !== dataId)
+                stateHolder.projects[i].projTodos = newList;
             }
         }
         setTodos(stateHolder)
-        window.localStorage.setItem('hooksTodos', JSON.stringify(stateHolder))
+        window.localStorage.setItem('hooksTodos', JSON.stringify(stateHolder)) //send the value of "state" to localstorage   
     }
 
-    const editFunc = (data) => {
+    const editTodo = (data, viewId) => {
         let stateHolder = { ...todos };
-        for (let i = 0; i < stateHolder.home.length; i++) { //Loop through everything in stateHolder.
-            if (stateHolder.home[i].id === data.id) { //If the id of the current object is the same as the id that is passed in...
-                // stateHolder[i].taskBody = data.editBody; //Update its body with the new body that was passed in.
-                stateHolder.home[i] = data
-            }
-        }
-        setTodos(stateHolder)
-        window.localStorage.setItem('hooksTodos', JSON.stringify(stateHolder));
-        console.log(data)
-    }
-
-    const editProjectTodo = (viewId, data) => {
-        let stateHolder = { ...todos };
-        for (let i = 0; i < stateHolder.projects.length; i++){ //Loop through everything in the projects array in stateHolder.
+        for (let i = 0; i < stateHolder.projects.length; i++) { //Loop through everything in the projects array in stateHolder.
             if (stateHolder.projects[i].projId === viewId) { //If project[i] is the project user is currently viewing...
                 for (let v = 0; v < stateHolder.projects[i].projTodos.length; v++) { //Loop through its array of todos.
                     if (stateHolder.projects[i].projTodos[v].id === data.id) { //If its id matches the id in the passed in data...
@@ -102,9 +92,12 @@ export default storage => {
                 }
             }
         }
+        // console.log(stateHolder)
         setTodos(stateHolder)
         window.localStorage.setItem('hooksTodos', JSON.stringify(stateHolder))
     }
+
+
 
     const toggleComplete = (data) => {
         let stateHolder = { ...todos };
@@ -132,6 +125,6 @@ export default storage => {
     }
 
 
-    return [todos, submitTodo, submitProject, submitProjectTodo, deleteFunc, deleteProjectTodo, editFunc, editProjectTodo, toggleComplete, completeProjectTodo, deleteComplete];
+    return [todos, submitProject, submitTodo, deleteTodo, editTodo, toggleComplete, deleteComplete];
 
 }

@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 
 
 function NewProjectForm(props) {
-    const [open, setOpen] = useState(false);
+    //const [open, setOpen] = useState(false);
     const [openNotes, setOpenNotes] = useState(false);
    
   

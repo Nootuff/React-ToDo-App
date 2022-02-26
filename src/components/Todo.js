@@ -63,10 +63,7 @@ function Todo(props) {
             style={{ textDecoration: props.todos.completed && "line-through" /* The && is a ternary with a single condistion */ }}
           >
             <h2 onClick={() => {
-              props.home ?
-                props.toggleComplete(props.todos)
-                :
-                props.completeProjectTodo(props.view, props.todos)
+                props.toggleComplete(props.todos)   
             }}>
               {props.todos.taskBody}
             </h2>
@@ -79,10 +76,7 @@ function Todo(props) {
           <Button
             variant="success"
             onClick={() => {
-              props.home ?
-                props.toggleComplete(props.todos)
-                :
-                props.completeProjectTodo(props.view, props.todos)
+                props.toggleComplete(props.todos)   
             }}
           >
             Done!
@@ -139,10 +133,8 @@ function Todo(props) {
                 onClick={(event) => {
                   event.preventDefault();
                   setOpenNotes(false)
-                  props.home ?
-                    props.editFunc(state)
-                    :
-                    props.editProjectTodo(props.view, state)
+        
+                    props.editTodo(state, props.proj)
                 }}
               >Update todo</Button>
             </form>
@@ -153,10 +145,9 @@ function Todo(props) {
               setOpen(false);
               setTimeout(() => {
                 {
-                  props.home ?
-                    props.deleteFunc(props.todos.id)
-                    :
-                    props.deleteProjectTodo(props.view, props.todos.id);
+                 
+                    props.deleteTodo(props.todos.id, props.proj)
+                   
                 }
               }, 300);
             }}
