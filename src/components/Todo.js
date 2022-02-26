@@ -8,7 +8,7 @@ import '../styles/Todo.css';
 
 function Todo(props) {
   const [open, setOpen] = useState(true);
-  const [openNotes, setOpenNotes] = useState(false);
+  const [openEdit, setOpenEdit] = useState(false);
   const [currDate, dateConverter] = useDate()
 
   let values = { //Stores all the todo's details for them to be updated when editing.
@@ -21,7 +21,7 @@ function Todo(props) {
     id: props.todos.id
   }
 
-  const [state, setState] = useState(values); //Maybe a better namd than "state"
+  const [state, setState] = useState(values);
 
   const handleEditChangeFunc = (event) => { //If you can't solve this issue then just leave it. 
     const { name, value } = event.target;
@@ -31,22 +31,9 @@ function Todo(props) {
     });
   }
 
-  /*
-  function convertDigitIn(str) { //Used to convert the deadline to a display date. You could make multiple different versions of this propr replacing the - / with properties that are set by arguments on invocation. 
-    return str.split('-').reverse().join('-');
-  } */
-
   function isLater(deadline, today) { //Move this to a hook? where would it go? 
     return deadline > today
   }
-
-  //var today = currDate() //got to change this name
-
-  /*
-  function convertBack(str) {
-    return str.split('/').reverse().join('-');
-  } */
-
 
   const deadlineDisplay = (props.todos.deadline) !== "" && <h5 style={{ color: isLater(dateConverter(props.todos.deadline, '-', '-'), currDate()) ? null : "red" }}>Deadline: {dateConverter(props.todos.deadline, '-', '/')}</h5>;
 
@@ -63,7 +50,7 @@ function Todo(props) {
             style={{ textDecoration: props.todos.completed && "line-through" /* The && is a ternary with a single condistion */ }}
           >
             <h2 onClick={() => {
-                props.toggleComplete(props.todos, props.proj)   
+              props.toggleComplete(props.todos, props.proj)
             }}>
               {props.todos.taskBody}
             </h2>
@@ -76,19 +63,19 @@ function Todo(props) {
           <Button
             variant="success"
             onClick={() => {
-                props.toggleComplete(props.todos, props.proj)   
+              props.toggleComplete(props.todos, props.proj)
             }}
           >
             Done!
           </Button>
           <Button
-            onClick={() => setOpenNotes(!openNotes)}
+            onClick={() => setOpenEdit(!openEdit)}
             aria-controls="example-collapse-text"
-            aria-expanded={openNotes}
+            aria-expanded={openEdit}
           >
             Edit
           </Button>
-          <Collapse in={openNotes}>
+          <Collapse in={openEdit}>
             <form >
               <label htmlFor="editBody">Edit task </label>
               <input
@@ -129,14 +116,14 @@ function Todo(props) {
               <Button
                 variant="primary"
                 disabled={state.taskBody === "" ? true : false}
-
                 onClick={(event) => {
                   event.preventDefault();
-                  setOpenNotes(false)
-        
-                    props.editTodo(state, props.proj)
+                  setOpenEdit(false)
+                  props.editTodo(state, props.proj)
                 }}
-              >Update todo</Button>
+              >
+                Update todo
+              </Button>
             </form>
           </Collapse>
           <Button
@@ -144,11 +131,7 @@ function Todo(props) {
             onClick={() => {
               setOpen(false);
               setTimeout(() => {
-                {
-                 
-                    props.deleteTodo(props.todos.id, props.proj)
-                   
-                }
+                { props.deleteTodo(props.todos.id, props.proj) }
               }, 300);
             }}
           >

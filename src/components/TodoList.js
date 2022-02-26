@@ -4,8 +4,7 @@ import NewProjectForm from "./NewProjectForm";
 
 import DeleteComplete from "./DeleteComplete";
 import ListComponent from "./ListComponent";
-//import ProjectTodosList from "./ProjectTodosList";
-import Todo from "./Todo";
+
 
 import ProjectList from "./ProjectList";
 import Header from "./Header";
@@ -16,17 +15,16 @@ import '../styles/TodoList.css';
 import useInputState from "../hooks/useInputState";
 import useLocalStorage from "../hooks/useLocalStorage";
 import useView from "../hooks/useView";
-//import useTransition from "../hooks/useTransition";
+
 
 function TodoList() {
     const [values, setValues, projData, setProjData, handleChangeFunc, handleProjChangeFunc] = useInputState();
-    const [todos, submitProject, submitTodo, deleteTodo, editTodo, toggleComplete, deleteComplete] = useLocalStorage();
+    const [todos, submitProject, deleteProject, editProject, submitTodo, deleteTodo, editTodo, toggleComplete, deleteComplete] = useLocalStorage();
     const [proj, setProj] = useView();
-    // const [shrink, multShrink] = useTransition(); //Its ok not to do this. 
 
     let viewedProject;
 
-    for (let i = 0; i < todos.projects.length; i++) { //Checks for currently viewed project. Do you even need this 
+    for (let i = 0; i < todos.projects.length; i++) { //Checks for currently viewed project. canyou turn this into a map?
         if (todos.projects[i].projId === proj) {
             viewedProject = todos.projects[i];
         }
@@ -85,8 +83,11 @@ function TodoList() {
                     deleteTodo={deleteTodo}
                     editTodo={editTodo}
                     toggleComplete={toggleComplete}
+                    deleteProject={deleteProject}
+                    editProject={editProject}
                     proj={proj}
                     viewedProject={viewedProject}
+                    setProj={setProj}
                 />
             </div>
             <Footer />

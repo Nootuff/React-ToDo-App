@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import useView from "./useView";
 
 const initialStorage = {
     projects: [
@@ -7,26 +6,28 @@ const initialStorage = {
             projId: "1",
             projName: "Home ",
             projNotes: "",
-            projTodos: [{
-                "taskBody": "Placeholder 1",
-                "taskNotes": "Some notes here",
-                "priority": "Medium",
-                "id": "1",
-                "completed": false,
-                "deadline": "",
-                "deletedDate": "",
-                "datePosted": "19/02/2022"
-            },
-            {
-                "taskBody": "Placeholder 2",
-                "taskNotes": "Some more here",
-                "priority": "high",
-                "id": "2",
-                "completed": false,
-                "deadline": "",
-                "deletedDate": "",
-                "datePosted": "19/02/2022"
-            }]
+            projTodos: [
+                {
+                    "taskBody": "Placeholder 1",
+                    "taskNotes": "Some notes here",
+                    "priority": "Medium",
+                    "id": "1",
+                    "completed": false,
+                    "deadline": "",
+                    "deletedDate": "",
+                    "datePosted": "19/02/2022"
+                },
+                {
+                    "taskBody": "Placeholder 2",
+                    "taskNotes": "Some more here",
+                    "priority": "high",
+                    "id": "2",
+                    "completed": false,
+                    "deadline": "",
+                    "deletedDate": "",
+                    "datePosted": "19/02/2022"
+                }
+            ]
         },
         {
             projId: "2",
@@ -40,9 +41,7 @@ const initialStorage = {
             projNotes: "These will be automatically deleted after 3 days.",
             projTodos: []
         }
-
     ]
-
 };
 
 export default storage => {
@@ -57,6 +56,26 @@ export default storage => {
         window.localStorage.setItem('hooksTodos', JSON.stringify(stateHolder))
     }
 
+    const deleteProject = (viewId) => {
+        let stateHolder = { ...todos };
+        let newTodos = stateHolder.projects.filter(project => project.projId !== viewId)
+        stateHolder.projects = newTodos;
+        setTodos(stateHolder)
+        window.localStorage.setItem('hooksTodos', JSON.stringify(stateHolder))
+    }
+
+    const editProject = (data, viewId) => {
+        let stateHolder = { ...todos };
+        for (let i = 0; i < stateHolder.projects.length; i++) {
+            if (stateHolder.projects[i].projId === viewId) {
+                stateHolder.projects[i] = data;
+            }
+        }
+        //console.log(stateHolder)
+        setTodos(stateHolder)
+        window.localStorage.setItem('hooksTodos', JSON.stringify(stateHolder))
+    }
+
     const submitTodo = (data, viewId) => {
         let stateHolder = { ...todos };
         for (let i = 0; i < stateHolder.projects.length; i++) {
@@ -64,7 +83,6 @@ export default storage => {
                 let dataholder = [...stateHolder.projects[i].projTodos, data]
                 stateHolder.projects[i].projTodos = dataholder
             }
-            console.log(stateHolder)
             setTodos(stateHolder)
             window.localStorage.setItem('hooksTodos', JSON.stringify(stateHolder));
         }
@@ -74,7 +92,7 @@ export default storage => {
         let stateHolder = { ...todos };
         for (let i = 0; i < stateHolder.projects.length; i++) {
             if (stateHolder.projects[i].projId === viewId) {
-                let newList = stateHolder.projects[i].projTodos.filter(toDo => toDo.id !== dataId)
+                let newList = stateHolder.projects[i].projTodos.filter(todo => todo.id !== dataId)
                 stateHolder.projects[i].projTodos = newList;
             }
         }
@@ -120,12 +138,11 @@ export default storage => {
                 stateHolder.projects[i].projTodos = incomplete;
             }
         }
-        //console.log(stateHolder)
         setTodos(stateHolder)
         window.localStorage.setItem('hooksTodos', JSON.stringify(stateHolder));
     }
 
 
-    return [todos, submitProject, submitTodo, deleteTodo, editTodo, toggleComplete, deleteComplete];
+    return [todos, submitProject, deleteProject, editProject, submitTodo, deleteTodo, editTodo, toggleComplete, deleteComplete];
 
 }
