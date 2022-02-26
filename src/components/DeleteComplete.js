@@ -4,7 +4,7 @@ function DeleteComplete(props) {
     return (
        <Button 
        variant="danger"
-       onClick={() => {props.deleteComplete(); /*props.multShrink()*/}} 
+       onClick={() => {props.deleteComplete(props.proj); /*props.multShrink()*/}} 
        >
            Clear All Complete</Button> 
     )

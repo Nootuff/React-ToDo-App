@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import useView from "./useView";
 
 const initialStorage = {
     projects: [
@@ -45,7 +46,6 @@ const initialStorage = {
 };
 
 export default storage => {
-
     const [todos, setTodos] = useState(JSON.parse(localStorage.getItem("hooksTodos")) || initialStorage);
 
     const submitProject = (data) => {
@@ -53,7 +53,6 @@ export default storage => {
         //var name = data.projName.replace(/\s/g, ''); //Is this still needed?
         let dataholder = [...todos.projects, data]
         stateHolder.projects = dataholder;
-        console.log(stateHolder)
         setTodos(stateHolder)
         window.localStorage.setItem('hooksTodos', JSON.stringify(stateHolder))
     }
@@ -113,11 +112,15 @@ export default storage => {
         window.localStorage.setItem('hooksTodos', JSON.stringify(stateHolder));
     }
 
-
-    const deleteComplete = () => {
+    const deleteComplete = (viewId) => { //Will have to re-write this when ghost system implemented 
         let stateHolder = { ...todos };
-        let incomplete = todos.home.filter(test => test.completed === false)
-        stateHolder.home = incomplete;
+        for (let i = 0; i < stateHolder.projects.length; i++) {
+            if (stateHolder.projects[i].projId === viewId) {
+                let incomplete = stateHolder.projects[i].projTodos.filter(todo => todo.completed === false)
+                stateHolder.projects[i].projTodos = incomplete;
+            }
+        }
+        //console.log(stateHolder)
         setTodos(stateHolder)
         window.localStorage.setItem('hooksTodos', JSON.stringify(stateHolder));
     }

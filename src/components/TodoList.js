@@ -28,7 +28,7 @@ function TodoList() {
 
     for (let i = 0; i < todos.projects.length; i++) { //Checks for currently viewed project. Do you even need this 
         if (todos.projects[i].projId === proj) {
-            viewedProject = todos.projects[i];    
+            viewedProject = todos.projects[i];
         }
     }
 
@@ -48,42 +48,46 @@ function TodoList() {
                     setProjData={setProjData}
                     handleProjChangeFunc={handleProjChangeFunc}
                     submitProject={submitProject}
+                    setProj={setProj}
                 />
 
-                <DeleteComplete /*multShrink={multShrink}*/ deleteComplete={deleteComplete} />
+                <DeleteComplete /*multShrink={multShrink}*/
+                    deleteComplete={deleteComplete}
+                    proj={proj}
+                />
                 <br />
-            
-            <br /> {/*Put these central control buttons in their  own componeont */}
-            <button
-                onClick={() => { setProj("1") }}
-                style={{ color: proj === "1" ? "red" : "black" }} >
-                {todos.projects[0].projName + " " + todos.projects[0].projTodos.length}
-            </button>
-            <br />
-            <button
-                onClick={() => { setProj("2") }}
-                style={{ color: proj === "2" ? "red" : "black" }} >
-                {todos.projects[1].projName + " " + todos.projects[1].projTodos.length}
-            </button>
-            <br />
-            <button
-                onClick={() => { setProj("3") }}
-                style={{ color: proj === "3" ? "red" : "black" }} >
-                {todos.projects[2].projName + " " + todos.projects[1].projTodos.length}
-            </button>
+
+                <br /> {/*Put these central control buttons in their  own componeont */}
+                <button
+                    onClick={() => { setProj("1") }}
+                    style={{ color: proj === "1" ? "red" : "black" }} >
+                    {todos.projects[0].projName + " " + todos.projects[0].projTodos.length}
+                </button>
+                <br />
+                <button
+                    onClick={() => { setProj("2") }}
+                    style={{ color: proj === "2" ? "red" : "black" }} >
+                    {todos.projects[1].projName + " " + todos.projects[1].projTodos.length}
+                </button>
+                <br />
+                <button
+                    onClick={() => { setProj("3") }}
+                    style={{ color: proj === "3" ? "red" : "black" }} >
+                    {todos.projects[2].projName + " " + todos.projects[1].projTodos.length}
+                </button>
 
                 <ProjectList
                     projects={todos.projects}
                     proj={proj}
-                    setProj={setProj} 
+                    setProj={setProj}
                 />
                 <ListComponent
-                       deleteTodo={deleteTodo}
-                       editTodo={editTodo}
-                       toggleComplete={toggleComplete}
-                       proj={proj}
-                       viewedProject={viewedProject}
-                    />
+                    deleteTodo={deleteTodo}
+                    editTodo={editTodo}
+                    toggleComplete={toggleComplete}
+                    proj={proj}
+                    viewedProject={viewedProject}
+                />
             </div>
             <Footer />
         </div>
