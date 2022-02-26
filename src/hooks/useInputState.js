@@ -4,10 +4,9 @@ import { v4 as uuidv4 } from 'uuid'; //Imports the uuid npm package.
 const initialTodo = {
     taskBody: "",
     taskNotes: "",
-    //completed: false,
     priority: "Medium",
-    deadline: ""
-    //id: ""
+    deadline: "",
+    deletedDate: ""
 };
 
 const initialProject = {

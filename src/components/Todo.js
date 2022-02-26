@@ -63,7 +63,7 @@ function Todo(props) {
             style={{ textDecoration: props.todos.completed && "line-through" /* The && is a ternary with a single condistion */ }}
           >
             <h2 onClick={() => {
-                props.toggleComplete(props.todos)   
+                props.toggleComplete(props.todos, props.proj)   
             }}>
               {props.todos.taskBody}
             </h2>
@@ -76,7 +76,7 @@ function Todo(props) {
           <Button
             variant="success"
             onClick={() => {
-                props.toggleComplete(props.todos)   
+                props.toggleComplete(props.todos, props.proj)   
             }}
           >
             Done!

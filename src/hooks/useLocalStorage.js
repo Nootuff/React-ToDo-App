@@ -13,6 +13,7 @@ const initialStorage = {
                 "id": "1",
                 "completed": false,
                 "deadline": "",
+                "deletedDate": "",
                 "datePosted": "19/02/2022"
             },
             {
@@ -22,6 +23,7 @@ const initialStorage = {
                 "id": "2",
                 "completed": false,
                 "deadline": "",
+                "deletedDate": "",
                 "datePosted": "19/02/2022"
             }]
         },
@@ -30,13 +32,13 @@ const initialStorage = {
             projName: "Dailies ",
             projNotes: "Tasks you need to do everyday! ",
             projTodos: []
-        }//,
-        /*{
+        },
+        {
             projId: "3",
             projName: "Your deleted todos ",
             projNotes: "These will be automatically deleted after 3 days.",
             projTodos: []
-        }*/
+        }
 
     ]
 
@@ -92,29 +94,25 @@ export default storage => {
                 }
             }
         }
-        // console.log(stateHolder)
         setTodos(stateHolder)
         window.localStorage.setItem('hooksTodos', JSON.stringify(stateHolder))
     }
 
-
-
-    const toggleComplete = (data) => {
+    const toggleComplete = (data, viewId) => {
         let stateHolder = { ...todos };
-        for (let i = 0; i < stateHolder.home.length; i++) {
-            if (stateHolder.home[i].id === data.id) {
-                stateHolder.home[i].completed = !stateHolder.home[i].completed
+        for (let i = 0; i < stateHolder.projects.length; i++) {
+            if (stateHolder.projects[i].projId === viewId) {
+                for (let v = 0; v < stateHolder.projects[i].projTodos.length; v++) {
+                    if (stateHolder.projects[i].projTodos[v].id === data.id) {
+                        stateHolder.projects[i].projTodos[v].completed = !stateHolder.projects[i].projTodos[v].completed
+                    }
+                }
             }
         }
         setTodos(stateHolder)
         window.localStorage.setItem('hooksTodos', JSON.stringify(stateHolder));
     }
 
-    const completeProjectTodo = (viewId, data) => {
-        let stateHolder = { ...todos };
-
-        alert(viewId)
-    }
 
     const deleteComplete = () => {
         let stateHolder = { ...todos };

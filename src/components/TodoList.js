@@ -65,6 +65,12 @@ function TodoList() {
                 style={{ color: proj === "2" ? "red" : "black" }} >
                 {todos.projects[1].projName + " " + todos.projects[1].projTodos.length}
             </button>
+            <br />
+            <button
+                onClick={() => { setProj("3") }}
+                style={{ color: proj === "3" ? "red" : "black" }} >
+                {todos.projects[2].projName + " " + todos.projects[1].projTodos.length}
+            </button>
 
                 <ProjectList
                     projects={todos.projects}

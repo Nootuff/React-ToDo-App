@@ -2,7 +2,7 @@ function ProjectList(props) {
 
   //Just a list of buttons to change projects
 
-  const list = props.projects.slice(2).reverse().map((num) =>
+  const list = props.projects.slice(3).reverse().map((num) =>
     <li>
       <button
         style={{ color: props.proj === num.projId ? "red" : "black" }}
