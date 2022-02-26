@@ -11,7 +11,7 @@ function ListComponent(props) {
     const list = props.viewedProject.projTodos.slice(0).reverse().map((num) =>
         <Todo
             key={num.id}
-            todos={num}
+            todo={num}
             deleteTodo={props.deleteTodo}
             editTodo={props.editTodo}
             toggleComplete={props.toggleComplete}

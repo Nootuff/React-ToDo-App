@@ -68,7 +68,7 @@ function NewTodoForm(props) {
               onClick={(event) => {
                 event.preventDefault();
                 setOpenNotes(false); //Closes notes section again.
-                props.submitTodo({ ...props.values, id: uuidv4(), completed: false, datePosted: currDate() }, props.proj); //Handles submission. 
+                props.submitTodo({ ...props.values, id: uuidv4(), completed: false, datePosted: currDate(), parentProj: props.proj }, props.proj); //Handles submission. 
                 props.setValues({ taskBody: "", taskNotes: "", priority: "Medium", deadline: "" }); //Changes the fields back to blank for a new todo to be input
                 //console.log()
               }}

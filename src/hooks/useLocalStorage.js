@@ -15,7 +15,8 @@ const initialStorage = {
                     "completed": false,
                     "deadline": "",
                     "deletedDate": "",
-                    "datePosted": "19/02/2022"
+                    "datePosted": "19/02/2022",
+                    "parentProj" : "1"
                 },
                 {
                     "taskBody": "Placeholder 2",
@@ -25,7 +26,8 @@ const initialStorage = {
                     "completed": false,
                     "deadline": "",
                     "deletedDate": "",
-                    "datePosted": "19/02/2022"
+                    "datePosted": "19/02/2022",
+                    "parentProj" : "1"
                 }
             ]
         },
@@ -58,7 +60,7 @@ export default storage => {
 
     const deleteProject = (viewId) => {
         let stateHolder = { ...todos };
-        let newTodos = stateHolder.projects.filter(project => project.projId !== viewId)
+        let newTodos = stateHolder.projects.filter(project => project.projId !== viewId) 
         stateHolder.projects = newTodos;
         setTodos(stateHolder)
         window.localStorage.setItem('hooksTodos', JSON.stringify(stateHolder))
@@ -88,7 +90,7 @@ export default storage => {
         }
     }
 
-    const deleteTodo = (dataId, viewId) => {
+    const deleteTodo = (dataId, viewId) => { //put some kind of if statment in here, if viewId == "3" then delete permamently else move the todo to the ghost proj
         let stateHolder = { ...todos };
         for (let i = 0; i < stateHolder.projects.length; i++) {
             if (stateHolder.projects[i].projId === viewId) {
