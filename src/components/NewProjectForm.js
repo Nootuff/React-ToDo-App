@@ -46,11 +46,9 @@ function NewProjectForm(props) {
               />
             </div>
           </Collapse>
-
           <br />
           <Button
             disabled={props.projData.projName === "" ? true : false}
-
             onClick={(event) => {
               const idGen = uuidv4();
               event.preventDefault();

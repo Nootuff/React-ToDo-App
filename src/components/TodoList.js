@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import NewTodoForm from "./NewTodoForm";
 import NewProjectForm from "./NewProjectForm";
 
@@ -19,7 +19,7 @@ import useView from "../hooks/useView";
 
 function TodoList() {
     const [values, setValues, projData, setProjData, handleChangeFunc, handleProjChangeFunc] = useInputState();
-    const [todos, submitProject, deleteProject, editProject, submitTodo, deleteTodo, editTodo, toggleComplete, deleteComplete] = useLocalStorage();
+    const [todos, submitProject, deleteProject, editProject, submitTodo, deleteTodo, editTodo, toggleComplete, deleteComplete, restore, autoDelete] = useLocalStorage();
     const [proj, setProj] = useView();
 
     let viewedProject;
@@ -29,6 +29,12 @@ function TodoList() {
             viewedProject = todos.projects[i];
         }
     }
+    
+/*
+    useEffect(() => {
+        autoDelete();
+      });
+      */
 
     return (
         <div className="Todo-list">
@@ -49,12 +55,15 @@ function TodoList() {
                     setProj={setProj}
                 />
 
-                <DeleteComplete /*multShrink={multShrink}*/
-                    deleteComplete={deleteComplete}
-                    proj={proj}
-                />
-                <br />
-
+                {proj !== "3" ?
+                    <DeleteComplete /*multShrink={multShrink}*/
+                        deleteComplete={deleteComplete}
+                        proj={proj}
+                    />
+                    :
+                    null
+                }
+                
                 <br /> {/*Put these central control buttons in their  own componeont */}
                 <button
                     onClick={() => { setProj("1") }}
@@ -71,7 +80,7 @@ function TodoList() {
                 <button
                     onClick={() => { setProj("3") }}
                     style={{ color: proj === "3" ? "red" : "black" }} >
-                    {todos.projects[2].projName + " " + todos.projects[1].projTodos.length}
+                    {todos.projects[2].projName + " " + todos.projects[2].projTodos.length}
                 </button>
 
                 <ProjectList
@@ -85,6 +94,7 @@ function TodoList() {
                     toggleComplete={toggleComplete}
                     deleteProject={deleteProject}
                     editProject={editProject}
+                    restore={restore}
                     proj={proj}
                     viewedProject={viewedProject}
                     setProj={setProj}

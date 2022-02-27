@@ -6,7 +6,6 @@ import useDate from "../hooks/useDate";
 import EditTodoForm from "./Forms/EditTodoForm";
 import '../styles/Todo.css';
 
-
 function Todo(props) {
   const [open, setOpen] = useState(true);
 
@@ -45,7 +44,6 @@ function Todo(props) {
       className="Todo shadow"
       id={props.todo.id}
     >
-
       <Collapse in={open}>
         <Card border={props.todo.priority === 'High' ? 'danger' : props.todo.priority === 'Medium' ? 'primary' : 'success'}
           style={{ border: "3px solid", marginBottom: "10px" }}>
@@ -53,43 +51,60 @@ function Todo(props) {
             style={{ textDecoration: props.todo.completed && "line-through" /* The && is a ternary with a single condistion */ }}
           >
             <h2 onClick={() => {
-              props.toggleComplete(props.todos, props.proj)
+              props.toggleComplete(props.todo, props.proj)
             }}>
               {props.todo.taskBody}
             </h2>
             <h4>{props.todo.taskNotes}</h4>
             <h4>Priority: {props.todo.priority}</h4>
             <h5>Posted: {props.todo.datePosted}</h5>
-
             {deadlineDisplay}
           </section>
-          <Button
-            variant="success"
-            onClick={() => {
-              props.toggleComplete(props.todo, props.proj)
-            }}
-          >
-            Done!
-          </Button>
-
-          <EditTodoForm
-            todo={props.todo}
-            proj={props.proj}
-            editTodo={props.editTodo}
-          />
-
+          {props.proj !== "3" ?
+            <div>
+              <Button
+                variant="success"
+                onClick={() => {
+                  props.toggleComplete(props.todo, props.proj)
+                }}
+              >
+                Done!
+              </Button>
+              <EditTodoForm
+                todo={props.todo}
+                proj={props.proj}
+                editTodo={props.editTodo}
+              />
+            </div>
+            : null}
 
           <Button
             variant="danger"
             onClick={() => {
               setOpen(false);
               setTimeout(() => {
-                { props.deleteTodo(props.todo.id, props.proj) }
+                { props.deleteTodo(props.todo, props.proj) }
               }, 300);
             }}
           >
             Delete todo
           </Button>
+
+          {props.proj === "3" ?
+            <Button
+              variant="success"
+              onClick={() => {
+                setOpen(false);
+                setTimeout(() => {
+                  props.restore(props.todo);
+                }, 300);
+              }}
+            >
+              Restore
+            </Button>
+            :
+            null
+          }
         </Card>
       </Collapse>
     </li>
