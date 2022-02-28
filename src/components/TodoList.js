@@ -19,7 +19,7 @@ import useView from "../hooks/useView";
 
 function TodoList() {
     const [values, setValues, projData, setProjData, handleChangeFunc, handleProjChangeFunc] = useInputState();
-    const [todos, submitProject, deleteProject, editProject, submitTodo, deleteTodo, editTodo, toggleComplete, deleteComplete, restore, autoDelete] = useLocalStorage();
+    const [todos, submitProject, deleteProject, editProject, submitTodo, deleteTodo, editTodo, toggleComplete, deleteComplete, restore] = useLocalStorage();
     const [proj, setProj] = useView();
 
     let viewedProject;
@@ -30,12 +30,6 @@ function TodoList() {
         }
     }
     
-/*
-    useEffect(() => {
-        autoDelete();
-      });
-      */
-
     return (
         <div className="Todo-list">
             <Header />

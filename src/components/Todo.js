@@ -11,33 +11,15 @@ function Todo(props) {
 
   const [currDate, dateConverter] = useDate()
 
-  /*
-  let values = { //Stores all the todo's details for them to be updated when editing.
-    taskBody: props.todos.taskBody,
-    taskNotes: props.todos.taskNotes,
-    completed: props.todos.completed,
-    priority: props.todos.priority,
-    datePosted: props.todos.datePosted,
-    deadline: props.todos.deadline,
-    id: props.todos.id
+   function isLater(deadline, today) { //Move this to a hook? where would it go? 
+
+//var one = new Date("19/02/2022")
+//var two = new Date(today)
+//console.log("here: " + deadline, today) //the dates must be converted to american format somehow
+    return new Date(deadline) > new Date(today)
   }
 
-  const [state, setState] = useState(values);
-
-  const handleEditChangeFunc = (event) => { //If you can't solve this issue then just leave it. 
-    const { name, value } = event.target;
-    setState({
-      ...state,
-      [name]: value,
-    });
-  }
-  */
-
-  function isLater(deadline, today) { //Move this to a hook? where would it go? 
-    return deadline > today
-  }
-
-  const deadlineDisplay = (props.todo.deadline) !== "" && <h5 style={{ color: isLater(dateConverter(props.todo.deadline, '-', '-'), currDate()) ? null : "red" }}>Deadline: {dateConverter(props.todo.deadline, '-', '/')}</h5>;
+  const deadlineDisplay = (props.todo.deadline) !== "" && <h5 style={{ color: isLater( props.todo.deadline, currDate()/*dateConverter(props.todo.deadline, '-', '/'), currDate()*/) ? null : "red" }}>Deadline: { dateConverter( props.todo.deadline, "-", "/" )}</h5>;
 
   return (
     <li
@@ -52,12 +34,12 @@ function Todo(props) {
           >
             <h2 onClick={() => {
               props.toggleComplete(props.todo, props.proj)
-            }}>
+            }} >
               {props.todo.taskBody}
             </h2>
             <h4>{props.todo.taskNotes}</h4>
             <h4>Priority: {props.todo.priority}</h4>
-            <h5>Posted: {props.todo.datePosted}</h5>
+            <h5>Posted: {  dateConverter( props.todo.datePosted, "-", "/" )   }</h5>
             {deadlineDisplay}
           </section>
           {props.proj !== "3" ?

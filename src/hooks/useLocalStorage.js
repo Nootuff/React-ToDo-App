@@ -15,8 +15,8 @@ const initialStorage = {
                     "id": "1",
                     "completed": false,
                     "deadline": "",
-                    "deletedDate": "",
-                    "datePosted": "19/02/2022",
+                    "deleteDate": "", //Do you need this even?
+                    "datePosted": "2022-02-19",
                     "parentProj": "1"
                 },
                 {
@@ -26,8 +26,8 @@ const initialStorage = {
                     "id": "2",
                     "completed": false,
                     "deadline": "",
-                    "deletedDate": "",
-                    "datePosted": "19/02/2022",
+                    "deleteDate": "",
+                    "datePosted": "2022-02-19",
                     "parentProj": "1"
                 }
             ]
@@ -41,7 +41,7 @@ const initialStorage = {
         {
             projId: "3",
             projName: "Your deleted todos ",
-            projNotes: "These will be automatically deleted after 3 days.",
+            projNotes: "Your last 10 deleted todos.",
             projTodos: []
         }
     ]
@@ -49,7 +49,7 @@ const initialStorage = {
 
 export default storage => {
     const [todos, setTodos] = useState(JSON.parse(localStorage.getItem("hooksTodos")) || initialStorage);
-    const [currDate, dateConverter] = useDate();
+    const [currDate, dateConverter, deleteOn] = useDate();
 
     const submitProject = (data) => {
         let stateHolder = { ...todos };
@@ -92,6 +92,18 @@ export default storage => {
         }
     }
 
+    const autoDelete = () => { //Keeps deleted todos at 10 items or under. 
+        let stateHolder = { ...todos };
+        if (stateHolder.projects[2].projTodos.length > 9) {
+            var dataHolder = stateHolder.projects[2].projTodos
+            var index = dataHolder.length - 10; //Calculate how far over the 10 item limit the new length will be. 
+            dataHolder.splice(0, index); //Cut away the first item in the array, if deleteComplete() is used, there may be more than 1, index allows for this event. 
+            stateHolder.projects[2].projTodos = dataHolder
+        }
+        setTodos(stateHolder)
+        window.localStorage.setItem('hooksTodos', JSON.stringify(stateHolder));
+    }
+
     const deleteTodo = (data, viewId) => { //put some kind of if statment in here, if viewId == "3" then delete permamently else move the todo to the ghost proj
         let stateHolder = { ...todos };
         for (let i = 0; i < stateHolder.projects.length; i++) {
@@ -99,13 +111,14 @@ export default storage => {
                 let newList = stateHolder.projects[i].projTodos.filter(todo => todo.id !== data.id);
                 stateHolder.projects[i].projTodos = newList;
                 if (viewId !== "3") { //If the currently viewed project is not deleted todos, then push the delted todo to its array.
-                    data.deletedDate = currDate()
+                    //data.deleteDate = deleteOn()
                     stateHolder.projects[2].projTodos.push(data);
                 }
             }
         }
         setTodos(stateHolder)
-        window.localStorage.setItem('hooksTodos', JSON.stringify(stateHolder)) //send the value of "state" to localstorage   
+        window.localStorage.setItem('hooksTodos', JSON.stringify(stateHolder)) //send the value of "state" to localstorage  
+        if (viewId !== "3") { autoDelete() }
     }
 
     const editTodo = (data, viewId) => {
@@ -147,7 +160,7 @@ export default storage => {
                 stateHolder.projects[i].projTodos = incomplete;
                 if (viewId !== "3") {
                     for (let i = 0; i < complete.length; i++) { //Got to find some way to add in the deleteDate
-                        complete[i].deletedDate = currDate();
+                        complete[i].deleteDate = deleteOn();
                         stateHolder.projects[2].projTodos.push(complete[i]);
                     }
                 }
@@ -155,13 +168,14 @@ export default storage => {
         }
         setTodos(stateHolder)
         window.localStorage.setItem('hooksTodos', JSON.stringify(stateHolder));
+        autoDelete()
     }
 
     const restore = (data) => { //Returns a single todo to its parent project & removes it from the deleted todos project. 
         let stateHolder = { ...todos };
         for (let i = 0; i < stateHolder.projects.length; i++) {
             if (stateHolder.projects[i].projId === data.parentProj) {
-                data.deletedDate = "";
+                //data.deleteDate = "";
                 let dataholder = [...stateHolder.projects[i].projTodos, data]
                 let deletedTodos = stateHolder.projects[2].projTodos.filter(todo => todo.id !== data.id);
                 stateHolder.projects[i].projTodos = dataholder;
@@ -172,15 +186,7 @@ export default storage => {
         window.localStorage.setItem('hooksTodos', JSON.stringify(stateHolder));
     }
 
-    const autoDelete = () => {
-        const today = currDate(); // loop through the 
-        let stateHolder = { ...todos };
-        for (let i = 0; i < stateHolder.projects[2].projTodos.length; i++) {
-            console.log("autoDelete check") 
-        }
 
-     
-    }
 
-    return [todos, submitProject, deleteProject, editProject, submitTodo, deleteTodo, editTodo, toggleComplete, deleteComplete, restore, autoDelete];
+    return [todos, submitProject, deleteProject, editProject, submitTodo, deleteTodo, editTodo, toggleComplete, deleteComplete, restore];
 }

@@ -6,7 +6,7 @@ const initialTodo = {
     taskNotes: "",
     priority: "Medium",
     deadline: "",
-    deletedDate: ""
+    deleteDate: ""
 };
 
 const initialProject = {
