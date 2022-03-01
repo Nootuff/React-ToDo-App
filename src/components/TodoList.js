@@ -1,39 +1,62 @@
-import React, { useState,useEffect } from "react";
+
+import React, { useState, useEffect } from "react";
 import NewTodoForm from "./NewTodoForm";
 import NewProjectForm from "./NewProjectForm";
-
 import DeleteComplete from "./DeleteComplete";
 import ListComponent from "./ListComponent";
-
-
 import ProjectList from "./ProjectList";
 import Header from "./Header";
 import Footer from "./Footer";
-
 import '../styles/TodoList.css';
+
 
 import useInputState from "../hooks/useInputState";
 import useLocalStorage from "../hooks/useLocalStorage";
 import useView from "../hooks/useView";
-
+const moment = require('moment');
 
 function TodoList() {
     const [values, setValues, projData, setProjData, handleChangeFunc, handleProjChangeFunc] = useInputState();
-    const [todos, submitProject, deleteProject, editProject, submitTodo, deleteTodo, editTodo, toggleComplete, deleteComplete, restore] = useLocalStorage();
+    const [todos, submitProject, deleteProject, editProject, submitTodo, deleteTodo, editTodo, toggleComplete, deleteComplete, restore, test] = useLocalStorage();
     const [proj, setProj] = useView();
 
-    let viewedProject;
-
-    for (let i = 0; i < todos.projects.length; i++) { //Checks for currently viewed project. canyou turn this into a map?
-        if (todos.projects[i].projId === proj) {
-            viewedProject = todos.projects[i];
-        }
-    }
+    /*
+        let viewedProject;
     
+        for (let i = 0; i < todos.projects.length; i++) { //Checks for currently viewed project. canyou turn this into a map?
+            if (todos.projects[i].projId === proj) {
+                viewedProject = todos.projects[i];
+            }
+        }
+    */
+
+
+
+    let viewedProject = todos.projects.filter(project => project.projId === proj)[0];
+    //console.log(viewedTest)
+    // console.log(viewedProject)
+
+
+    //Moment test section 
+
+    const midnight = "0:00:00";
+    let now = null;
+
+    setInterval(function () {
+        now = moment().format("H:mm:ss");
+        if (now === midnight) {
+            test(false)
+        }
+    }, 1000);
+
     return (
         <div className="Todo-list">
             <Header />
             <div className="Wrapper">
+                {todos.midnight ? "Complete" : "incomplete"}
+                <button onClick={() => { test(true) }}>setStateMomentTest</button>
+                
+                {proj !== "3" &&
                 <NewTodoForm
                     handleChangeFunc={handleChangeFunc}
                     submitTodo={submitTodo}
@@ -41,23 +64,24 @@ function TodoList() {
                     setValues={setValues}
                     proj={proj}
                 />
-                <NewProjectForm
-                    projData={projData}
-                    setProjData={setProjData}
-                    handleProjChangeFunc={handleProjChangeFunc}
-                    submitProject={submitProject}
-                    setProj={setProj}
-                />
+            }
+              
+                    <NewProjectForm
+                        projData={projData}
+                        setProjData={setProjData}
+                        handleProjChangeFunc={handleProjChangeFunc}
+                        submitProject={submitProject}
+                        setProj={setProj}
+                    />
+             
 
-                {proj !== "3" ?
+                {proj !== "3" &&
                     <DeleteComplete /*multShrink={multShrink}*/
                         deleteComplete={deleteComplete}
                         proj={proj}
                     />
-                    :
-                    null
                 }
-                
+
                 <br /> {/*Put these central control buttons in their  own componeont */}
                 <button
                     onClick={() => { setProj("1") }}

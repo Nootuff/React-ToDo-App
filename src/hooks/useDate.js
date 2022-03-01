@@ -17,18 +17,5 @@ export default date => {
     return str.split(split).reverse().join(join);
   }
 
-  /*
-  
-  const dateFormatter = () =>{
-
-  }
-  
-  */
-
-  const deleteOn = () => {
-    var future = today.setDate(today.getDate() + 3);
-   return currDate();
-  }
-
-  return [currDate, dateConverter, deleteOn];
+  return [currDate, dateConverter];
 }

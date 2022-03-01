@@ -36,5 +36,5 @@ let stateHolder = [...todos];
  
 }
 
-    return [ /*handleEditChangeFunc*/editFunc ];
+    //return [ /*handleEditChangeFunc*/editFunc ];
 }

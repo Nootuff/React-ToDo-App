@@ -3,7 +3,7 @@ import Todo from "./Todo";
 
 function ProjectTodosList(props) {
 
-    //const list 
+    //const list probably delete this file
 
     const list = props.todos.projTodos.slice(0).reverse().map((num) =>
         <Todo
@@ -30,4 +30,4 @@ function ProjectTodosList(props) {
     );
 }
 
-export default ProjectTodosList;
+//export default ProjectTodosList;

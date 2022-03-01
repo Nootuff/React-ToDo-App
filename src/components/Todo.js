@@ -8,18 +8,13 @@ import '../styles/Todo.css';
 
 function Todo(props) {
   const [open, setOpen] = useState(true);
-
   const [currDate, dateConverter] = useDate()
 
-   function isLater(deadline, today) { //Move this to a hook? where would it go? 
-
-//var one = new Date("19/02/2022")
-//var two = new Date(today)
-//console.log("here: " + deadline, today) //the dates must be converted to american format somehow
+  function isLater(deadline, today) { //Move this to a hook? where would it go? 
     return new Date(deadline) > new Date(today)
   }
 
-  const deadlineDisplay = (props.todo.deadline) !== "" && <h5 style={{ color: isLater( props.todo.deadline, currDate()/*dateConverter(props.todo.deadline, '-', '/'), currDate()*/) ? null : "red" }}>Deadline: { dateConverter( props.todo.deadline, "-", "/" )}</h5>;
+  const deadlineDisplay = (props.todo.deadline) !== "" && <h5 style={{ color: isLater(props.todo.deadline, currDate()) ? null : "red" }}>Deadline: {dateConverter(props.todo.deadline, "-", "/")}</h5>;
 
   return (
     <li
@@ -33,16 +28,17 @@ function Todo(props) {
             style={{ textDecoration: props.todo.completed && "line-through" /* The && is a ternary with a single condistion */ }}
           >
             <h2 onClick={() => {
-              props.toggleComplete(props.todo, props.proj)
-            }} >
+              { props.proj !== "3" && props.toggleComplete(props.todo, props.proj) /*User cannot click on header to toggle complete if the todo is in deletion storage.*/ }
+            }}
+            >
               {props.todo.taskBody}
             </h2>
             <h4>{props.todo.taskNotes}</h4>
             <h4>Priority: {props.todo.priority}</h4>
-            <h5>Posted: {  dateConverter( props.todo.datePosted, "-", "/" )   }</h5>
+            <h5>Posted: {dateConverter(props.todo.datePosted, "-", "/")}</h5>
             {deadlineDisplay}
           </section>
-          {props.proj !== "3" ?
+          {props.proj !== "3" &&
             <div>
               <Button
                 variant="success"
@@ -58,8 +54,7 @@ function Todo(props) {
                 editTodo={props.editTodo}
               />
             </div>
-            : null}
-
+          }
           <Button
             variant="danger"
             onClick={() => {
@@ -71,8 +66,7 @@ function Todo(props) {
           >
             Delete todo
           </Button>
-
-          {props.proj === "3" ?
+          {props.proj === "3" &&
             <Button
               variant="success"
               onClick={() => {
@@ -84,8 +78,6 @@ function Todo(props) {
             >
               Restore
             </Button>
-            :
-            null
           }
         </Card>
       </Collapse>
