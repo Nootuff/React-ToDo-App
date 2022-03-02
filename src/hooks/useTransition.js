@@ -10,6 +10,6 @@ export default transition => {
     }
 
 
-    return [shrink, multShrink];
+   // return [shrink, multShrink];
 
 }

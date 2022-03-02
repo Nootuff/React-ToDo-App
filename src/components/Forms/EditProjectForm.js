@@ -58,8 +58,6 @@ function EditProjectForm(props) {
                             setOpenEdit(false);
                             props.editProject(state, props.proj);
                         }}
-
-                       
                     >Update</Button>
                 </form>
             </Collapse>

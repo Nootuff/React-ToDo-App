@@ -1,10 +1,8 @@
-
-
-import Todo from "./Todo";
-import EditProjectForm from "./Forms/EditProjectForm";
+import Todo from "../ListItems/Todo";
+import EditProjectForm from "../Forms/EditProjectForm";
 import Button from 'react-bootstrap/Button';
 
-function ListComponent(props) {
+function TodoList(props) {
 
     const list = props.viewedProject.projTodos.slice(0).reverse().map((num) =>
         <Todo
@@ -22,7 +20,7 @@ function ListComponent(props) {
         <div>
             <h1>{props.viewedProject.projName}</h1>
             <h2>{props.viewedProject.projNotes}</h2>
-            {props.viewedProject.projId.length > 1 ? //Option to edit to delete project only available on user created projects.
+            {props.viewedProject.projId.length > 1 && //Option to edit to delete project only available on user created projects.
                 <div>
                     <EditProjectForm
                         viewedProject={props.viewedProject}
@@ -39,8 +37,7 @@ function ListComponent(props) {
                         Delete this whole project!
                     </Button>
                 </div>
-                :
-                null}
+                }
             <ul className="List">
                 {list}
             </ul>
@@ -48,4 +45,4 @@ function ListComponent(props) {
     );
 }
 
-export default ListComponent;
+export default TodoList;

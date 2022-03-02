@@ -16,7 +16,6 @@ function EditTodoForm(props) {
         completed: props.todo.completed,
         deadline: props.todo.deadline,
         datePosted: props.todo.datePosted,
-        datePosted: props.todo.datePosted,
         parentProj: props.todo.parentProj
     }
 

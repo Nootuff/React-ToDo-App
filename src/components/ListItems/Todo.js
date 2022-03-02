@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Collapse from 'react-bootstrap/Collapse';
-import useDate from "../hooks/useDate";
-import EditTodoForm from "./Forms/EditTodoForm";
-import '../styles/Todo.css';
+import useDate from "../../hooks/useDate";
+import EditTodoForm from "../Forms/EditTodoForm";
+import '../../styles/Todo.css';
 
 function Todo(props) {
   const [open, setOpen] = useState(true);
@@ -28,7 +28,7 @@ function Todo(props) {
             style={{ textDecoration: props.todo.completed && "line-through" /* The && is a ternary with a single condistion */ }}
           >
             <h2 onClick={() => {
-              { props.proj !== "3" && props.toggleComplete(props.todo, props.proj) /*User cannot click on header to toggle complete if the todo is in deletion storage.*/ }
+              props.proj !== "3" && props.toggleComplete(props.todo, props.proj) /*User cannot click on header to toggle complete if the todo is in deletion storage.*/
             }}
             >
               {props.todo.taskBody}
@@ -60,7 +60,7 @@ function Todo(props) {
             onClick={() => {
               setOpen(false);
               setTimeout(() => {
-                { props.deleteTodo(props.todo, props.proj) }
+                props.deleteTodo(props.todo, props.proj) 
               }, 300);
             }}
           >

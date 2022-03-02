@@ -183,6 +183,7 @@ export default storage => {
         window.localStorage.setItem('hooksTodos', JSON.stringify(stateHolder));
     }
 
+    /*
     const test = (set) => { 
         let stateHolder = { ...todos };
         stateHolder.midnight = set
@@ -191,6 +192,7 @@ export default storage => {
         setTodos(stateHolder)
         window.localStorage.setItem('hooksTodos', JSON.stringify(stateHolder));
     }
+    */
 
-    return [todos, submitProject, deleteProject, editProject, submitTodo, deleteTodo, editTodo, toggleComplete, deleteComplete, restore, test];
+    return [todos, submitProject, deleteProject, editProject, submitTodo, deleteTodo, editTodo, toggleComplete, deleteComplete, restore];
 }
