@@ -6,7 +6,12 @@ import TodoList from "./ListComponents/TodoList";
 import ProjectList from "./ListComponents/ProjectList";
 import Header from "./Partials/Header";
 import Footer from "./Partials/Footer";
+import Nav from "./Partials/Nav";
+
+
 import '../styles/TodoList.css';
+
+
 
 import useInputState from "../hooks/useInputState";
 import useLocalStorage from "../hooks/useLocalStorage";
@@ -17,6 +22,7 @@ function TodoListBase() {
     const [values, setValues, projData, setProjData, handleChangeFunc, handleProjChangeFunc] = useInputState();
     const [todos, submitProject, deleteProject, editProject, submitTodo, deleteTodo, editTodo, toggleComplete, deleteComplete, restore] = useLocalStorage();
     const [proj, setProj] = useView();
+
 
     /*
         let viewedProject;
@@ -51,21 +57,39 @@ function TodoListBase() {
 
     return (
         <div className="Todo-list">
-            <Header />
+            {/*<Header />*/}
+
+            {/*<div class="sidebar">
+                <h4 className='Nav-item'>&lt;react-Todo /&gt;</h4>
+                <ProjectList
+                    projects={todos.projects}
+                    proj={proj}
+                    setProj={setProj}
+                />
+
+    </div>*/}
+            <Nav
+                projects={todos.projects}
+                proj={proj}
+                setProj={setProj}
+            />
             <div className="Wrapper">
                 {/*todos.midnight ? "Complete" : "incomplete"*/}
-               {/* <button onClick={() => { test(true) }}>setStateMomentTest</button>*/}
-                
+                {/* <button onClick={() => { test(true) }}>setStateMomentTest</button>*/}
+
+
+
+
                 {proj !== "3" &&
-                <NewTodoForm
-                    handleChangeFunc={handleChangeFunc}
-                    submitTodo={submitTodo}
-                    values={values}
-                    setValues={setValues}
-                    proj={proj}
-                />
-            }
-              
+                    <NewTodoForm
+                        handleChangeFunc={handleChangeFunc}
+                        submitTodo={submitTodo}
+                        values={values}
+                        setValues={setValues}
+                        proj={proj}
+                    />
+                }
+                {proj !== "3" &&
                     <NewProjectForm
                         projData={projData}
                         setProjData={setProjData}
@@ -73,39 +97,15 @@ function TodoListBase() {
                         submitProject={submitProject}
                         setProj={setProj}
                     />
-             
-
+                }
                 {proj !== "3" &&
-                    <DeleteComplete /*multShrink={multShrink}*/
+                    <DeleteComplete 
                         deleteComplete={deleteComplete}
                         proj={proj}
                     />
                 }
-
-                <br /> {/*Put these central control buttons in their  own componeont */}
-                <button
-                    onClick={() => { setProj("1") }}
-                    style={{ color: proj === "1" ? "red" : "black" }} >
-                    {todos.projects[0].projName + " " + todos.projects[0].projTodos.length}
-                </button>
                 <br />
-                <button
-                    onClick={() => { setProj("2") }}
-                    style={{ color: proj === "2" ? "red" : "black" }} >
-                    {todos.projects[1].projName + " " + todos.projects[1].projTodos.length}
-                </button>
-                <br />
-                <button
-                    onClick={() => { setProj("3") }}
-                    style={{ color: proj === "3" ? "red" : "black" }} >
-                    {todos.projects[2].projName + " " + todos.projects[2].projTodos.length}
-                </button>
 
-                <ProjectList
-                    projects={todos.projects}
-                    proj={proj}
-                    setProj={setProj}
-                />
                 <TodoList
                     deleteTodo={deleteTodo}
                     editTodo={editTodo}

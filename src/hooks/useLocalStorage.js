@@ -32,8 +32,8 @@ const initialStorage = {
         },
         {
             projId: "2",
-            projName: "Dailies ",
-            projNotes: "Tasks you need to do everyday! ",
+            projName: "Daily todos ",
+            projNotes: "Tasks you need to do everyday! Feature not yet implemented.",
             projTodos: []
         },
         {
@@ -42,8 +42,7 @@ const initialStorage = {
             projNotes: "Your last 10 deleted todos.",
             projTodos: []
         }
-    ],
-    midnight: false
+    ]
 };
 
 export default storage => {
