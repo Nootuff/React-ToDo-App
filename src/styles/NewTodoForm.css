@@ -1,0 +1,10 @@
+.New-todo-form{
+    border: 1px solid red;
+}
+
+/*Mobile size*/
+@media screen and (min-width: 576px) {
+.New-todo-form{
+margin-top: 80px;
+}
+}

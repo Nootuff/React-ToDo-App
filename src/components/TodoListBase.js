@@ -7,6 +7,7 @@ import ProjectList from "./ListComponents/ProjectList";
 import Header from "./Partials/Header";
 import Footer from "./Partials/Footer";
 import Nav from "./Partials/Nav";
+import Collapse from 'react-bootstrap/Collapse';
 
 
 import '../styles/TodoList.css';
@@ -22,6 +23,7 @@ function TodoListBase() {
     const [values, setValues, projData, setProjData, handleChangeFunc, handleProjChangeFunc] = useInputState();
     const [todos, submitProject, deleteProject, editProject, submitTodo, deleteTodo, editTodo, toggleComplete, deleteComplete, restore] = useLocalStorage();
     const [proj, setProj] = useView();
+    const [openNav, setOpenNav] = useState(false);
 
 
     /*
@@ -57,7 +59,13 @@ function TodoListBase() {
 
     return (
         <div className="Todo-list">
-            {/*<Header />*/}
+            <Header
+                openNav={openNav}
+                setOpenNav={setOpenNav}
+                setProj={setProj}
+                proj={proj}
+                data={todos.projects}
+            />
 
             {/*<div class="sidebar">
                 <h4 className='Nav-item'>&lt;react-Todo /&gt;</h4>
@@ -79,6 +87,14 @@ function TodoListBase() {
 
 
 
+                <div className="d-block d-sm-none" style={{ color: "red", marginTop: "80px", border: "1px solid green", transition: "width 2s ease" }}>
+                    <Collapse in={openNav}>
+                        <div>
+                            <p>Get projects into here somehow</p>
+                        </div>
+                    </Collapse>
+                </div>
+
 
                 {proj !== "3" &&
                     <NewTodoForm
@@ -99,7 +115,7 @@ function TodoListBase() {
                     />
                 }
                 {proj !== "3" &&
-                    <DeleteComplete 
+                    <DeleteComplete
                         deleteComplete={deleteComplete}
                         proj={proj}
                     />

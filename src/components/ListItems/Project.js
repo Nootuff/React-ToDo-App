@@ -3,12 +3,14 @@ import { FaTrashAlt } from "react-icons/fa";
 import { FaHome } from "react-icons/fa";
 
 
+
+
 function Project(props) {
 
      return (
           <table
                className='Nav-item'
-               style={{ color: props.proj === props.data.projId ? "red" : "black" }}
+               style={{ color: props.proj === props.data.projId ? "red" : "black", border: "1px solid white", padding: "0" }}
                onClick={() => { props.setProj(props.data.projId) }}
           >
                <tr>

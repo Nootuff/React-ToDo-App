@@ -9,6 +9,8 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 
 import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
 
+import '../../styles/NewTodoForm.css';
+
 function NewTodoForm(props) {
   const [open, setOpen] = useState(false);
   const [openNotes, setOpenNotes] = useState(false);
@@ -23,9 +25,9 @@ function NewTodoForm(props) {
   ];
 
   return (
-    <div >
-      <form style={{ border: "1px solid red" }} >
-        <h2>Enter New Todo</h2>
+    <div className="New-todo-form" >
+      <form   >
+        <h2  style={{marginTop: "10px" }} >Enter New Todo</h2>
         <label htmlFor="taskBody">Task </label>
         <input
           type="text"
