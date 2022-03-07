@@ -6,3 +6,9 @@
   align-items: center;
   background-color: #1c1c1c;
 }
+
+@media screen and (min-width: 576px) {
+  .Footer{
+    margin-left: 300px;
+    }
+}

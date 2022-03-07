@@ -1,0 +1,10 @@
+.Header{
+  height: 80px;
+   
+}
+
+@media screen and (min-width: 576px) {
+    .Header{
+        display: none;
+      }
+}

@@ -19,9 +19,9 @@ function NewTodoForm(props) {
   const [radioValue, setRadioValue] = useState('Medium');
 
   const radios = [
-    { name: 'Low', value: 'Low', color: "success" },
-    { name: 'Medium', value: 'Medium', color: "primary"},
-    { name: 'High', value: 'High', color: "danger" },
+    { name: 'Low', color: "success" },
+    { name: 'Medium', color: "primary"},
+    { name: 'High', color: "danger" },
   ];
 
   return (
@@ -60,24 +60,22 @@ function NewTodoForm(props) {
   */}
              
            
-           <ButtonGroup
-           
-           >
+           <ButtonGroup>
 
         {radios.map((radio, idx) => (
           <ToggleButton
-		  style={{outline: "none !important"}}
+		  
             key={idx}
             id={`radio-${idx}`}
             type="radio"
             variant={ "outline-" + radio.color }
             name="priority"
             value={radio.name}
-            checked={radioValue === radio.value}
+            checked={radioValue === radio.name}
             
             onChange={(e) => {
               setRadioValue(e.currentTarget.value);
-             props.handleChangeFunc(e); // got to find a way to get 
+             props.handleChangeFunc(e);  
             }}
           >
             {radio.name}

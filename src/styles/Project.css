@@ -1,0 +1,27 @@
+.Nav-item{
+   /* border: 1px solid white; */
+     padding: 0;
+}
+
+#Nav-icon{ /*DONT DELETE KEEPS ICON ON SAME LINE*/
+  position: relative;
+  bottom: 2px;
+  
+}
+
+.Nav-item {
+  display: block;
+  color: black;
+  /*padding: 16px;*/
+  text-decoration: none;
+}
+
+.Nav-item.active {
+  background-color: #04AA6D;
+  color: white;
+}
+
+ .Nav-item:hover:not(.active) {
+  background-color: #555;
+  color: white;
+}

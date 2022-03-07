@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 
+import useDate from "../../hooks/useDate";
 import Button from 'react-bootstrap/Button';
 import Collapse from 'react-bootstrap/Collapse';
-import useDate from "../../hooks/useDate";
+
+import ToggleButton from 'react-bootstrap/ToggleButton';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
 
 function EditTodoForm(props) {
     const [openEdit, setOpenEdit] = useState(false);
@@ -20,6 +23,7 @@ function EditTodoForm(props) {
     }
 
     const [state, setState] = useState(values);
+    const [editRadioValue, setEditRadioValue] = useState(state.priority);
 
     const handleEditChangeFunc = (event) => { //If you can't solve this issue then just leave it. 
         const { name, value } = event.target;
@@ -28,6 +32,12 @@ function EditTodoForm(props) {
             [name]: value,
         });
     }
+
+    const editRadios = [
+        { name: 'Low', color: "success" },
+        { name: 'Medium', color: "primary" },
+        { name: 'High', color: "danger" },
+    ];
 
     return (
         <div>
@@ -50,6 +60,8 @@ function EditTodoForm(props) {
                     />
                     <br />
                     <label htmlFor="priority">Set priority</label>
+
+                    {/*
                     <select
                         name="priority"
                         className="TodoForm-select button"
@@ -60,6 +72,29 @@ function EditTodoForm(props) {
                         <option value="Medium">Medium</option>
                         <option value="Low">Low</option>
                     </select>
+    */}
+                    <ButtonGroup>
+
+                        {editRadios.map((editRadio, num) => (
+                            <ToggleButton
+                                key={num}
+                                id={`editRadio-${num}`}
+                                type="radio"
+                                variant={"outline-" + editRadio.color}
+                                name="priority"
+                                value={editRadio.name}
+                                checked={editRadioValue === editRadio.name}
+                                onChange={(e) => {
+                                    //alert("Click")
+                                    setEditRadioValue(e.currentTarget.value);
+                                    handleEditChangeFunc(e);
+                                }}
+                            >
+                                {editRadio.name}
+                            </ToggleButton>
+                        ))}
+                    </ButtonGroup>
+
                     <br />
                     <textarea
                         id="taskNotes"

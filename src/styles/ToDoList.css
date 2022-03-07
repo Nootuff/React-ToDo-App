@@ -11,59 +11,13 @@
 .List{
   padding-left: 0;
   list-style-type: none;
-
 }
 
-
-
-
-.sidebar {
-
-  margin: 80px 0;
-  padding: 0;
-  width: 300px;
-  background-color: #f1f1f1;
-  position: fixed;
-  height: 100%;
- /* overflow: auto;*/
-}
-
-#Nav-icon{ /*DONT DELETE KEEPS ICON ON SAME LINE*/
-  position: relative;
-  bottom: 2px;
-  
-}
-
-.sidebar .Nav-item {
-  display: block;
-  color: black;
-  /*padding: 16px;*/
-  text-decoration: none;
-}
- 
-.sidebar .Nav-item.active {
-  background-color: #04AA6D;
-  color: white;
-}
-
-.sidebar .Nav-item:hover:not(.active) {
-  background-color: #555;
-  color: white;
-}
 
 @media screen and (max-width: 576px) {
-  .sidebar {
-    width: 100%;
-    height: 80px;
-    position: relative;
-  }
-  .sidebar .Nav-item {float: left;}
   .Wrapper {margin-left: 0;}
 }
 
 @media screen and (max-width: 400px) {
-  .sidebar .Nav-item {
-    text-align: center;
-    float: none;
-  }
+ 
 }

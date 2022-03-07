@@ -1,10 +1,12 @@
 import ProjectList from "../ListComponents/ProjectList";
 import Project from "../ListItems/Project";
+import '../../styles/Sidebar.css';
 
 function Nav(props) {
 
     return (
-        <div className="sidebar d-none d-sm-block">
+        <div className="sidebar d-none d-sm-block background-purple">
+          <div><h2 className="white-text">&lt;react-Todo <span style={{color: "#DC3545"}}>/</span>&gt;</h2></div>
               <Project
         setProj={props.setProj}
         proj={props.proj}
@@ -18,7 +20,7 @@ function Nav(props) {
       />
 
       < hr/>
-      <h4>My Projects</h4>
+      <h4 className="white-text">My Projects</h4>
            <ProjectList
                     projects={props.projects}
                     proj={props.proj}
