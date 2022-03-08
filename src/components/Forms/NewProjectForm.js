@@ -11,7 +11,7 @@ function NewProjectForm(props) {
 
   return (
     <div >
-      <form  style={{ border: "1px solid blue" }} >
+      <form  style={{   }} >
         <h2>Create new project</h2>
         <label htmlFor="taskBody">Task </label>
         <input

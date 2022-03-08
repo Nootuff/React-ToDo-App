@@ -1,3 +1,14 @@
+:root {
+  --inner-grey: #212121;
+  --outer-grey: #171717;
+
+  --outer-trim: #2e0008;
+ 
+  --grey-color: #a1a1a1;
+  --dark-purple: #130036;
+--danger-red: #DC3545;
+}
+
 html, body {
   margin: 0;
   height: 100vh;
@@ -21,5 +32,5 @@ code {
 }
 
 .background-purple{
-  background-color: #130036;
+  background-color: var(--dark-purple);
 }

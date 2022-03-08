@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import Navbar from 'react-bootstrap/Navbar';
-import DropdownButton from 'react-bootstrap/DropdownButton';
-import Dropdown from 'react-bootstrap/Dropdown';
-import Project from "../ListItems/Project";
+ 
 
 import Button from 'react-bootstrap/Button';
 import { FaBars } from "react-icons/fa";
+import { ImCross } from "react-icons/im";
 import '../../styles/Header.css';
+import '../../styles/index.css';
 
-function Header({ setOpenNav, openNav, proj, setProj, data }) {
+function Header({ setOpenNav, openNav }) {
 
     return (
-        <Navbar className="Header navbar fixed-top  d-block d-sm-none background-purple" >
+        <Navbar className="Header navbar fixed-top  d-block d-sm-none" >
 
             {/*
             <div class="d-flex"></div>
@@ -57,14 +57,14 @@ function Header({ setOpenNav, openNav, proj, setProj, data }) {
 
 
 
-            <div class="d-flex" style={{border: "1px solid yellow" }} >
-                <h2 className="p-2 white-text" style={{ fontSize: "1.5rem" }}>
+            <div class="d-flex" /*style={{ border: "1px solid yellow" }}*/ >
+                <h2 className="Header-logo p-2 white-text"  >
 
 
                     &lt;react-Todo <span className="text-danger">/</span>&gt;
                 </h2>
 
-
+                {/*
                 <div className="p-2" >
                     <Project
                         setProj={setProj}
@@ -80,45 +80,23 @@ function Header({ setOpenNav, openNav, proj, setProj, data }) {
                         data={data[2]}
                     />
                 </div>
+*/}
 
-                <div className="p-2 ms-auto">  
-                <Button
-                    onClick={() => setOpenNav(!openNav)}
-                    //aria-controls="example-collapse-text"
-                    aria-expanded={openNav}
-                >
-                    <FaBars />
-                </Button>
-               
-                 </div>
-                  
-            </div>
 
-            {/*
-<div style={{ border: "1px solid red", width: "100%"}}> 
-            <DropdownButton id="dropdown-basic-button" title="" className="d-block d-sm-none float-end"   drop="start">
-                <Dropdown.Item >
-                    test
-                </Dropdown.Item>
-                <Dropdown.Item >
-                    test
-                </Dropdown.Item>
-                <Dropdown.Item >
-                    test
-                </Dropdown.Item>
-                {/*
-{ props.projects.slice(3).reverse().map((num) =>
-<Dropdown.Item 
-onClick={() => { props.setProj(num.projId) }}
->
-{num.projName + " " + num.projTodos.length}
-</Dropdown.Item>
-)}
+                <div className="Header-button p-2 ms-auto">
+                    <Button
+                        onClick={() => setOpenNav(!openNav)}
+                        //aria-controls="example-collapse-text"
+                        aria-expanded={openNav}
+                    >
+                        <span className="Header-button-icon">
+                        {openNav ? <ImCross  /> : <FaBars />}
+                        </span>
+                    </Button>
 
-            </DropdownButton>
+                </div>
 
             </div>
-            */}
         </Navbar>
     )
 }

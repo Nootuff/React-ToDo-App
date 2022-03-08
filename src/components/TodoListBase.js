@@ -8,7 +8,7 @@ import Header from "./Partials/Header";
 import Footer from "./Partials/Footer";
 import Nav from "./Partials/Nav";
 import Collapse from 'react-bootstrap/Collapse';
-
+import Dropdown from "./Partials/Dropdown";
 
 import '../styles/TodoList.css';
 
@@ -17,7 +17,7 @@ import '../styles/TodoList.css';
 import useInputState from "../hooks/useInputState";
 import useLocalStorage from "../hooks/useLocalStorage";
 import useView from "../hooks/useView";
-//const moment = require('moment');
+
 
 function TodoListBase() {
     const [values, setValues, projData, setProjData, handleChangeFunc, handleProjChangeFunc] = useInputState();
@@ -39,32 +39,13 @@ function TodoListBase() {
 
 
     let viewedProject = todos.projects.filter(project => project.projId === proj)[0];
-    //console.log(viewedTest)
-    // console.log(viewedProject)
-
-
-    //Moment test section 
-
-    /*
-    const midnight = "0:00:00";
-    let now = null;
-
-    setInterval(function () {
-        now = moment().format("H:mm:ss");
-        if (now === midnight) {
-            test(false)
-        }
-    }, 1000);
-    */
-
+    
     return (
         <div className="Todo-list">
             <Header
                 openNav={openNav}
                 setOpenNav={setOpenNav}
-                setProj={setProj}
-                proj={proj}
-                data={todos.projects}
+               
             />
 
             {/*<div class="sidebar">
@@ -82,15 +63,17 @@ function TodoListBase() {
                 setProj={setProj}
             />
             <div className="Wrapper">
-                {/*todos.midnight ? "Complete" : "incomplete"*/}
-                {/* <button onClick={() => { test(true) }}>setStateMomentTest</button>*/}
+             
 
 
-
-                <div className="d-block d-sm-none" style={{ color: "red", marginTop: "80px", border: "1px solid green", transition: "width 2s ease" }}>
+                <div className="d-block d-sm-none" style={{ marginTop: "79px", transition: "width 2s ease" }}>
                     <Collapse in={openNav}>
                         <div>
-                            <p>Get projects into here somehow</p>
+                         <Dropdown
+                            projects={todos.projects}
+                            proj={proj}
+                            setProj={setProj}
+                         />
                         </div>
                     </Collapse>
                 </div>

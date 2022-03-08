@@ -2,7 +2,7 @@ import Button from 'react-bootstrap/Button';
 import { FaTrashAlt } from "react-icons/fa";
 import { FaHome } from "react-icons/fa";
 import '../../styles/Project.css';
-
+import '../../styles/index.css';
 
 
 function Project(props) {
@@ -10,15 +10,15 @@ function Project(props) {
      return (
           <table
                className='Nav-item'
-               style={{ color: props.proj === props.data.projId ? "red" : "white" }}
+               style={{ color: props.proj === props.data.projId ? "#DC3545" : "white", /*border: "1px solid yellow"*/ }}
                onClick={() => { props.setProj(props.data.projId) }}
           >
                <tr>
-                    <td className='d-none d-sm-block'>
+                    <td className=' '>
                          {props.data.projName + " "}
                     </td>
                     <td  >
-                         <span className='d-none d-sm-block'>{props.data.projId !== "3" && props.data.projTodos.length}</span>
+                         <span className=' '>{props.data.projId !== "3" && props.data.projTodos.length}</span>
                     </td>
                     <td id="Nav-icon">
                          {props.data.projId === "1" ? <FaHome /> : props.data.projId === "3" ? <FaTrashAlt /> : null}

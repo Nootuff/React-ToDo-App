@@ -1,6 +1,24 @@
+
+
+
+
 .Header{
   height: 80px;
-   
+  background-color: var(--dark-purple);
+}
+
+.Header-logo{
+  font-size: 2rem;
+}
+
+.Header-button{
+  margin: 6px;
+}
+
+.Header-button-icon{
+ position: relative;
+ bottom: 2px;
+ left: 0.5px;
 }
 
 @media screen and (min-width: 576px) {
