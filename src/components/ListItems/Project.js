@@ -20,7 +20,7 @@ function Project(props) {
                     <td  >
                          <span className=' '>{props.data.projId !== "3" && props.data.projTodos.length}</span>
                     </td>
-                    <td id="Nav-icon">
+                    <td className="Icon">
                          {props.data.projId === "1" ? <FaHome /> : props.data.projId === "3" ? <FaTrashAlt /> : null}
                     </td>
 

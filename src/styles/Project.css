@@ -3,11 +3,7 @@
      padding: 0;
 }
 
-#Nav-icon{ /*DONT DELETE KEEPS ICON ON SAME LINE*/
-  position: relative;
-  bottom: 2px;
-  
-}
+
 
 .Nav-item {
   display: block;

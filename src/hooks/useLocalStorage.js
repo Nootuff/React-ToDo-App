@@ -42,7 +42,8 @@ const initialStorage = {
             projNotes: "Your last 10 deleted todos.",
             projTodos: []
         }
-    ]
+    ],
+    darkMode: false
 };
 
 export default storage => {

@@ -6,7 +6,7 @@ import TodoList from "./ListComponents/TodoList";
 import ProjectList from "./ListComponents/ProjectList";
 import Header from "./Partials/Header";
 import Footer from "./Partials/Footer";
-import Nav from "./Partials/Nav";
+import Sidebar from "./Partials/Sidebar";
 import Collapse from 'react-bootstrap/Collapse';
 import Dropdown from "./Partials/Dropdown";
 
@@ -39,13 +39,13 @@ function TodoListBase() {
 
 
     let viewedProject = todos.projects.filter(project => project.projId === proj)[0];
-    
+
     return (
         <div className="Todo-list">
             <Header
                 openNav={openNav}
                 setOpenNav={setOpenNav}
-               
+                setProj={setProj}
             />
 
             {/*<div class="sidebar">
@@ -57,25 +57,53 @@ function TodoListBase() {
                 />
 
     </div>*/}
-            <Nav
+            <Sidebar
                 projects={todos.projects}
                 proj={proj}
                 setProj={setProj}
             />
             <div className="Wrapper">
-             
+
 
 
                 <div className="d-block d-sm-none" style={{ marginTop: "79px", transition: "width 2s ease" }}>
                     <Collapse in={openNav}>
                         <div>
-                         <Dropdown
-                            projects={todos.projects}
-                            proj={proj}
-                            setProj={setProj}
-                         />
+                            <Dropdown
+                                projects={todos.projects}
+                                proj={proj}
+                                setProj={setProj}
+                            />
                         </div>
                     </Collapse>
+                </div>
+
+
+                <div class="container" style={{ border: "", width: "65%" }}>
+
+                    <div class="d-flex" /*style={{border: "5px solid cyan"}}*/>
+
+                        <div class=" m-0 flex-shrink-1 rounded-start " style={{ border: "1px solid blue", backgroundColor: "blue" }}>tickbox</div>
+                        <div class=" p-0 w-100 text-start" style={{ border: "1px solid yellow", backgroundColor: "#c4c4c4"  }}>
+                            <div class="row  " style={{ border: "1px solid blue" }}>
+                                <h2>
+                                    Todo Text, have the details button fill up like your prtfolio on hover 
+                                </h2 >
+                            </div>
+                            <div class="row  ">
+                                <h4  >
+                                    Deadline
+                                </h4 >
+                            </div>
+                            <div class="m-0  d-flex flex-row bd-highlight" style={{ border: "1px solid green" }}>
+                                <div class="  bd-highlight"><button>Details</button></div>
+                                <div class="  bd-highlight"><button>Edit</button></div>
+                                <div class="  bd-highlight" style={{backgroundColor: "#DC3545"}}><button>X</button></div>
+                            </div>
+
+                        </div>
+                    </div>
+
                 </div>
 
 

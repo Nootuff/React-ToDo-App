@@ -34,3 +34,8 @@ code {
 .background-purple{
   background-color: var(--dark-purple);
 }
+
+.Icon{
+  position: relative;
+  bottom: 2px;
+}
