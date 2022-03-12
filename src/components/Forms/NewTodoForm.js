@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import { v4 as uuidv4 } from 'uuid'; //Imports the uuid npm package. 
 import Collapse from 'react-bootstrap/Collapse';
 import Button from 'react-bootstrap/Button';
-import useDate from "../../hooks/useDate";
 
-import ToggleButton from 'react-bootstrap/ToggleButton';
+
+import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Form from 'react-bootstrap/Form';
 
 import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
+import useDate from "../../hooks/useDate";
 
 import '../../styles/NewTodoForm.css';
 
@@ -185,10 +186,11 @@ function NewTodoForm(props) {
             <input type="date" onChange={props.handleChangeFunc} value={props.values.deadline} onKeyDown={(e) => e.preventDefault()} id="deadline" min={dateConverter(currDate(), '/', '-')} name="deadline"></input>
             <br />
               */}
-
+<ButtonToolbar aria-label="Toolbar with button groups">
+<ButtonGroup aria-label="Toolbar with button groups">
 
             <Button
-              className="mt-2"
+              className="me-2"
               disabled={props.values.taskBody === "" ? true : false}
               onClick={(event) => {
                 event.preventDefault();
@@ -197,7 +199,18 @@ function NewTodoForm(props) {
                 props.setValues({ taskBody: "", taskNotes: "", priority: "Medium", deadline: "" }); //Changes the fields back to blank for a new todo to be input
                 setRadioValue("Medium");
               }}
-            >I need to do this</Button>
+            >I need to do this
+            </Button>
+            </ButtonGroup>
+            <ButtonGroup aria-label="Toolbar with button groups"> 
+            <Button
+            variant="danger"
+            onClick={()=> {setOpen(false)}}
+            >
+              Close
+            </Button>
+            </ButtonGroup>
+            </ButtonToolbar>
           </div>
         </Collapse>
 

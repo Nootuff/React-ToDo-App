@@ -43,7 +43,7 @@ function Todo(props) {
             </div>
 
           </div>
-          <div className="p-3  w-100 text-start" style={{ border: " ", backgroundColor: "#dedede" }}>
+          <div className="Todo-body p-3  w-100 text-start"  >
 
             <div
               className={props.todo.completed && "opacity-50"}

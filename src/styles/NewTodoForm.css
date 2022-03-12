@@ -1,6 +1,8 @@
 .New-todo-form{
   width: 70%;
   margin: auto;
+  background-color: var(--light-grey-color);
+  border-radius: 5px;
 }
 
 /*Mobile size*/

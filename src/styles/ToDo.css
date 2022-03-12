@@ -5,6 +5,10 @@
    /* border: 1px solid aqua;*/
 }
 
+.Todo-body{
+    background-color: var(--light-grey-color);
+}
+
 .Todo-control{
     cursor: pointer;
 }

@@ -18,8 +18,7 @@ function TodoList(props) {
 
     return (
         <div>
-            <h1>{props.viewedProject.projName}</h1>
-            <h2>{props.viewedProject.projNotes}</h2>
+          
             {props.viewedProject.projId.length > 1 && //Option to edit to delete project only available on user created projects.
                 <div>
                     <EditProjectForm

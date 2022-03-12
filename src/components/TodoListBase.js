@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import NewTodoForm from "./Forms/NewTodoForm";
 import NewProjectForm from "./Forms/NewProjectForm";
+import ProjectControl from "./Controls/ProjectControl";
 import DeleteComplete from "./Controls/DeleteComplete";
 import TodoList from "./ListComponents/TodoList";
 import ProjectList from "./ListComponents/ProjectList";
@@ -9,6 +10,8 @@ import Footer from "./Partials/Footer";
 import Sidebar from "./Partials/Sidebar";
 import Collapse from 'react-bootstrap/Collapse';
 import Dropdown from "./Partials/Dropdown";
+
+
 
 import '../styles/TodoList.css';
 
@@ -62,7 +65,7 @@ function TodoListBase() {
                 proj={proj}
                 setProj={setProj}
             />
-            <div className="Wrapper">
+            <div className="Wrapper" /*style={{border: "1px solid red"}}*/>
 
 
 
@@ -78,6 +81,24 @@ function TodoListBase() {
                     </Collapse>
                 </div>
 
+            
+                    <NewProjectForm
+                        projData={projData}
+                        setProjData={setProjData}
+                        handleProjChangeFunc={handleProjChangeFunc}
+                        submitProject={submitProject}
+                        setProj={setProj}
+                    />
+       
+
+<section style={{border: "1px solid red"}}>
+
+                
+                <ProjectControl
+                    proj={proj}
+                    viewedProject={viewedProject}
+                />
+
                 {proj !== "3" &&
                     <NewTodoForm
                         handleChangeFunc={handleChangeFunc}
@@ -87,15 +108,7 @@ function TodoListBase() {
                         proj={proj}
                     />
                 }
-                {proj !== "3" &&
-                    <NewProjectForm
-                        projData={projData}
-                        setProjData={setProjData}
-                        handleProjChangeFunc={handleProjChangeFunc}
-                        submitProject={submitProject}
-                        setProj={setProj}
-                    />
-                }
+
                 {proj !== "3" &&
                     <DeleteComplete
                         deleteComplete={deleteComplete}
@@ -115,6 +128,7 @@ function TodoListBase() {
                     viewedProject={viewedProject}
                     setProj={setProj}
                 />
+                </section>
             </div>
             <Footer />
         </div>
