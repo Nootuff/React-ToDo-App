@@ -21,7 +21,7 @@ const initialStorage = {
                 {
                     "taskBody": "Placeholder 2",
                     "taskNotes": "Some more here",
-                    "priority": "high",
+                    "priority": "High",
                     "id": "2",
                     "completed": false,
                     "deadline": "",

@@ -78,35 +78,6 @@ function TodoListBase() {
                     </Collapse>
                 </div>
 
-
-                <div class="container" style={{ border: "", width: "65%" }}>
-
-                    <div class="d-flex" /*style={{border: "5px solid cyan"}}*/>
-
-                        <div class=" m-0 flex-shrink-1 rounded-start " style={{ border: "1px solid blue", backgroundColor: "blue" }}>tickbox</div>
-                        <div class=" p-0 w-100 text-start" style={{ border: "1px solid yellow", backgroundColor: "#c4c4c4"  }}>
-                            <div class="row  " style={{ border: "1px solid blue" }}>
-                                <h2>
-                                    Todo Text, have the details button fill up like your prtfolio on hover 
-                                </h2 >
-                            </div>
-                            <div class="row  ">
-                                <h4  >
-                                    Deadline
-                                </h4 >
-                            </div>
-                            <div class="m-0  d-flex flex-row bd-highlight" style={{ border: "1px solid green" }}>
-                                <div class="  bd-highlight"><button>Details</button></div>
-                                <div class="  bd-highlight"><button>Edit</button></div>
-                                <div class="  bd-highlight" style={{backgroundColor: "#DC3545"}}><button>X</button></div>
-                            </div>
-
-                        </div>
-                    </div>
-
-                </div>
-
-
                 {proj !== "3" &&
                     <NewTodoForm
                         handleChangeFunc={handleChangeFunc}

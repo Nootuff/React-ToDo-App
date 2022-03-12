@@ -2,33 +2,137 @@ import React, { useState } from "react";
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Collapse from 'react-bootstrap/Collapse';
+import Form from 'react-bootstrap/Form';
+import { FaEdit, FaTrashAlt } from "react-icons/fa";
+
 import useDate from "../../hooks/useDate";
 import EditTodoForm from "../Forms/EditTodoForm";
 import '../../styles/Todo.css';
+import '../../styles/index.css';
 
 function Todo(props) {
   const [open, setOpen] = useState(true);
+  const [openDetails, setOpenDetails] = useState(false);
+  const [openEdit, setOpenEdit] = useState(false);
   const [currDate, dateConverter] = useDate()
 
   function isLater(deadline, today) { //Move this to a hook? where would it go? 
     return new Date(deadline) > new Date(today)
   }
 
-  const deadlineDisplay = (props.todo.deadline) !== "" && <h5 style={{ color: isLater(props.todo.deadline, currDate()) ? null : "red" }}>Deadline: {dateConverter(props.todo.deadline, "-", "/")}</h5>;
+  const deadlineDisplay = (props.todo.deadline) !== "" && <h5 style={{ color: isLater(props.todo.deadline, currDate()) ? null : "var(--danger-red)" }}>Deadline: {dateConverter(props.todo.deadline, "-", "/")}</h5>;
 
   return (
-    <li
-      className="Todo shadow"
-      id={props.todo.id}
-    >
+    <Collapse in={open}>
+      <li
+        className="Todo container p-0"
+        id={props.todo.id}
+      >
+
+        {/*<div class="container" style={{ border: "" }}>*/}
+
+        <div class="d-flex" /*style={{border: "5px solid cyan"}}*/>
+
+          <div
+            className={"m-0 flex-shrink-1 rounded-start " + (props.todo.completed && "opacity-50")}
+            style={{ backgroundColor: props.todo.priority === 'High' ? 'var(--danger-red)' : props.todo.priority === 'Medium' ? 'var(--primary-blue)' : 'var(--success-green)' }}
+          >
+
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></input>
+            </div>
+
+          </div>
+          <div className="p-3  w-100 text-start" style={{ border: " ", backgroundColor: "#dedede" }}>
+
+            <div
+              className={props.todo.completed && "opacity-50"}
+              style={{ textDecoration: props.todo.completed && "line-through" /* The && is a ternary with a single condistion */ }} >
+              <div class="row" >
+                <h4
+                  onClick={() => {
+                    props.proj !== "3" && props.toggleComplete(props.todo, props.proj) /*User cannot click on header to toggle complete if the todo is in deletion storage.*/
+                  }}
+                >
+                  {props.todo.taskBody}
+                </h4 >
+              </div>
+              <div class="row">
+                {deadlineDisplay}
+              </div>
+            </div>
+            <Collapse in={openDetails}>
+              <div
+              
+                className={" flex-row " + (props.todo.completed && "opacity-50")}
+                 
+                style={{border: "", textDecoration: props.todo.completed && "line-through" /* The && is a ternary with a single condistion */ }} 
+              >
+               <hr  />
+                <p style={{ wordWrap: "break-word" }} ><b> Details:</b> {props.todo.taskNotes}</p>
+                
+                <p><b>Priority:</b> {props.todo.priority}</p>
+                <p><b>Posted:</b> {dateConverter(props.todo.datePosted, "-", "/")}</p>
+              </div>
+            </Collapse>
+            <div class="m-0  d-flex flex-row bd-highlight" style={{ border: " " }}>
+              <div class="  bd-highlight me-2" style={{ border: " " }}>
+                <Button className="p-0 pe-1 ps-1"
+                  onClick={() => setOpenDetails(!openDetails)}
+                  aria-controls="example-collapse-text"
+                  aria-expanded={openDetails}
+                >
+                  Details
+                </Button>
+              </div>
+              <div class="Todo-control bd-highlight me-2">
+                <FaEdit
+                  onClick={() => setOpenEdit(!openEdit)}
+                  aria-controls="example-collapse-text"
+                  aria-expanded={openEdit}
+                />
+              </div>
+              <div class="Todo-control bd-highlight me-2" >
+                <FaTrashAlt
+                  style={{ color: "#DC3545" }}
+                  onClick={() => {
+                    setOpen(false);
+                    setTimeout(() => {
+                      props.deleteTodo(props.todo, props.proj)
+                    }, 300);
+                  }}
+                />
+              </div>
+            </div>
+            <Collapse in={openEdit}>
+              <div>
+                <hr />
+                <EditTodoForm
+                  todo={props.todo}
+                  proj={props.proj}
+                  editTodo={props.editTodo}
+                  setOpenEdit={setOpenEdit}
+                />
+              </div>
+            </Collapse>
+          </div>
+        </div>
+
+
+
+        {/*
       <Collapse in={open}>
+
+
+
+
         <Card border={props.todo.priority === 'High' ? 'danger' : props.todo.priority === 'Medium' ? 'primary' : 'success'}
           style={{ border: "3px solid", marginBottom: "10px" }}>
           <section
-            style={{ textDecoration: props.todo.completed && "line-through" /* The && is a ternary with a single condistion */ }}
+            style={{ textDecoration: props.todo.completed && "line-through" /* The && is a ternary with a single condistion  }}
           >
             <h2 onClick={() => {
-              props.proj !== "3" && props.toggleComplete(props.todo, props.proj) /*User cannot click on header to toggle complete if the todo is in deletion storage.*/
+              props.proj !== "3" && props.toggleComplete(props.todo, props.proj) /*User cannot click on header to toggle complete if the todo is in deletion storage.
             }}
             >
               {props.todo.taskBody}
@@ -80,8 +184,11 @@ function Todo(props) {
             </Button>
           }
         </Card>
-      </Collapse>
-    </li>
+    
+    */}
+
+      </li>
+    </Collapse>
   );
 }
 

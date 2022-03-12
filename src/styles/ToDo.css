@@ -1,5 +1,11 @@
 .Todo{
-    margin:  10px auto;
-    width: 60%;
+    margin:  20px auto;
+    width: 60%!important;
+
+   /* border: 1px solid aqua;*/
+}
+
+.Todo-control{
+    cursor: pointer;
 }
 
