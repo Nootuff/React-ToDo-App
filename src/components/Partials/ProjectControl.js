@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import DeleteProject from "../Controls/DeleteProject";
 import DeleteComplete from "../Controls/DeleteComplete";
@@ -17,7 +17,11 @@ function ProjectControl({ proj, viewedProject, setProj, deleteComplete, editProj
    const [open, setOpen] = useState(false);
 
 
-
+   useEffect(() => {
+      setOpen(false);
+      //console.log("itchanges")
+   }, [proj])  
+   
 
 
    return (

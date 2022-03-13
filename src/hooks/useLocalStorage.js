@@ -48,7 +48,7 @@ const initialStorage = {
 
 export default storage => {
     const [todos, setTodos] = useState(JSON.parse(localStorage.getItem("hooksTodos")) || initialStorage);
-   // const [currDate, dateConverter, deleteOn] = useDate();
+    // const [currDate, dateConverter, deleteOn] = useDate();
 
     const submitProject = (data) => {
         let stateHolder = { ...todos };
@@ -110,7 +110,6 @@ export default storage => {
                 let newList = stateHolder.projects[i].projTodos.filter(todo => todo.id !== data.id);
                 stateHolder.projects[i].projTodos = newList;
                 if (viewId !== "3") { //If the currently viewed project is not deleted todos, then push the delted todo to its array.
-                  
                     stateHolder.projects[2].projTodos.push(data);
                 }
             }
@@ -171,8 +170,20 @@ export default storage => {
 
     const restore = (data) => { //Returns a single todo to its parent project & removes it from the deleted todos project. 
         let stateHolder = { ...todos };
+        let parent = false;
+
+        for (let i = 0; i < stateHolder.projects.length; i++) {
+            if(stateHolder.projects[i].projId === data.parentProj){
+parent = true;
+//alert("Parent present!")
+            } //else{
+               // alert("Parent dead!")   
+           // }
+        }
+
         for (let i = 0; i < stateHolder.projects.length; i++) {
             if (stateHolder.projects[i].projId === data.parentProj) {
+
                 let dataholder = [...stateHolder.projects[i].projTodos, data]
                 let deletedTodos = stateHolder.projects[2].projTodos.filter(todo => todo.id !== data.id);
                 stateHolder.projects[i].projTodos = dataholder;

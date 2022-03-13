@@ -75,7 +75,9 @@ function Todo(props) {
                 <p><b>Posted:</b> {dateConverter(props.todo.datePosted, "-", "/")}</p>
               </div>
             </Collapse>
-            <div class="m-0  d-flex flex-row bd-highlight" style={{ border: " " }}>
+            <div className="m-0  d-flex flex-row bd-highlight" style={{ border: " " }}>
+            {props.proj !== "3" &&
+              <span className=" d-flex flex-row">
               <div class="  bd-highlight me-2" style={{ border: " " }}>
                 <Button className="p-0 pe-1 ps-1"
                   onClick={() => setOpenDetails(!openDetails)}
@@ -92,6 +94,25 @@ function Todo(props) {
                   aria-expanded={openEdit}
                 />
               </div>
+              </span>
+              }
+              <span  className=" d-flex flex-row">
+              {props.proj === "3" &&
+              <div class="Todo-control bd-highlight me-2" >
+              <Button
+              className="p-0 pe-1 ps-1"
+              variant="success"
+              onClick={() => {
+                setOpen(false);
+                setTimeout(() => {
+                  props.restore(props.todo);
+                }, 300);
+              }}
+            >
+              Restore
+            </Button>
+              </div>
+}
               <div class="Todo-control bd-highlight me-2" >
                 <FaTrashAlt
                   style={{ color: "#DC3545" }}
@@ -103,6 +124,7 @@ function Todo(props) {
                   }}
                 />
               </div>
+              </span>
             </div>
             <Collapse in={openEdit}>
               <div>
