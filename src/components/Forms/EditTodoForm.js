@@ -32,6 +32,8 @@ function EditTodoForm(props) {
     const [state, setState] = useState(values);
     //const [editRadioValue, setEditRadioValue] = useState(state.priority);
 
+//console.log(state)
+
     const handleEditChangeFunc = (event) => { //If you can't solve this issue then just leave it. 
         const { name, value } = event.target;
         setState({

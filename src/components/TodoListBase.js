@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from "react";
 import NewTodoForm from "./Forms/NewTodoForm";
 import NewProjectForm from "./Forms/NewProjectForm";
-import ProjectControl from "./Controls/ProjectControl";
+import EditProjectForm from "./Forms/EditProjectForm";
 import DeleteComplete from "./Controls/DeleteComplete";
 import TodoList from "./ListComponents/TodoList";
 import ProjectList from "./ListComponents/ProjectList";
 import Header from "./Partials/Header";
 import Footer from "./Partials/Footer";
 import Sidebar from "./Partials/Sidebar";
-import Collapse from 'react-bootstrap/Collapse';
 import Dropdown from "./Partials/Dropdown";
+import ProjectControl from "./Partials/ProjectControl";
+import Collapse from 'react-bootstrap/Collapse';
+
 
 
 
@@ -42,7 +44,7 @@ function TodoListBase() {
 
 
     let viewedProject = todos.projects.filter(project => project.projId === proj)[0];
-
+//console.log(viewedProject)
     return (
         <div className="Todo-list">
             <Header
@@ -81,53 +83,60 @@ function TodoListBase() {
                     </Collapse>
                 </div>
 
-            
-                    <NewProjectForm
-                        projData={projData}
-                        setProjData={setProjData}
-                        handleProjChangeFunc={handleProjChangeFunc}
-                        submitProject={submitProject}
-                        setProj={setProj}
-                    />
-       
 
-<section style={{border: "1px solid red"}}>
-
-                
-                <ProjectControl
-                    proj={proj}
-                    viewedProject={viewedProject}
-                />
-
-                {proj !== "3" &&
-                    <NewTodoForm
-                        handleChangeFunc={handleChangeFunc}
-                        submitTodo={submitTodo}
-                        values={values}
-                        setValues={setValues}
-                        proj={proj}
-                    />
-                }
-
-                {proj !== "3" &&
-                    <DeleteComplete
-                        deleteComplete={deleteComplete}
-                        proj={proj}
-                    />
-                }
-                <br />
-
-                <TodoList
-                    deleteTodo={deleteTodo}
-                    editTodo={editTodo}
-                    toggleComplete={toggleComplete}
-                    deleteProject={deleteProject}
-                    editProject={editProject}
-                    restore={restore}
-                    proj={proj}
-                    viewedProject={viewedProject}
+                <NewProjectForm
+                    projData={projData}
+                    setProjData={setProjData}
+                    handleProjChangeFunc={handleProjChangeFunc}
+                    submitProject={submitProject}
                     setProj={setProj}
                 />
+
+
+                <section style={{ border: "1px solid red" }}>
+
+
+                    <ProjectControl
+                        proj={proj}
+                        viewedProject={viewedProject}
+
+                        setProj={setProj}
+                        deleteComplete={deleteComplete}
+                        editProject={editProject}
+                        deleteProject={deleteProject}
+                    />
+                    {/*
+                      <EditProjectForm
+                        viewedProject={viewedProject}
+                        editProject={editProject}
+                        proj={proj}
+                    />
+*/}
+
+                    {proj !== "3" &&
+                        <NewTodoForm
+                            handleChangeFunc={handleChangeFunc}
+                            submitTodo={submitTodo}
+                            values={values}
+                            setValues={setValues}
+                            proj={proj}
+                        />
+                    }
+
+                   
+                    <br />
+
+                    <TodoList
+                        deleteTodo={deleteTodo}
+                        editTodo={editTodo}
+                        toggleComplete={toggleComplete}
+                        deleteProject={deleteProject}
+                        editProject={editProject}
+                        restore={restore}
+                        proj={proj}
+                        viewedProject={viewedProject}
+                        setProj={setProj}
+                    />
                 </section>
             </div>
             <Footer />

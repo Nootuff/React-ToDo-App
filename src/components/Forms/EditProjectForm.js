@@ -1,19 +1,41 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+
+import Form from 'react-bootstrap/Form';
 
 import Button from 'react-bootstrap/Button';
 import Collapse from 'react-bootstrap/Collapse';
 
 function EditProjectForm(props) {
-    const [openEdit, setOpenEdit] = useState(false);
+    //const [openEdit, setOpenEdit] = useState(false);
 
-    let values = {
+const holder = props.viewedProject;
+
+  let values = {
+      
         projId: props.viewedProject.projId,
         projName: props.viewedProject.projName,
         projNotes: props.viewedProject.projNotes,
         projTodos: props.viewedProject.projTodos
-    }
+        
+       /*
+        projId: holder.projId,
+        projName: holder.projName,
+        projNotes: holder.projNotes,
+        projTodos: holder.projTodos
+        */
+    } 
 
-    const [state, setState] = useState(values);
+    const [state, setState] = useState("");
+   
+   
+     useEffect(() => {
+       setState(values);
+       //console.log("itchanges")
+    }, [props.viewedProject])  
+
+    
+   //console.log("values here");
+//console.log(state);
 
     const handleEditChangeFunc = (event) => { //If you can't solve this issue then just leave it. 
         const { name, value } = event.target;
@@ -22,10 +44,11 @@ function EditProjectForm(props) {
             [name]: value,
         });
     }
-
+ 
     return (
-        <div>
-            <Button
+        <div >
+          
+           {/* <Button
                 onClick={() => setOpenEdit(!openEdit)}
                 aria-controls="example-collapse-text"
                 aria-expanded={openEdit}
@@ -33,7 +56,10 @@ function EditProjectForm(props) {
                 Edit Project
             </Button>
             <Collapse in={openEdit}>
-                <form>
+    */}
+
+                <Form>
+                    <h1> {state.projName}  </h1>
                     <input
                         type="text"
                         name="projName" /*Name must be the same as state value the input is meant to update.*/
@@ -55,12 +81,12 @@ function EditProjectForm(props) {
                         disabled={state.projName === "" ? true : false}
                         onClick={(event) => {
                             event.preventDefault();
-                            setOpenEdit(false);
+                           
                             props.editProject(state, props.proj);
                         }}
                     >Update</Button>
-                </form>
-            </Collapse>
+                </Form>
+
         </div>
     );
 }

@@ -1,10 +1,10 @@
 import Button from 'react-bootstrap/Button';
 
-function DeleteComplete(props) {
+function DeleteComplete({proj, deleteComplete}) {
     return (
        <Button 
        variant="danger"
-       onClick={() => {props.deleteComplete(props.proj); /*props.multShrink()*/}} 
+       onClick={() => {deleteComplete(proj);}} 
        >
            Clear All Complete Todos</Button> 
     )

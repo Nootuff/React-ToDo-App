@@ -1,6 +1,6 @@
 import Todo from "../ListItems/Todo";
 import EditProjectForm from "../Forms/EditProjectForm";
-import Button from 'react-bootstrap/Button';
+
 
 function TodoList(props) {
 
@@ -18,25 +18,18 @@ function TodoList(props) {
 
     return (
         <div>
-          
-            {props.viewedProject.projId.length > 1 && //Option to edit to delete project only available on user created projects.
-                <div>
+              
+           {/* {props.viewedProject.projId.length > 1 && //Option to edit to delete project only available on user created projects.
+          <div>
                     <EditProjectForm
                         viewedProject={props.viewedProject}
                         editProject={props.editProject}
                         proj={props.proj}
                     />
-                    <Button
-                        variant="danger"
-                        onClick={() => {
-                            props.deleteProject(props.viewedProject.projId);
-                            props.setProj("1")
-                        }}
-                    >
-                        Delete this whole project!
-                    </Button>
-                </div>
-                }
+                  
+    </div> 
+                */}
+            
             <ul className="List">
                 {list}
             </ul>
