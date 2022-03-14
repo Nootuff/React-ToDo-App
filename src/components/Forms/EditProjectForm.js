@@ -8,34 +8,34 @@ import Collapse from 'react-bootstrap/Collapse';
 function EditProjectForm(props) {
     //const [openEdit, setOpenEdit] = useState(false);
 
-const holder = props.viewedProject;
+    const holder = props.viewedProject;
 
-  let values = {
-      
-        projId: props.viewedProject.projId,
+    let values = {
+
+        //  projId: props.viewedProject.projId,
         projName: props.viewedProject.projName,
         projNotes: props.viewedProject.projNotes,
-        projTodos: props.viewedProject.projTodos
-        
-       /*
-        projId: holder.projId,
-        projName: holder.projName,
-        projNotes: holder.projNotes,
-        projTodos: holder.projTodos
-        */
-    } 
+        //  projTodos: props.viewedProject.projTodos
+
+        /*
+         projId: holder.projId,
+         projName: holder.projName,
+         projNotes: holder.projNotes,
+         projTodos: holder.projTodos
+         */
+    }
 
     const [state, setState] = useState("");
-   
-   
-     useEffect(() => {
-       setState(values);
-       //console.log("itchanges")
-    }, [props.viewedProject])  
 
-    
-   //console.log("values here");
-//console.log(state);
+
+    useEffect(() => {
+        setState(values);
+        console.log("itchanges")
+    }, [props.viewedProject])
+
+
+    //console.log("values here");
+    //console.log(state);
 
     const handleEditChangeFunc = (event) => { //If you can't solve this issue then just leave it. 
         const { name, value } = event.target;
@@ -44,11 +44,11 @@ const holder = props.viewedProject;
             [name]: value,
         });
     }
- 
+
     return (
         <div >
-          
-           {/* <Button
+
+            {/* <Button
                 onClick={() => setOpenEdit(!openEdit)}
                 aria-controls="example-collapse-text"
                 aria-expanded={openEdit}
@@ -58,34 +58,37 @@ const holder = props.viewedProject;
             <Collapse in={openEdit}>
     */}
 
-                <Form>
-                    <h1> {state.projName}  </h1>
-                    <input
+            <Form>
+
+                <Form.Group className="mb-2"  >
+                    <Form.Label><b>Edit Project Name</b></Form.Label>
+
+                    <Form.Control
                         type="text"
                         name="projName" /*Name must be the same as state value the input is meant to update.*/
-                        id="taskBody"
+                        id="projName"
                         value={state.projName}
                         onChange={handleEditChangeFunc}
                     />
-                    <br />
-                    <textarea
-                        id="projNotes"
+                </Form.Group>
+                <Form.Group className="mb-2"  >
+                    <Form.Label><b>Edit details</b></Form.Label>
+                    <Form.Control as="textarea" rows={3} id="projNotes"
                         value={state.projNotes}
                         name="projNotes"
-                        onChange={handleEditChangeFunc}
-                        rows="4" cols="50"
-                    />
-                    <br />
-                    <Button
-                        variant="primary"
-                        disabled={state.projName === "" ? true : false}
-                        onClick={(event) => {
-                            event.preventDefault();
-                           
-                            props.editProject(state, props.proj);
-                        }}
-                    >Update</Button>
-                </Form>
+                        onChange={handleEditChangeFunc} />
+                </Form.Group>
+                <Button
+                    className="mb-2"
+                    variant="primary"
+                    disabled={state.projName === "" ? true : false}
+                    onClick={(event) => {
+                        event.preventDefault();
+                        props.setOpen(false)
+                        props.editProject(state, props.proj);
+                    }}
+                >Update</Button>
+            </Form>
 
         </div>
     );

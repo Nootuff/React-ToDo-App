@@ -16,13 +16,13 @@ function ProjectControl({ proj, viewedProject, setProj, deleteComplete, editProj
 
    const [open, setOpen] = useState(false);
 
-
    useEffect(() => {
       setOpen(false);
       //console.log("itchanges")
-   }, [proj])  
-   
+   }, [proj])
 
+//console.log(proj)
+//console.log(viewedProject)
 
    return (
       <div className="text-start" style={{ width: "60%", border: "1px solid green", margin: "auto" }}>
@@ -30,46 +30,45 @@ function ProjectControl({ proj, viewedProject, setProj, deleteComplete, editProj
             <h2>{viewedProject.projName}</h2>
             <p>{viewedProject.projNotes}</p>
          </section>
-       
          {proj !== "3" &&
-         <section>
-         <Button
-            onClick={() => setOpen(!open)}
-            aria-controls="example-collapse-text"
-            aria-expanded={open}
-         >
-            Edit Project
-         </Button>
-         <Collapse in={open}>
-            <div style={{ border: "1px solid orange" }}>
-
+            <section>
                {viewedProject.projId.length > 1 &&
-                  <EditProjectForm
-
-                     viewedProject={viewedProject}
-                     editProject={editProject}
-                     proj={proj}
-
-                  />
+                  <>
+                     <Button
+                        className="mb-2"
+                        onClick={() => setOpen(!open)}
+                        aria-controls="example-collapse-text"
+                        aria-expanded={open}
+                     >
+                        Edit Project
+                     </Button>
+                     <Collapse in={open}>
+                        <div style={{ border: "1px solid orange" }}>
+                           <EditProjectForm
+                              viewedProject={viewedProject}
+                              editProject={editProject}
+                              proj={proj}
+                              setOpen={setOpen}
+                           />
+                           <DeleteProject
+                              viewedProject={viewedProject}
+                              setProj={setProj}
+                              deleteProject={deleteProject}
+                           />
+                        </div>
+                     </Collapse>
+                  </>
                }
-
-               <ButtonGroup vertical>
-               {viewedProject.projId.length > 1 &&
-                  <DeleteProject
-                     viewedProject={viewedProject}
-                     setProj={setProj}
-                     deleteProject={deleteProject}
-                  />
-               }
+               <div>
                   <DeleteComplete
                      proj={proj}
                      deleteComplete={deleteComplete}
                   />
-               </ButtonGroup>
-            </div>
-         </Collapse>
-         </section>
-}
+               </div>
+
+            </section>
+         }
+
       </div>
    );
 }

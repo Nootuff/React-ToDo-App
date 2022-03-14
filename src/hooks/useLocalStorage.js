@@ -71,7 +71,8 @@ export default storage => {
         let stateHolder = { ...todos };
         for (let i = 0; i < stateHolder.projects.length; i++) {
             if (stateHolder.projects[i].projId === viewId) {
-                stateHolder.projects[i] = data;
+                stateHolder.projects[i].projName = data.projName;
+                stateHolder.projects[i].projNotes = data.projNotes;
             }
         }
         //console.log(stateHolder)
@@ -173,37 +174,29 @@ export default storage => {
         let parent = false;
 
         for (let i = 0; i < stateHolder.projects.length; i++) {
-            if(stateHolder.projects[i].projId === data.parentProj){
-parent = true;
-//alert("Parent present!")
-            } //else{
-               // alert("Parent dead!")   
-           // }
-        }
-
-        for (let i = 0; i < stateHolder.projects.length; i++) {
-            if (stateHolder.projects[i].projId === data.parentProj) {
-
-                let dataholder = [...stateHolder.projects[i].projTodos, data]
-                let deletedTodos = stateHolder.projects[2].projTodos.filter(todo => todo.id !== data.id);
-                stateHolder.projects[i].projTodos = dataholder;
-                stateHolder.projects[2].projTodos = deletedTodos;
+            if (stateHolder.projects[i].projId === data.parentProj) { //Check to see if this todo's parent project still exists.
+                parent = true; //If it does, set parent to true
             }
         }
-        setTodos(stateHolder)
-        window.localStorage.setItem('hooksTodos', JSON.stringify(stateHolder));
-    }
 
-    /*
-    const test = (set) => { 
-        let stateHolder = { ...todos };
-        stateHolder.midnight = set
-        //console.log(stateHolder.midnight)
-       
+        if(parent) { //If parent is true & parent project still exists... something about this if parent statement is causing the undefined error
+            for (let i = 0; i < stateHolder.projects.length; i++) {
+                if (stateHolder.projects[i].projId === data.parentProj) { //Find the parent project whose projId matches the todo's parentProj value.
+                    let dataholder = [...stateHolder.projects[i].projTodos, data]; //Add it back to the existing todos in that project. 
+                    stateHolder.projects[i].projTodos = dataholder;
+                }
+            }
+        } else { //Automatically send this todo to the home project todos list. 
+            let dataholder = [...stateHolder.projects[0].projTodos, data];
+            stateHolder.projects[0].projTodos = dataholder;
+        }
+
+        let deletedTodos = stateHolder.projects[2].projTodos.filter(todo => todo.id !== data.id); //Create a list of todos excluding the one that was jsut restored. 
+        stateHolder.projects[2].projTodos = deletedTodos; //Set the todos list of deleted storage to this updated list. 
+         
         setTodos(stateHolder)
         window.localStorage.setItem('hooksTodos', JSON.stringify(stateHolder));
     }
-    */
 
     return [todos, submitProject, deleteProject, editProject, submitTodo, deleteTodo, editTodo, toggleComplete, deleteComplete, restore];
 }

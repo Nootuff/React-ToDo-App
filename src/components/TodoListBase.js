@@ -41,10 +41,20 @@ function TodoListBase() {
         }
     */
 
+ 
 
-
-    let viewedProject = todos.projects.filter(project => project.projId === proj)[0];
+    
 //console.log(viewedProject)
+useEffect(() => {
+   
+    console.log("Project update")
+ }, [todos])  
+ 
+
+
+
+ let viewedProject = todos.projects.filter(project => project.projId === proj)[0];
+
     return (
         <div className="Todo-list">
             <Header

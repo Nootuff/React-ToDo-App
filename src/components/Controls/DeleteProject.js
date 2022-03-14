@@ -2,17 +2,18 @@ import React, { useState } from "react";
 
 import Button from 'react-bootstrap/Button';
 
-function DeleteProject({viewedProject, setProj, deleteProject }) {
+function DeleteProject({ viewedProject, setProj, deleteProject }) {
 
-       return (
+    return (
         <Button
+            className="mb-2"
             variant="danger"
-        onClick={() => {
-             deleteProject(viewedProject.projId);
-             setProj("1")
-         }}
+            onClick={() => {
+                deleteProject(viewedProject.projId);
+                setProj("1")
+            }}
         >
-            Delete project 
+            Delete project
         </Button>
     );
 
