@@ -29,6 +29,10 @@ function TodoListBase() {
     const [todos, submitProject, deleteProject, editProject, submitTodo, deleteTodo, editTodo, toggleComplete, deleteComplete, restore] = useLocalStorage();
     const [proj, setProj] = useView();
     const [openNav, setOpenNav] = useState(false);
+    const [showProjForm, setShowProjForm] = useState(false);
+
+    const handleFormClose = () => setShowProjForm(false);
+    const handleFormShow = () => setShowProjForm(true);
 
 
     /*
@@ -44,11 +48,12 @@ function TodoListBase() {
  
 
     
-//console.log(viewedProject)
+/*
 useEffect(() => {
    
     console.log("Project update")
  }, [todos])  
+ */
  
 
 
@@ -76,6 +81,7 @@ useEffect(() => {
                 projects={todos.projects}
                 proj={proj}
                 setProj={setProj}
+                handleFormShow={handleFormShow}
             />
             <div className="Wrapper" /*style={{border: "1px solid red"}}*/>
 
@@ -100,6 +106,8 @@ useEffect(() => {
                     handleProjChangeFunc={handleProjChangeFunc}
                     submitProject={submitProject}
                     setProj={setProj}
+                    showProjForm={showProjForm}
+                    handleFormClose={handleFormClose}
                 />
 
 
