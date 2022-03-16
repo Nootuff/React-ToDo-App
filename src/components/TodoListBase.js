@@ -12,7 +12,7 @@ import Dropdown from "./Partials/Dropdown";
 import ProjectControl from "./Partials/ProjectControl";
 import Collapse from 'react-bootstrap/Collapse';
 
-import '../styles/todolist.css';
+import '../styles/TodoListBase.css';
 
 
 
