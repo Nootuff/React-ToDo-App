@@ -7,7 +7,7 @@ import { FaEdit, FaTrashAlt } from "react-icons/fa";
 
 import useDate from "../../hooks/useDate";
 import EditTodoForm from "../Forms/EditTodoForm";
-import '../../styles/Todo.css';
+import '../../styles/TodoStyles.css';
 import '../../styles/index.css';
 
 function Todo(props) {
