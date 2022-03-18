@@ -37,10 +37,23 @@ function Todo(props) {
             className={"m-0 flex-shrink-1 rounded-start " + (props.todo.completed && "opacity-50")}
             style={{ backgroundColor: props.todo.priority === 'High' ? 'var(--danger-red)' : props.todo.priority === 'Medium' ? 'var(--primary-blue)' : 'var(--success-green)' }}
           >
+            <table 
+            className="Container m-1" 
+            onClick={() => {
+              props.proj !== "3" && props.toggleComplete(props.todo, props.proj) /*User cannot click on header to toggle complete if the todo is in deletion storage.*/
+            }}
+            >
+              <tbody className="text-center">
+                <tr>
+                  <td className="align-middle p-0 "><span className={"tick " + (props.todo.completed ? "tick-show" : "tick-hidden") } /*style={{opacity: props.todo.completed ? "1" : "0" }} */>&#10003;</span></td>
+                </tr>
+              </tbody>
+            </table>
 
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></input>
-            </div>
+            {/* <div class="form-check">
+             <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></input> 
+ 
+            </div>*/}
 
           </div>
           <div className="Todo-body p-3  w-100 text-start"  >
@@ -63,67 +76,67 @@ function Todo(props) {
             </div>
             <Collapse in={openDetails}>
               <div
-              
+
                 className={" flex-row " + (props.todo.completed && "opacity-50")}
-                 
-                style={{border: "", textDecoration: props.todo.completed && "line-through" /* The && is a ternary with a single condistion */ }} 
+
+                style={{ border: "", textDecoration: props.todo.completed && "line-through" /* The && is a ternary with a single condistion */ }}
               >
-               <hr  />
+                <hr />
                 <p style={{ wordWrap: "break-word" }} ><b> Details:</b> {props.todo.taskNotes}</p>
-                
+
                 <p><b>Priority:</b> {props.todo.priority}</p>
                 <p><b>Posted:</b> {dateConverter(props.todo.datePosted, "-", "/")}</p>
               </div>
             </Collapse>
             <div className="m-0  d-flex flex-row bd-highlight" style={{ border: " " }}>
-            {props.proj !== "3" &&
-              <span className=" d-flex flex-row">
-              <div class="  bd-highlight me-2" style={{ border: " " }}>
-                <Button className="p-0 pe-1 ps-1"
-                  onClick={() => setOpenDetails(!openDetails)}
-                  aria-controls="example-collapse-text"
-                  aria-expanded={openDetails}
-                >
-                  Details
-                </Button>
-              </div>
-              <div class="Todo-control bd-highlight me-2">
-                <FaEdit
-                  onClick={() => setOpenEdit(!openEdit)}
-                  aria-controls="example-collapse-text"
-                  aria-expanded={openEdit}
-                />
-              </div>
-              </span>
+              {props.proj !== "3" &&
+                <span className=" d-flex flex-row">
+                  <div class="  bd-highlight me-2" style={{ border: " " }}>
+                    <Button className="p-0 pe-1 ps-1"
+                      onClick={() => setOpenDetails(!openDetails)}
+                      aria-controls="example-collapse-text"
+                      aria-expanded={openDetails}
+                    >
+                      Details
+                    </Button>
+                  </div>
+                  <div class="Todo-control bd-highlight me-2">
+                    <FaEdit
+                      onClick={() => setOpenEdit(!openEdit)}
+                      aria-controls="example-collapse-text"
+                      aria-expanded={openEdit}
+                    />
+                  </div>
+                </span>
               }
-              <span  className=" d-flex flex-row">
-              {props.proj === "3" &&
-              <div class="Todo-control bd-highlight me-2" >
-              <Button
-              className="p-0 pe-1 ps-1"
-              variant="success"
-              onClick={() => {
-                setOpen(false);
-                setTimeout(() => {
-                  props.restore(props.todo);
-                }, 300);
-              }}
-            >
-              Restore
-            </Button>
-              </div>
-}
-              <div class="Todo-control bd-highlight me-2" >
-                <FaTrashAlt
-                  style={{ color: "#DC3545" }}
-                  onClick={() => {
-                    setOpen(false);
-                    setTimeout(() => {
-                      props.deleteTodo(props.todo, props.proj)
-                    }, 300);
-                  }}
-                />
-              </div>
+              <span className=" d-flex flex-row">
+                {props.proj === "3" &&
+                  <div class="Todo-control bd-highlight me-2" >
+                    <Button
+                      className="p-0 pe-1 ps-1"
+                      variant="success"
+                      onClick={() => {
+                        setOpen(false);
+                        setTimeout(() => {
+                          props.restore(props.todo);
+                        }, 300);
+                      }}
+                    >
+                      Restore
+                    </Button>
+                  </div>
+                }
+                <div class="Todo-control bd-highlight me-2" >
+                  <FaTrashAlt
+                    style={{ color: "#DC3545" }}
+                    onClick={() => {
+                      setOpen(false);
+                      setTimeout(() => {
+                        props.deleteTodo(props.todo, props.proj)
+                      }, 300);
+                    }}
+                  />
+                </div>
               </span>
             </div>
             <Collapse in={openEdit}>

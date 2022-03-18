@@ -1,23 +1,23 @@
-.Nav-item{
-   /* border: 1px solid white; */
-     padding: 0;
-}
-
-
-
-.Nav-item {
-  display: block;
-  color: black;
-  /*padding: 16px;*/
-  text-decoration: none;
-}
-
-.Nav-item.active {
+.Project-container.active {
   background-color: #04AA6D;
-  color: white;
 }
 
- .Nav-item:hover:not(.active) {
+ .Project-container:hover:not(.active) {
   background-color: #555;
-  color: white;
+}
+
+
+.Project-count{
+  display: block;
+  height: 25px;
+  width: 25px;
+  line-height: 25px;
+
+  -moz-border-radius: 30px; /* or 50% */
+  border-radius: 30px; /* or 50% */
+
+  background-color: white;
+  color: var(--dark-purple);
+  text-align: center;
+ 
 }

@@ -19,7 +19,7 @@ function Dropdown(props) {
         data={props.projects[2]}
       />
 
-        <h2 className="white-text" >Your Projects</h2>
+        <h2 className="white-text text-center" >Your Projects</h2>
         <ProjectList
                     projects={props.projects}
                     proj={props.proj}

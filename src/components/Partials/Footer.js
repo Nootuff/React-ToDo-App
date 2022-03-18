@@ -6,7 +6,7 @@ import '../../styles/index.css';
 
 function Footer() {
     return (
-        <nav className="Footer" id="footerNav">
+        <nav className="Footer background-purple" id="footerNav">
 
             
 

@@ -13,3 +13,30 @@
     cursor: pointer;
 }
 
+
+.Container{
+    width: 27px;
+    height: 27px;
+    background-color: aliceblue;
+    cursor: pointer;
+    border-radius: 25px; /*Makes it round*/
+  }
+
+  .tick-hidden{
+    opacity: 0;
+  }
+
+  .tick-shown{
+    opacity: 1;
+  }
+   
+ .tick{
+   font-weight: bold;
+   
+ }
+ 
+ .Container:hover .tick {
+  opacity: 1;
+}
+ 
+

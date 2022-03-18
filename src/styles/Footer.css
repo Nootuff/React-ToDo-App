@@ -5,7 +5,7 @@
   display: flex;  /*Can this flex stuff be done in bootstrap*/
   justify-content: center;
   align-items: center;
-  background-color: #1c1c1c;
+  
 }
 
 .Footer-item:hover {
