@@ -1,27 +1,42 @@
 import Project from "../ListItems/Project";
-import DropdownButton from 'react-bootstrap/DropdownButton';
-import Dropdown from 'react-bootstrap/Dropdown';
+import NewProjectButton from "../Controls/NewProjectButton";
 
-
-
-function ProjectList(props) {
+function ProjectList({ projects, proj, setProj, handleFormShow }) {
 
   //Just a list of buttons to change projects
 
-  const list = props.projects.slice(3).reverse().map((num) =>
+  const list = projects.slice(3).reverse().map((num) =>
   
       <Project
         key={num.projId}
-        setProj={props.setProj}
-        proj={props.proj}
+        setProj={setProj}
+        proj={proj}
         data={num}
       />
     
   );
 
   return (
-      <div>       
+      <div> 
+        <Project
+        setProj={setProj}
+        proj={proj}
+        data={projects[0]}
+      />
+
+      <Project
+        setProj={setProj}
+        proj={proj}
+        data={projects[2]}
+      />
+
+      <hr style={{borderTop: "1.5px solid white", width: "90%", margin: "20px auto"}}/>
+      <h4 className="white-text text-center">My Projects</h4>      
         {list}
+
+        <NewProjectButton 
+        handleFormShow={handleFormShow}
+     />
       </div>
   );
 }

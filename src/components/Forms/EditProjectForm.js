@@ -8,7 +8,7 @@ import Collapse from 'react-bootstrap/Collapse';
 function EditProjectForm(props) {
     //const [openEdit, setOpenEdit] = useState(false);
 
-    const holder = props.viewedProject;
+   // const holder = props.viewedProject;
 
     let values = {
 

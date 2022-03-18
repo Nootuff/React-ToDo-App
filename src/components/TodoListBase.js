@@ -63,6 +63,7 @@ useEffect(() => {
                 openNav={openNav}
                 setOpenNav={setOpenNav}
                 setProj={setProj}
+              
             />
 
             {/*<div class="sidebar">
@@ -91,6 +92,7 @@ useEffect(() => {
                                 projects={todos.projects}
                                 proj={proj}
                                 setProj={setProj}
+                                handleFormShow={handleFormShow}
                             />
                         </div>
                     </Collapse>

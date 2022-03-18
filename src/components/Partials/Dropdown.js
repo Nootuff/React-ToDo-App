@@ -2,11 +2,12 @@ import Project from "../ListItems/Project";
 import ProjectList from "../ListComponents/ProjectList";
 import '../../styles/Dropdown.css';
 
-function Dropdown(props) {
+function Dropdown({ projects, proj, setProj, handleFormShow }) {
 
     return (
-        <div className="Dropdown" >
-          <Project
+        <div className="Dropdown pb-4" >
+         
+         {/* <Project
 
         setProj={props.setProj}
         proj={props.proj}
@@ -18,12 +19,15 @@ function Dropdown(props) {
         proj={props.proj}
         data={props.projects[2]}
       />
+      
 
         <h2 className="white-text text-center" >Your Projects</h2>
+*/}
         <ProjectList
-                    projects={props.projects}
-                    proj={props.proj}
-                    setProj={props.setProj}
+                    projects={projects}
+                    proj={proj}
+                    setProj={setProj}
+                    handleFormShow={handleFormShow}
                 />
         </div>
          )

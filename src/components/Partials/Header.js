@@ -58,7 +58,7 @@ function Header({ setOpenNav, openNav, setProj }) {
 
 
             <div class="d-flex" /*style={{ border: "1px solid yellow" }}*/ >
-                <h2 className="Header-logo p-2 white-text"
+                <h2 className="Header-logo p-2 white-text cursor-pointer"
                     onClick={() => { setProj("1") }}
                 >
                     &lt;react-Todo <span className="text-danger">/</span>&gt;

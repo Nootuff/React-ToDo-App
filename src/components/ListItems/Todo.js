@@ -82,7 +82,7 @@ function Todo(props) {
                 style={{ border: "", textDecoration: props.todo.completed && "line-through" /* The && is a ternary with a single condistion */ }}
               >
                 <hr />
-                <p style={{ wordWrap: "break-word" }} ><b> Details:</b> {props.todo.taskNotes}</p>
+                {props.todo.taskNotes !== "" && <p style={{ wordWrap: "break-word" }} ><b> Details:</b> {props.todo.taskNotes}</p>}
 
                 <p><b>Priority:</b> {props.todo.priority}</p>
                 <p><b>Posted:</b> {dateConverter(props.todo.datePosted, "-", "/")}</p>
