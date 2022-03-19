@@ -1,4 +1,4 @@
 .Dropdown{
     text-align: right;
-    background-color: black;
+    background-color: var(--dark-purple);
 }

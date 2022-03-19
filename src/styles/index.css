@@ -1,9 +1,11 @@
 :root {
   --light-grey-color: #dedede;
-  --dark-purple: #130036;
+  --purple: #130036;
+  --dark-purple: #080018;
   --primary-blue: #0d6efd;
   --success-green: #28a745;
   --warning-yellow: #ffc107;
+  --danger-red-hover: #bb2d3b;
   --danger-red: #DC3545;
 }
 
@@ -27,7 +29,7 @@ code {
 }
 
 .background-purple{
-  background-color: var(--dark-purple);
+  background-color: var(--purple);
 }
 
 .cursor-pointer{

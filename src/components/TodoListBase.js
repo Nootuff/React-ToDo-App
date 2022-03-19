@@ -116,7 +116,6 @@ useEffect(() => {
                     <ProjectControl
                         proj={proj}
                         viewedProject={viewedProject}
-
                         setProj={setProj}
                         deleteComplete={deleteComplete}
                         editProject={editProject}

@@ -7,6 +7,7 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Form from 'react-bootstrap/Form';
 import useDate from "../../hooks/useDate";
 import '../../styles/Forms/NewTodoForm.css';
+import '../../styles/index.css';
 
 function NewTodoForm({ handleChangeFunc, submitTodo, values, setValues, proj }) {
   const [open, setOpen] = useState(false);

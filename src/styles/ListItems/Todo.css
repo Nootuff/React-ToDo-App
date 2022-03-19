@@ -1,7 +1,6 @@
 .Todo{
     margin:  20px auto;
-    width: 60%!important;
-
+    width: 85%!important;
    /* border: 1px solid aqua;*/
 }
 
@@ -9,10 +8,21 @@
     background-color: var(--light-grey-color);
 }
 
-.Todo-control{
-    cursor: pointer;
+.Todo-edit{
+  color: #343a40;
 }
 
+.Todo-edit:hover{
+  color: #131516;
+}
+
+.Todo-trash{
+  color: var(--danger-red);
+}
+
+.Todo-trash:hover {
+  color: var(--danger-red-hover);
+}
 
 .Container{
     width: 27px;
@@ -39,4 +49,10 @@
   opacity: 1;
 }
  
+
+@media screen and (min-width: 576px) {
+  .Todo{
+    width: 60%!important;
+  }
+}
 

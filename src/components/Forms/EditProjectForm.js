@@ -4,38 +4,21 @@ import Form from 'react-bootstrap/Form';
 
 import Button from 'react-bootstrap/Button';
 import Collapse from 'react-bootstrap/Collapse';
+import '../../styles/index.css';
 
-function EditProjectForm(props) {
-    //const [openEdit, setOpenEdit] = useState(false);
-
-   // const holder = props.viewedProject;
+function EditProjectForm({ viewedProject, editProject, proj, setOpen }) {
 
     let values = {
-
-        //  projId: props.viewedProject.projId,
-        projName: props.viewedProject.projName,
-        projNotes: props.viewedProject.projNotes,
-        //  projTodos: props.viewedProject.projTodos
-
-        /*
-         projId: holder.projId,
-         projName: holder.projName,
-         projNotes: holder.projNotes,
-         projTodos: holder.projTodos
-         */
+        projName: viewedProject.projName,
+        projNotes: viewedProject.projNotes,
     }
 
     const [state, setState] = useState("");
 
-
     useEffect(() => {
         setState(values);
-        console.log("itchanges")
-    }, [props.viewedProject])
-
-
-    //console.log("values here");
-    //console.log(state);
+        //console.log("itchanges")
+    }, [viewedProject])
 
     const handleEditChangeFunc = (event) => { //If you can't solve this issue then just leave it. 
         const { name, value } = event.target;
@@ -46,18 +29,7 @@ function EditProjectForm(props) {
     }
 
     return (
-        <div >
-
-            {/* <Button
-                onClick={() => setOpenEdit(!openEdit)}
-                aria-controls="example-collapse-text"
-                aria-expanded={openEdit}
-            >
-                Edit Project
-            </Button>
-            <Collapse in={openEdit}>
-    */}
-
+        <div>
             <Form>
 
                 <Form.Group className="mb-2"  >
@@ -85,8 +57,8 @@ function EditProjectForm(props) {
                     disabled={state.projName === "" ? true : false}
                     onClick={(event) => {
                         event.preventDefault();
-                        props.setOpen(false)
-                        props.editProject(state, props.proj);
+                        setOpen(false)
+                        editProject(state, proj);
                     }}
                 >Update</Button>
             </Form>

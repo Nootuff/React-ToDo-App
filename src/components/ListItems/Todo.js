@@ -4,7 +4,7 @@ import Collapse from 'react-bootstrap/Collapse';
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import useDate from "../../hooks/useDate";
 import EditTodoForm from "../Forms/EditTodoForm";
-import '../../styles/ListItems/TodoStyles.css';
+import '../../styles/ListItems/Todo.css';
 import '../../styles/index.css';
 
 function Todo({ todo, deleteTodo, editTodo, toggleComplete, restore, proj }) {
@@ -27,7 +27,7 @@ function Todo({ todo, deleteTodo, editTodo, toggleComplete, restore, proj }) {
       >
         <div class="d-flex" /*style={{border: "5px solid cyan"}}*/>
           <div
-            className={"m-0 flex-shrink-1 rounded-start " + (todo.completed && "opacity-50")}
+            className={"m-0 flex-shrink-1 rounded-start " + (todo.completed ? "opacity-50" : proj === "3" ? "opacity-50" : null)}
             style={{ backgroundColor: todo.priority === 'High' ? 'var(--danger-red)' : todo.priority === 'Medium' ? 'var(--primary-blue)' : 'var(--success-green)' }}
           >
             <table
@@ -45,8 +45,8 @@ function Todo({ todo, deleteTodo, editTodo, toggleComplete, restore, proj }) {
           </div>
           <div className="Todo-body p-3  w-100 text-start"  >
             <div
-              className={todo.completed && "opacity-50"}
-              style={{ textDecoration: todo.completed && "line-through" /* The && is a ternary with a single condistion */ }} >
+              className={todo.completed ? "opacity-50" : proj === "3" ? "opacity-50" : null}
+              style={{ textDecoration: todo.completed && "line-through" }} >
               <div class="row" >
                 <h4
                   onClick={() => {
@@ -62,8 +62,8 @@ function Todo({ todo, deleteTodo, editTodo, toggleComplete, restore, proj }) {
             </div>
             <Collapse in={openDetails}>
               <div
-                className={" flex-row " + (todo.completed && "opacity-50")}
-                style={{ border: "", textDecoration: todo.completed && "line-through" /* The && is a ternary with a single condistion */ }}
+                className={" flex-row " + (todo.completed ? "opacity-50" : proj === "3" ? "opacity-50" : null)}
+                style={{ textDecoration: todo.completed && "line-through" }}
               >
                 <hr />
                 {todo.taskNotes !== "" && <p style={{ wordWrap: "break-word" }} ><b> Details:</b> {todo.taskNotes}</p>}
@@ -71,10 +71,10 @@ function Todo({ todo, deleteTodo, editTodo, toggleComplete, restore, proj }) {
                 <p><b>Posted:</b> {dateConverter(todo.datePosted, "-", "/")}</p>
               </div>
             </Collapse>
-            <div className="m-0  d-flex flex-row bd-highlight" style={{ border: " " }}>
+            <div className="m-0 d-flex flex-row bd-highlight">
               {proj !== "3" &&
                 <span className=" d-flex flex-row">
-                  <div class="  bd-highlight me-2" style={{ border: " " }}>
+                  <div class="  bd-highlight me-2">
                     <Button className="p-0 pe-1 ps-1"
                       onClick={() => setOpenDetails(!openDetails)}
                       aria-controls="example-collapse-text"
@@ -83,8 +83,9 @@ function Todo({ todo, deleteTodo, editTodo, toggleComplete, restore, proj }) {
                       Details
                     </Button>
                   </div>
-                  <div class="Todo-control bd-highlight me-2">
+                  <div class="cursor-pointer bd-highlight me-2">
                     <FaEdit
+                    className="Todo-edit"
                       onClick={() => setOpenEdit(!openEdit)}
                       aria-controls="example-collapse-text"
                       aria-expanded={openEdit}
@@ -94,7 +95,7 @@ function Todo({ todo, deleteTodo, editTodo, toggleComplete, restore, proj }) {
               }
               <span className=" d-flex flex-row">
                 {proj === "3" &&
-                  <div class="Todo-control bd-highlight me-2" >
+                  <div class="cursor-pointer bd-highlight me-2" >
                     <Button
                       className="p-0 pe-1 ps-1"
                       variant="success"
@@ -109,9 +110,9 @@ function Todo({ todo, deleteTodo, editTodo, toggleComplete, restore, proj }) {
                     </Button>
                   </div>
                 }
-                <div class="Todo-control bd-highlight me-2" >
+                <div class="cursor-pointer bd-highlight me-2" >
                   <FaTrashAlt
-                    style={{ color: "#DC3545" }}
+                    className= "Todo-trash"
                     onClick={() => {
                       setOpen(false);
                       setTimeout(() => {
