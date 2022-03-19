@@ -38,6 +38,7 @@ className="p-3 rounded"
             id="projName"
             name="projName"
             placeholder="Project name"
+            maxlength="30"
             value={projData.projName}
             onChange={handleProjChangeFunc}
           />

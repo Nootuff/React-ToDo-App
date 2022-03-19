@@ -68,6 +68,7 @@ function EditProjectForm(props) {
                         name="projName" /*Name must be the same as state value the input is meant to update.*/
                         id="projName"
                         value={state.projName}
+                        maxlength="30"
                         onChange={handleEditChangeFunc}
                     />
                 </Form.Group>

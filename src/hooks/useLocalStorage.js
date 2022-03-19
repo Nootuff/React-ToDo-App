@@ -9,23 +9,33 @@ const initialStorage = {
             projNotes: "",
             projTodos: [
                 {
-                    "taskBody": "Placeholder 1",
-                    "taskNotes": "Some notes here",
+                    "taskBody": "Hoover your room.",
+                    "taskNotes": "Dust it too.",
                     "priority": "Medium",
-                    "id": "1",
-                    "completed": false,
+                    "id": "00001",
+                    "completed": true,
                     "deadline": "",
-                    "datePosted": "2022-02-19",
+                    "datePosted": "2022-02-21",
                     "parentProj": "1"
                 },
                 {
-                    "taskBody": "Placeholder 2",
-                    "taskNotes": "Some more here",
+                    "taskBody": "Buy more dog food.",
+                    "taskNotes": "",
                     "priority": "High",
-                    "id": "2",
+                    "id": "00002",
+                    "completed": false,
+                    "deadline": "2022-03-21",
+                    "datePosted": "2022-03-18",
+                    "parentProj": "1"
+                },
+                {
+                    "taskBody": "Prepare overnight oats.",
+                    "taskNotes": "",
+                    "priority": "Medium",
+                    "id": "00003",
                     "completed": false,
                     "deadline": "",
-                    "datePosted": "2022-02-19",
+                    "datePosted": "2022-02-10",
                     "parentProj": "1"
                 }
             ]
@@ -41,6 +51,70 @@ const initialStorage = {
             projName: "Your deleted todos ",
             projNotes: "Your last 10 deleted todos.",
             projTodos: []
+        },
+        {
+            projId: "0004",
+            projName: "Get in shape ",
+            projNotes: "New year new you!",
+            projTodos: [
+                {
+                "taskBody": "Decide on a workout plan",
+                "taskNotes": "",
+                "priority": "Medium",
+                "id": "00004",
+                "completed": false,
+                "deadline": "",
+                "datePosted": "2022-01-19",
+                "parentProj": "0004"
+            },
+            {
+                "taskBody": "Buy some new trainers",
+                "taskNotes": "Make sure they're good quality.",
+                "priority": "low",
+                "id": "00005",
+                "completed": true,
+                "deadline": "2022-02-25",
+                "datePosted": "2022-01-25",
+                "parentProj": "0004"
+            }
+        ]
+        },
+        {
+            projId: "0005",
+            projName: "Learn web development ",
+            projNotes: "",
+            projTodos: [
+                {
+                    "taskBody": "Learn React ",
+                    "taskNotes": "Learn hooks and context too.",
+                    "priority": "Medium",
+                    "id": "00006",
+                    "completed": true,
+                    "deadline": "",
+                    "datePosted": "2022-01-19",
+                    "parentProj": "0005"
+                },
+                {
+                    "taskBody": "Deploy React hooks todo app",
+                    "taskNotes": "",
+                    "priority": "High",
+                    "id": "00007",
+                    "completed": true,
+                    "deadline": "",
+                    "datePosted": "2022-03-03",
+                    "parentProj": "0005"
+                },
+                {
+                    "taskBody": "Polish portfolio",
+                    "taskNotes": "Make sure its responsive!",
+                    "priority": "Medium",
+                    "id": "00008",
+                    "completed": false,
+                    "deadline": "",
+                    "datePosted": "2022-03-19",
+                    "parentProj": "0005"
+                }
+            ]
         }
     ],
     darkMode: false

@@ -31,7 +31,7 @@ function ProjectList({ projects, proj, setProj, handleFormShow }) {
       />
 
       <hr style={{borderTop: "1.5px solid white", width: "90%", margin: "20px auto"}}/>
-      <h4 className="white-text text-center">My Projects</h4>      
+      {projects.length > 3 && <h4 className="white-text text-center">My Projects</h4>}
         {list}
 
         <NewProjectButton 
