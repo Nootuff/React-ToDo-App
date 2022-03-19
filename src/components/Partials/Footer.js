@@ -1,7 +1,7 @@
 import { FaRegCopyright } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
 
-import '../../styles/Footer.css';
+import '../../styles/Partials/Footer.css';
 import '../../styles/index.css';
 
 function Footer() {

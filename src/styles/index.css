@@ -1,16 +1,10 @@
 :root {
-  --inner-grey: #212121;
-  --outer-grey: #171717;
-
-  --outer-trim: #2e0008;
- 
   --light-grey-color: #dedede;
   --dark-purple: #130036;
-
   --primary-blue: #0d6efd;
   --success-green: #28a745;
   --warning-yellow: #ffc107;
---danger-red: #DC3545;
+  --danger-red: #DC3545;
 }
 
 html, body {
@@ -21,15 +15,12 @@ html, body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-
-
 
 .white-text{
   color: white;

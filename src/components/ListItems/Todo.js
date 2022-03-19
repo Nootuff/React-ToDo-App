@@ -4,7 +4,7 @@ import Collapse from 'react-bootstrap/Collapse';
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import useDate from "../../hooks/useDate";
 import EditTodoForm from "../Forms/EditTodoForm";
-import '../../styles/TodoStyles.css';
+import '../../styles/ListItems/TodoStyles.css';
 import '../../styles/index.css';
 
 function Todo({ todo, deleteTodo, editTodo, toggleComplete, restore, proj }) {
@@ -25,39 +25,32 @@ function Todo({ todo, deleteTodo, editTodo, toggleComplete, restore, proj }) {
         className="Todo container p-0"
         id={todo.id}
       >
-
-      
         <div class="d-flex" /*style={{border: "5px solid cyan"}}*/>
-
           <div
             className={"m-0 flex-shrink-1 rounded-start " + (todo.completed && "opacity-50")}
             style={{ backgroundColor: todo.priority === 'High' ? 'var(--danger-red)' : todo.priority === 'Medium' ? 'var(--primary-blue)' : 'var(--success-green)' }}
           >
-            <table 
-            className="Container m-1" 
-            onClick={() => {
-              proj !== "3" && toggleComplete(todo, proj) /*User cannot click on header to toggle complete if the todo is in deletion storage.*/
-            }}
+            <table
+              className="Container m-1"
+              onClick={() => {
+                proj !== "3" && toggleComplete(todo, proj) /*User cannot click on header to toggle complete if the todo is in deletion storage.*/
+              }}
             >
               <tbody className="text-center">
                 <tr>
-                  <td className="align-middle p-0 "><span className={"tick " + (todo.completed ? "tick-show" : "tick-hidden") } /*style={{opacity: props.todo.completed ? "1" : "0" }} */>&#10003;</span></td>
+                  <td className="align-middle p-0 "><span className={"tick " + (todo.completed ? "tick-show" : "tick-hidden")}>&#10003;</span></td>
                 </tr>
               </tbody>
             </table>
-
-          
-
           </div>
           <div className="Todo-body p-3  w-100 text-start"  >
-
             <div
               className={todo.completed && "opacity-50"}
               style={{ textDecoration: todo.completed && "line-through" /* The && is a ternary with a single condistion */ }} >
               <div class="row" >
                 <h4
                   onClick={() => {
-                    proj !== "3" && toggleComplete(todo, proj) /*User cannot click on header to toggle complete if the todo is in deletion storage.*/
+                    proj !== "3" && toggleComplete(todo, proj)
                   }}
                 >
                   {todo.taskBody}
@@ -74,7 +67,6 @@ function Todo({ todo, deleteTodo, editTodo, toggleComplete, restore, proj }) {
               >
                 <hr />
                 {todo.taskNotes !== "" && <p style={{ wordWrap: "break-word" }} ><b> Details:</b> {todo.taskNotes}</p>}
-
                 <p><b>Priority:</b> {todo.priority}</p>
                 <p><b>Posted:</b> {dateConverter(todo.datePosted, "-", "/")}</p>
               </div>

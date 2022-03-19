@@ -2,7 +2,7 @@ import ProjectList from "../ListComponents/ProjectList";
 //import Project from "../ListItems/Project";
 
 
-import '../../styles/Sidebar.css';
+import '../../styles/Partials/Sidebar.css';
 
 function Sidebar({ projects, proj, setProj, handleFormShow }) {
 
