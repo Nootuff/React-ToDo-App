@@ -6,7 +6,6 @@ import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Form from 'react-bootstrap/Form';
 import useDate from "../../hooks/useDate";
-import '../../styles/Forms/NewTodoForm.css';
 import '../../styles/index.css';
 
 function NewTodoForm({ handleChangeFunc, submitTodo, values, setValues, proj }) {
@@ -23,7 +22,7 @@ function NewTodoForm({ handleChangeFunc, submitTodo, values, setValues, proj }) 
   ];
 
   return (
-    <div className="New-todo-form p-3 text-start">
+    <div className="New-todo-form p-3 text-start background-grey rounded">
       <Form   >
         <Form.Group className="mb-2"  >
           <Form.Control

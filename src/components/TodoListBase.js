@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from "react";
 import NewTodoForm from "./Forms/NewTodoForm";
 import NewProjectForm from "./Forms/NewProjectForm";
-import EditProjectForm from "./Forms/EditProjectForm";
-import DeleteComplete from "./Controls/DeleteComplete";
 import TodoList from "./ListComponents/TodoList";
-import ProjectList from "./ListComponents/ProjectList";
 import Header from "./Partials/Header";
 import Footer from "./Partials/Footer";
 import Sidebar from "./Partials/Sidebar";
@@ -22,40 +19,14 @@ import useView from "../hooks/useView";
 
 
 function TodoListBase() {
-    const [values, setValues, projData, setProjData, handleChangeFunc, handleProjChangeFunc] = useInputState();
-    const [todos, submitProject, deleteProject, editProject, submitTodo, deleteTodo, editTodo, toggleComplete, deleteComplete, restore] = useLocalStorage();
-    const [proj, setProj] = useView();
-    const [openNav, setOpenNav] = useState(false);
-    const [showProjForm, setShowProjForm] = useState(false);
-
-    const handleFormClose = () => setShowProjForm(false);
-    const handleFormShow = () => setShowProjForm(true);
-
-
-    /*
-        let viewedProject;
-    
-        for (let i = 0; i < todos.projects.length; i++) { //Checks for currently viewed project. canyou turn this into a map?
-            if (todos.projects[i].projId === proj) {
-                viewedProject = todos.projects[i];
-            }
-        }
-    */
-
- 
-
-    
-/*
-useEffect(() => {
-   
-    console.log("Project update")
- }, [todos])  
- */
- 
-
-
-
- let viewedProject = todos.projects.filter(project => project.projId === proj)[0];
+const [values, setValues, projData, setProjData, handleChangeFunc, handleProjChangeFunc] = useInputState();
+const [todos, submitProject, deleteProject, editProject, submitTodo, deleteTodo, editTodo, toggleComplete, deleteComplete, restore] = useLocalStorage();
+const [proj, setProj] = useView();
+const [openNav, setOpenNav] = useState(false);
+const [showProjForm, setShowProjForm] = useState(false);
+const handleFormClose = () => setShowProjForm(false);
+const handleFormShow = () => setShowProjForm(true);
+let viewedProject = todos.projects.filter(project => project.projId === proj)[0];
 
     return (
         <div className="Todo-list">
@@ -65,27 +36,13 @@ useEffect(() => {
                 setProj={setProj}
               
             />
-
-            {/*<div class="sidebar">
-                <h4 className='Nav-item'>&lt;react-Todo /&gt;</h4>
-                <ProjectList
-                    projects={todos.projects}
-                    proj={proj}
-                    setProj={setProj}
-                />
-
-    </div>*/}
             <Sidebar
                 projects={todos.projects}
                 proj={proj}
                 setProj={setProj}
                 handleFormShow={handleFormShow}
             />
-            <div className="Wrapper" /*style={{border: "1px solid red"}}*/>
-
-
-
-                <div className="d-block d-sm-none" style={{ marginTop: "79px", transition: "width 2s ease" }}>
+            <div className="Base-drop-container d-block d-sm-none">
                     <Collapse in={openNav}>
                         <div>
                             <Dropdown
@@ -97,8 +54,8 @@ useEffect(() => {
                         </div>
                     </Collapse>
                 </div>
-
-
+            <div className="Wrapper" /*style={{border: "1px solid red"}}*/>
+                
                 <NewProjectForm
                     projData={projData}
                     setProjData={setProjData}
@@ -108,11 +65,7 @@ useEffect(() => {
                     showProjForm={showProjForm}
                     handleFormClose={handleFormClose}
                 />
-
-
-                <section style={{ border: "1px solid red" }}>
-
-
+                <section className="Base-body" >
                     <ProjectControl
                         proj={proj}
                         viewedProject={viewedProject}
@@ -121,14 +74,6 @@ useEffect(() => {
                         editProject={editProject}
                         deleteProject={deleteProject}
                     />
-                    {/*
-                      <EditProjectForm
-                        viewedProject={viewedProject}
-                        editProject={editProject}
-                        proj={proj}
-                    />
-*/}
-
                     {proj !== "3" &&
                         <NewTodoForm
                             handleChangeFunc={handleChangeFunc}
@@ -138,10 +83,7 @@ useEffect(() => {
                             proj={proj}
                         />
                     }
-
-                   
                     <br />
-
                     <TodoList
                         deleteTodo={deleteTodo}
                         editTodo={editTodo}

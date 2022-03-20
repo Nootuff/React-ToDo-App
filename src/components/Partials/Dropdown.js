@@ -3,34 +3,16 @@ import ProjectList from "../ListComponents/ProjectList";
 import '../../styles/Partials/Dropdown.css';
 
 function Dropdown({ projects, proj, setProj, handleFormShow }) {
-
-    return (
-        <div className="Dropdown pb-4" >
-         
-         {/* <Project
-
-        setProj={props.setProj}
-        proj={props.proj}
-        data={props.projects[0]}
+  return (
+    <div className="Dropdown pt-1 pb-4" >
+      <ProjectList
+        projects={projects}
+        proj={proj}
+        setProj={setProj}
+        handleFormShow={handleFormShow}
       />
-     
-      <Project
-        setProj={props.setProj}
-        proj={props.proj}
-        data={props.projects[2]}
-      />
-      
-
-        <h2 className="white-text text-center" >Your Projects</h2>
-*/}
-        <ProjectList
-                    projects={projects}
-                    proj={proj}
-                    setProj={setProj}
-                    handleFormShow={handleFormShow}
-                />
-        </div>
-         )
+    </div>
+  )
 }
 
 export default Dropdown;

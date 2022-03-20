@@ -1,16 +1,7 @@
 import React, { useState } from "react";
-
 import useDate from "../../hooks/useDate";
 import Button from 'react-bootstrap/Button';
-import Collapse from 'react-bootstrap/Collapse';
-
-import Dropdown from 'react-bootstrap/Dropdown';
-
 import Form from 'react-bootstrap/Form';
-
-
-
-import ToggleButton from 'react-bootstrap/ToggleButton';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import '../../styles/index.css';
 
@@ -50,7 +41,7 @@ function EditTodoForm({ todo, proj, editTodo, setOpenEdit }) {
 
     return (
         <div>
-            <Form >
+            <Form>
                 <Form.Group className="mb-2"  >
                     <Form.Label><b>Edit Todo</b></Form.Label>
                     <Form.Control

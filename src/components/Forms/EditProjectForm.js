@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
-
 import Form from 'react-bootstrap/Form';
-
 import Button from 'react-bootstrap/Button';
-import Collapse from 'react-bootstrap/Collapse';
+import DeleteProject from "../Controls/DeleteProject";
 import '../../styles/index.css';
 
-function EditProjectForm({ viewedProject, editProject, proj, setOpen }) {
+function EditProjectForm({ viewedProject, editProject, proj, setOpen, setProj, deleteProject }) {
 
     let values = {
         projName: viewedProject.projName,
@@ -29,18 +27,17 @@ function EditProjectForm({ viewedProject, editProject, proj, setOpen }) {
     }
 
     return (
-        <div>
+        <div className="EditProjectForm p-3 rounded background-grey">
             <Form>
 
                 <Form.Group className="mb-2"  >
                     <Form.Label><b>Edit Project Name</b></Form.Label>
-
                     <Form.Control
                         type="text"
                         name="projName" /*Name must be the same as state value the input is meant to update.*/
                         id="projName"
                         value={state.projName}
-                        maxlength="30"
+                        maxLength="30"
                         onChange={handleEditChangeFunc}
                     />
                 </Form.Group>
@@ -60,9 +57,15 @@ function EditProjectForm({ viewedProject, editProject, proj, setOpen }) {
                         setOpen(false)
                         editProject(state, proj);
                     }}
-                >Update</Button>
+                >
+                    Update
+                </Button>
             </Form>
-
+            <DeleteProject
+                viewedProject={viewedProject}
+                setProj={setProj}
+                deleteProject={deleteProject}
+            />
         </div>
     );
 }

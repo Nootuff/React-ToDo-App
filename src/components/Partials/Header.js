@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import Navbar from 'react-bootstrap/Navbar';
 import { FaBars } from "react-icons/fa";
 import { ImCross } from "react-icons/im";
@@ -7,9 +6,9 @@ import '../../styles/index.css';
 
 function Header({ setOpenNav, openNav, setProj }) {
     return (
-        <Navbar className="Header navbar fixed-top  d-block d-sm-none" >
-            <div class="d-flex" /*style={{ border: "1px solid yellow" }}*/ >
-                <h2 className="Header-logo p-2 white-text cursor-pointer"
+        <Navbar className="Header navbar fixed-top  d-block d-sm-none background-purple" >
+            <div className="d-flex">
+                <h2 className="Header-logo p-2 cursor-pointer"
                     onClick={() => { setProj("1") }}
                 >
                     &lt;react-Todo <span className="text-danger">/</span>&gt;
@@ -19,7 +18,7 @@ function Header({ setOpenNav, openNav, setProj }) {
                         onClick={() => setOpenNav(!openNav)}
                         //aria-controls="example-collapse-text"
                         aria-expanded={openNav}
-                        className="Header-button white-text"
+                        className="Header-button text-white"
                     >
                         <span className="Header-button-icon">
                             {openNav ? <ImCross /> : <FaBars />}

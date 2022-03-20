@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 function DeleteComplete({proj, deleteComplete}) {
     return (
        <Button 
-       className="mb-2"
+       className="my-2"
        variant="danger"
        onClick={() => {deleteComplete(proj);}} 
        >

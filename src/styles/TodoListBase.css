@@ -1,17 +1,27 @@
 .Wrapper{
     min-height: 85vh;
-    margin-left: 300px;
+    margin-left: 0;
+    padding-top: 20px;
     border-top: 1px solid white;
   }
-  
-  .List{
-    padding-left: 0;
-    list-style-type: none;
+
+  .Base-drop-container{
+    margin-top: 79px;
   }
   
+  .Base-body{
+    margin: auto;
+    width: 90%!important;
+  }
+
   
-  @media screen and (max-width: 576px) {
-    .Wrapper {margin-left: 0;}
+  @media screen and (min-width: 576px) {
+    .Base-body{
+      width: 65%!important;
+    }
+    .Wrapper {
+    margin-left: 300px;
+    }
   }
   
   @media screen and (max-width: 400px) {

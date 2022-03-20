@@ -1,9 +1,6 @@
 import Todo from "../ListItems/Todo";
-import EditProjectForm from "../Forms/EditProjectForm";
-
 
 function TodoList(props) {
-
     const list = props.viewedProject.projTodos.slice(0).reverse().map((num) =>
         <Todo
             key={num.id}
@@ -18,19 +15,7 @@ function TodoList(props) {
 
     return (
         <div>
-              
-           {/* {props.viewedProject.projId.length > 1 && //Option to edit to delete project only available on user created projects.
-          <div>
-                    <EditProjectForm
-                        viewedProject={props.viewedProject}
-                        editProject={props.editProject}
-                        proj={props.proj}
-                    />
-                  
-    </div> 
-                */}
-            
-            <ul className="List">
+            <ul className="List pb-5">
                 {list}
             </ul>
         </div>

@@ -25,30 +25,31 @@ function Todo({ todo, deleteTodo, editTodo, toggleComplete, restore, proj }) {
         className="Todo container p-0"
         id={todo.id}
       >
-        <div class="d-flex" /*style={{border: "5px solid cyan"}}*/>
+        <div className="d-flex" /*style={{border: "5px solid cyan"}}*/>
           <div
             className={"m-0 flex-shrink-1 rounded-start " + (todo.completed ? "opacity-50" : proj === "3" ? "opacity-50" : null)}
             style={{ backgroundColor: todo.priority === 'High' ? 'var(--danger-red)' : todo.priority === 'Medium' ? 'var(--primary-blue)' : 'var(--success-green)' }}
           >
             <table
-              className="Container m-1"
+              className="Todo-checkbox m-1 cursor-pointer"
               onClick={() => {
                 proj !== "3" && toggleComplete(todo, proj) /*User cannot click on header to toggle complete if the todo is in deletion storage.*/
               }}
             >
               <tbody className="text-center">
                 <tr>
-                  <td className="align-middle p-0 "><span className={"tick " + (todo.completed ? "tick-show" : "tick-hidden")}>&#10003;</span></td>
+                  <td className="align-middle p-0 "><span className={"Todo-tick " + (todo.completed ? "Todo-tick-show" : "Todo-tick-hidden")}>&#10003;</span></td>
                 </tr>
               </tbody>
             </table>
           </div>
-          <div className="Todo-body p-3  w-100 text-start"  >
+          <div className="p-3 w-100 text-start background-grey">
             <div
               className={todo.completed ? "opacity-50" : proj === "3" ? "opacity-50" : null}
               style={{ textDecoration: todo.completed && "line-through" }} >
-              <div class="row" >
+              <div className="row" >
                 <h4
+                className="cursor-pointer"
                   onClick={() => {
                     proj !== "3" && toggleComplete(todo, proj)
                   }}
@@ -56,7 +57,7 @@ function Todo({ todo, deleteTodo, editTodo, toggleComplete, restore, proj }) {
                   {todo.taskBody}
                 </h4 >
               </div>
-              <div class="row">
+              <div className="row">
                 {deadlineDisplay}
               </div>
             </div>
@@ -74,7 +75,7 @@ function Todo({ todo, deleteTodo, editTodo, toggleComplete, restore, proj }) {
             <div className="m-0 d-flex flex-row bd-highlight">
               {proj !== "3" &&
                 <span className=" d-flex flex-row">
-                  <div class="  bd-highlight me-2">
+                  <div className="  bd-highlight me-2">
                     <Button className="p-0 pe-1 ps-1"
                       onClick={() => setOpenDetails(!openDetails)}
                       aria-controls="example-collapse-text"
@@ -83,7 +84,7 @@ function Todo({ todo, deleteTodo, editTodo, toggleComplete, restore, proj }) {
                       Details
                     </Button>
                   </div>
-                  <div class="cursor-pointer bd-highlight me-2">
+                  <div className="cursor-pointer bd-highlight me-2">
                     <FaEdit
                     className="Todo-edit"
                       onClick={() => setOpenEdit(!openEdit)}
@@ -95,7 +96,7 @@ function Todo({ todo, deleteTodo, editTodo, toggleComplete, restore, proj }) {
               }
               <span className=" d-flex flex-row">
                 {proj === "3" &&
-                  <div class="cursor-pointer bd-highlight me-2" >
+                  <div className="cursor-pointer bd-highlight me-2" >
                     <Button
                       className="p-0 pe-1 ps-1"
                       variant="success"
@@ -110,7 +111,7 @@ function Todo({ todo, deleteTodo, editTodo, toggleComplete, restore, proj }) {
                     </Button>
                   </div>
                 }
-                <div class="cursor-pointer bd-highlight me-2" >
+                <div className="cursor-pointer bd-highlight me-2" >
                   <FaTrashAlt
                     className= "Todo-trash"
                     onClick={() => {

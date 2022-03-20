@@ -1,16 +1,9 @@
 import React, { useState, useEffect } from "react";
-
-import DeleteProject from "../Controls/DeleteProject";
 import DeleteComplete from "../Controls/DeleteComplete";
 import EditProjectForm from "../Forms/EditProjectForm";
-
-
 import Button from 'react-bootstrap/Button';
 import Collapse from 'react-bootstrap/Collapse';
-
-import ButtonGroup from 'react-bootstrap/ButtonGroup';
-
-
+import '../../styles/index.css';
 
 function ProjectControl({ proj, viewedProject, setProj, deleteComplete, editProject, deleteProject }) {
 
@@ -25,8 +18,8 @@ function ProjectControl({ proj, viewedProject, setProj, deleteComplete, editProj
 //console.log(viewedProject)
 
    return (
-      <div className="text-start" style={{ width: "60%", border: "1px solid green", margin: "auto" }}>
-         <section style={{ border: "1px solid blue" }}>
+      <div className="text-start">
+         <section className="background-grey px-3 pt-2 pb-1 mb-2 rounded ">
             <h2>{viewedProject.projName}</h2>
             <p>{viewedProject.projNotes}</p>
          </section>
@@ -43,15 +36,12 @@ function ProjectControl({ proj, viewedProject, setProj, deleteComplete, editProj
                         Edit Project
                      </Button>
                      <Collapse in={open}>
-                        <div style={{ border: "1px solid orange" }}>
+                        <div >
                            <EditProjectForm
                               viewedProject={viewedProject}
                               editProject={editProject}
                               proj={proj}
                               setOpen={setOpen}
-                           />
-                           <DeleteProject
-                              viewedProject={viewedProject}
                               setProj={setProj}
                               deleteProject={deleteProject}
                            />

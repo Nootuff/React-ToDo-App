@@ -1,9 +1,7 @@
 .Sidebar {
-
     margin:  0;
     padding: 0;
     width: 300px;
- 
     position: fixed;
     height: 100%;
    /* overflow: auto;*/

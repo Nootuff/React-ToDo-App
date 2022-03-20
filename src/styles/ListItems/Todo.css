@@ -1,15 +1,18 @@
 .Todo{
-    margin:  20px auto;
-    width: 85%!important;
+  margin: 20px auto;
+/*  width: 85%!important; */
    /* border: 1px solid aqua;*/
+  transition: 0.3s;
 }
 
-.Todo-body{
-    background-color: var(--light-grey-color);
+.Todo:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 5px 10px 8px #888888;
 }
 
 .Todo-edit{
   color: #343a40;
+  transition: 0.2s;
 }
 
 .Todo-edit:hover{
@@ -18,41 +21,41 @@
 
 .Todo-trash{
   color: var(--danger-red);
+  transition: 0.2s;
 }
 
 .Todo-trash:hover {
   color: var(--danger-red-hover);
 }
 
-.Container{
-    width: 27px;
-    height: 27px;
-    background-color: aliceblue;
-    cursor: pointer;
-    border-radius: 25px; /*Makes it round*/
-  }
+.Todo-checkbox{
+  width: 27px;
+  height: 27px;
+  background-color: aliceblue;
+  border-radius: 25px;
+}
 
-  .tick-hidden{
-    opacity: 0;
-  }
+.Todo-tick-hidden{
+  opacity: 0;
+}
 
-  .tick-shown{
-    opacity: 1;
-  }
+.Todo-tick-shown{
+  opacity: 1;
+}
    
- .tick{
-   font-weight: bold;
-   
- }
+.Todo-tick{
+  font-weight: bold;
+  transition: 0.2s;
+}
  
- .Container:hover .tick {
+.Todo-checkbox:hover .Todo-tick {
   opacity: 1;
 }
  
 
 @media screen and (min-width: 576px) {
   .Todo{
-    width: 60%!important;
+  /*  width: 60%!important; */
   }
 }
 
