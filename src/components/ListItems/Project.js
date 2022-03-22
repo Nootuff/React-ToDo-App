@@ -5,9 +5,9 @@ import '../../styles/index.css';
 function Project({ setProj, proj, data }) {
 
      return (
-          <div  
+          <div
                className='Project-container mb-1 ps-3 p-2'
-               style={{ color: proj === data.projId ? "#DC3545" : "white"}}
+               style={{ color: proj === data.projId ? "var(--danger-red)" : "white" }}
                onClick={() => { setProj(data.projId) }}
           >
                <div className="Nav-data d-flex "
@@ -15,7 +15,13 @@ function Project({ setProj, proj, data }) {
                >
                     <div><h6>{data.projName + " "}</h6></div>
                     <div className='ms-auto'>
-                         {data.projId !== "3" && <div className="d-inline"><b><span className="Project-count">{data.projTodos.length}</span></b></div>}
+                         {data.projId !== "3" && <div className="d-inline">
+                         <b>
+                         <span className="Project-count" style={{ backgroundColor: proj === data.projId ? "var(--danger-red)" : "white"}}>
+                         {data.projTodos.length}
+                         </span>
+                         </b>
+                         </div>}
 
                          <div className="d-inline Icon" >{ /*props.data.projId === "1" && <FaHome />  :*/ data.projId === "3" && <FaTrashAlt />}</div>
                     </div>

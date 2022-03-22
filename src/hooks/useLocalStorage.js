@@ -70,7 +70,7 @@ const initialStorage = {
             {
                 "taskBody": "Buy some new trainers",
                 "taskNotes": "Make sure they're good quality.",
-                "priority": "low",
+                "priority": "Low",
                 "id": "00005",
                 "completed": true,
                 "deadline": "2022-02-25",

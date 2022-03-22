@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import NewTodoForm from "./Forms/NewTodoForm";
 import NewProjectForm from "./Forms/NewProjectForm";
 import TodoList from "./ListComponents/TodoList";

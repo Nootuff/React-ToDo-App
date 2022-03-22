@@ -42,7 +42,7 @@ function NewTodoForm({ handleChangeFunc, submitTodo, values, setValues, proj }) 
             <Button
               className="mb-2"
               onClick={() => setOpenNotes(!openNotes)}
-              //aria-controls="example-collapse-text"
+              aria-controls="collapse-notes"
               aria-expanded={openNotes}
             >
               Notes
@@ -116,7 +116,7 @@ function NewTodoForm({ handleChangeFunc, submitTodo, values, setValues, proj }) 
                   I need to do this
                 </Button>
               </ButtonGroup>
-              <ButtonGroup aria-label="Toolbar with button groups">
+              <ButtonGroup>
                 <Button
                   variant="danger"
                   onClick={() => { setOpen(false) }}

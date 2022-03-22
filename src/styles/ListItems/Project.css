@@ -13,7 +13,6 @@
   line-height: 25px;
   -moz-border-radius: 30px; /* or 50% */
   border-radius: 30px; /* or 50% */
-  background-color: white;
-  color: var(--dark-purple);
+  color: var(--purple);
   text-align: center;
 }
