@@ -1,9 +1,25 @@
-.Project-container.active {
-  background-color: #04AA6D;
+
+.Project-title {
+  transition: 0.3s;
 }
 
- .Project-container:hover:not(.active) {
-  background-color: #555;
+.Project-title {
+  position: relative;
+  top: 2.5px;
+
+}
+
+ .Project-container:hover {
+  background-color: rgb(56, 56, 56);
+}
+
+.Project-container:hover .Project-title{
+ padding-left: 3px;
+}
+
+.Project-trash{
+  position: relative;
+  right: 4px;
 }
 
 .Project-count{
@@ -15,4 +31,6 @@
   border-radius: 30px; /* or 50% */
   color: var(--purple);
   text-align: center;
+ position: relative;
+  top: 2px;
 }

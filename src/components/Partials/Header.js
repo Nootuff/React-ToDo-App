@@ -1,7 +1,7 @@
 import Navbar from 'react-bootstrap/Navbar';
 import { FaBars } from "react-icons/fa";
 import { ImCross } from "react-icons/im";
-import Logo from "../Partials/Logo";
+//import Logo from "../Partials/Logo";
 import '../../styles/Partials/Header.css';
 import '../../styles/index.css';
 
@@ -9,14 +9,14 @@ function Header({ setOpenNav, openNav, setProj }) {
     return (
         <Navbar className="Header navbar fixed-top  d-block d-sm-none background-purple" >
             <div className="d-flex">
-                {/*  <h2 className="Header-logo p-2 cursor-pointer"
-                    onClick={() => { setProj("1") }}
-                >
-                    &lt;react-Todo <span className="text-danger">/</span>&gt;
-    </h2> */}
-                <Logo
-                    setProj={setProj}
-                />
+                <div className="Header-logo ">
+                    <h2 className="Header-logo p-2 cursor-pointer"
+                        onClick={() => { setProj("1") }}
+                    >
+                        <span className="text-white">&lt;doThis </span><span style={{ color: "var(--danger-red)" }}>/</span><span className="text-white">&gt;</span>
+                    </h2>
+
+                </div>
                 <div className="Header-button p-2 ms-auto">
                     <h4
                         onClick={() => setOpenNav(!openNav)}

@@ -20,7 +20,8 @@
       width: 65%!important;
     }
     .Wrapper {
-    margin-left: 300px;
+    margin-left: 25%;
+    border: 1px solid red;
     }
   }
   

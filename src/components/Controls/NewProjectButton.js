@@ -1,11 +1,13 @@
 import { BsPlusCircle } from "react-icons/bs";
+import '../../styles/Controls/NewProjectButton.css';
+import '../../styles/index.css';
 
 function NewProjectButton({ handleFormShow }) {
     return (
-        <h5 className="text-center mt-4 cursor-pointer text-white"
+        <h5 className="NewProjectButton text-center mt-4 cursor-pointer"
             onClick={() => { handleFormShow() }}
         >
-            Create new Project <BsPlusCircle className="Icon" />
+            Create new Project <span className="NewProjectButton-icon"><BsPlusCircle className="Icon" /></span>
         </h5>
     )
 }
