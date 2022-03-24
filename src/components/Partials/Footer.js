@@ -6,8 +6,8 @@ import '../../styles/index.css';
 
 function Footer() {
     return (
-        <nav className="Footer background-purple" id="footerNav">
-            <div className="d-flex gap-4 justify-content-center">
+        <footer className="Footer background-purple" id="footerNav" >
+            <div className="d-flex gap-4 justify-content-center" style={{border: "1px solid red"}}>
                 <div>
                     <p className="border-end text-wrap pe-4 text-white"> <FaRegCopyright className="Icon" /> Adam Walker 2022</p>
                 </div>
@@ -18,7 +18,7 @@ function Footer() {
                     <a className="Footer-item link-light text-decoration-none ps-4 border-start" href="https://github.com/Nootuff/React-ToDo-App" rel="noreferrer" target="_blank">View site code on GitHub <FaGithub className="Icon" /></a>
                 </div>
             </div>
-        </nav>
+        </footer>
     )
 }
 

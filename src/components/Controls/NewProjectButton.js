@@ -7,7 +7,7 @@ function NewProjectButton({ handleFormShow }) {
         <h5 className="NewProjectButton text-center mt-4 cursor-pointer"
             onClick={() => { handleFormShow() }}
         >
-            Create new Project <span className="NewProjectButton-icon"><BsPlusCircle className="Icon" /></span>
+            Create new Project <span className="ps-2"><BsPlusCircle className="Icon" /></span>
         </h5>
     )
 }

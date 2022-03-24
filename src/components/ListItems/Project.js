@@ -5,7 +5,7 @@ import '../../styles/index.css';
 function Project({ setProj, proj, data }) {
 
      return (
-          <div
+          <li
                className='Project-container mb-1 ps-3 p-2 cursor-pointer'
                style={{ color: proj === data.projId ? "var(--primary-blue)" : "white" }}
                onClick={() => { setProj(data.projId) }}
@@ -25,7 +25,7 @@ function Project({ setProj, proj, data }) {
                          <div className="d-inline Icon Project-trash" >{data.projId === "3" && <FaTrashAlt />}</div>
                     </div>
                </div>
-          </div>
+          </li>
      );
 }
 

@@ -14,7 +14,7 @@ function ProjectList({ projects, proj, setProj, handleFormShow }) {
   );
 
   return (
-    <div className="mt-4">
+    <ul className="List mt-4">
       <Project
         setProj={setProj}
         proj={proj}
@@ -32,7 +32,7 @@ function ProjectList({ projects, proj, setProj, handleFormShow }) {
       <NewProjectButton
         handleFormShow={handleFormShow}
       />
-    </div>
+    </ul>
   );
 }
 

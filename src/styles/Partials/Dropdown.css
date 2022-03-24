@@ -1,3 +1,4 @@
 .Dropdown{
+  overflow: hidden;
   background-color: var(--dark-purple);
 }

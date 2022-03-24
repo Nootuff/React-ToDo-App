@@ -13,7 +13,7 @@ function Header({ setOpenNav, openNav, setProj }) {
                     <h2 className="Header-logo p-2 cursor-pointer"
                         onClick={() => { setProj("1") }}
                     >
-                        <span className="text-white">&lt;doThis </span><span style={{ color: "var(--danger-red)" }}>/</span><span className="text-white">&gt;</span>
+                        <span className="text-white">&lt;doThis </span><span style={{ color: "var(--primary-blue)" }}>/</span><span className="text-white">&gt;</span>
                     </h2>
 
                 </div>
