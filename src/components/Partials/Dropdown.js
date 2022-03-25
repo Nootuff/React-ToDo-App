@@ -1,4 +1,3 @@
-import Project from "../ListItems/Project";
 import ProjectList from "../ListComponents/ProjectList";
 import '../../styles/Partials/Dropdown.css';
 

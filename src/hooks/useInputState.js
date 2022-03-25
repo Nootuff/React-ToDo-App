@@ -1,40 +1,37 @@
 import React, { useState } from "react";
-import { v4 as uuidv4 } from 'uuid'; //Imports the uuid npm package. 
 
 const initialTodo = {
-    taskBody: "",
-    taskNotes: "",
-    priority: "Medium",
-    deadline: ""
+  taskBody: "",
+  taskNotes: "",
+  priority: "Medium",
+  deadline: ""
 };
 
 const initialProject = {
-    projName: "",
-    projNotes: "",
+  projName: "",
+  projNotes: "",
 };
 
 export default input => {
-    const [values, setValues] = useState(initialTodo);
-    const [projData, setProjData] = useState(initialProject);
+  const [todoValues, setTodoValues] = useState(initialTodo);
+  const [projData, setProjData] = useState(initialProject);
 
 
-    const handleChangeFunc = (event) => {
-        const { name, value } = event.target; //Destructured const
-        setValues({
-            ...values,
-            [name]: value,
-            //: uuidv4()
-        });
-    }
+  const handleTodoChange = (event) => {
+    const { name, value } = event.target;
+    setTodoValues({
+      ...todoValues,
+      [name]: value,
+    });
+  }
 
-    const handleProjChangeFunc = (event) => {
-        const { name, value } = event.target; 
-        setProjData({
-            ...projData,
-            [name]: value,
-        });
-    }
-    
+  const handleProjChange = (event) => {
+    const { name, value } = event.target;
+    setProjData({
+      ...projData,
+      [name]: value,
+    });
+  }
 
-    return [values, setValues, projData, setProjData, handleChangeFunc, handleProjChangeFunc];
+  return [todoValues, setTodoValues, projData, setProjData, handleTodoChange, handleProjChange];
 }

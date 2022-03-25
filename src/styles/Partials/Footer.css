@@ -29,31 +29,6 @@ nav td {
     /* For desktop: */
     .Footer {
         font-size: 15px;
-       
         margin-left: 25%;
       }
 }
-
-
-/*.Footer {
-  height: 100px; 
- 
-  font-size: 13px;
-  display: flex;  /*Can this flex stuff be done in bootstrap
-  justify-content: center;
-  align-items: center;
-  
-}
-
-.Footer-item:hover {
-  color: var(--primary-blue)!important;
-  text-decoration: underline!important;
-}
-
-@media screen and (min-width: 576px) {
-  .Footer{
-    margin-left: 25%;
-    font-size: 15px;
-    }
-}
-*/

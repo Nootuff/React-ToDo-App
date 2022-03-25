@@ -1,19 +1,18 @@
+.Project-body{
+  width: 90%;
+}
 
 .Project-title {
   transition: 0.3s;
-}
-
-.Project-title {
   position: relative;
   top: 2.5px;
-
 }
 
- .Project-container:hover {
+ .Project:hover {
   background-color: rgb(56, 56, 56);
 }
 
-.Project-container:hover .Project-title{
+.Project:hover .Project-title{
  padding-left: 3px;
 }
 

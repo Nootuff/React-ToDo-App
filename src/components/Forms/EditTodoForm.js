@@ -22,7 +22,6 @@ function EditTodoForm({ todo, proj, editTodo, setOpenEdit }) {
 
     const [state, setState] = useState(values);
 
-
     const handleEditChangeFunc = (event) => { //If you can't solve this issue then just leave it. 
         const { name, value } = event.target;
         setState({
@@ -65,7 +64,7 @@ function EditTodoForm({ todo, proj, editTodo, setOpenEdit }) {
                     <br />
                     <ButtonGroup
                         className="d-md-block d-none"
-                        aria-label="Basic example"
+                        aria-label="priority"
                     >
                         {editRadios.map((editRadio, num) => (
                             <Button
@@ -84,7 +83,7 @@ function EditTodoForm({ todo, proj, editTodo, setOpenEdit }) {
                     <ButtonGroup
                         vertical
                         className="d-md-none d-block"
-                        aria-label="Basic example"
+                        aria-label="priority"
                     >
                         {editRadios.map((editRadio, num) => (
                             <Button

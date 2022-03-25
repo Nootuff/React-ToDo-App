@@ -6,7 +6,7 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import '../../styles/index.css';
 
-function NewProjectForm({ projData, setProjData, handleProjChangeFunc, submitProject, setProj, showProjForm, handleFormClose }) {
+function NewProjectForm({ projData, setProjData, handleProjChange, submitProject, setProj, showProjForm, handleFormClose }) {
 
   const [openNotes, setOpenNotes] = useState(false);
 
@@ -32,13 +32,12 @@ function NewProjectForm({ projData, setProjData, handleProjChangeFunc, submitPro
               placeholder="Project name"
               maxLength="30"
               value={projData.projName}
-              onChange={handleProjChangeFunc}
+              onChange={handleProjChange}
             />
           </Form.Group>
           <Button
             className="mb-2"
             onClick={() => setOpenNotes(!openNotes)}
-            //aria-controls="example-collapse-text"
             aria-expanded={openNotes}
           >
             Notes
@@ -53,7 +52,7 @@ function NewProjectForm({ projData, setProjData, handleProjChangeFunc, submitPro
                 placeholder="Add extra details."
                 rows={3}
                 value={projData.projNotes}
-                onChange={handleProjChangeFunc}
+                onChange={handleProjChange}
               />
             </Form.Group>
           </Collapse>
