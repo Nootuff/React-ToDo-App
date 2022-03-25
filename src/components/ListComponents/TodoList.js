@@ -14,11 +14,9 @@ function TodoList(props) {
     );
 
     return (
-        <div>
-            <ul className="List pb-5">
-                {list}
-            </ul>
-        </div>
+        <ul className="List pb-5">
+            {list}
+        </ul>
     );
 }
 

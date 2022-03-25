@@ -21,9 +21,7 @@ function EditTodoForm({ todo, proj, editTodo, setOpenEdit }) {
     }
 
     const [state, setState] = useState(values);
-    //const [editRadioValue, setEditRadioValue] = useState(state.priority);
 
-    //console.log(state)
 
     const handleEditChangeFunc = (event) => { //If you can't solve this issue then just leave it. 
         const { name, value } = event.target;
@@ -65,9 +63,9 @@ function EditTodoForm({ todo, proj, editTodo, setOpenEdit }) {
                 <Form.Group className="mb-2"  >
                     <Form.Label><b>Change Priority</b></Form.Label>
                     <br />
-                    <ButtonGroup 
-                    className="d-md-block d-none"
-                    aria-label="Basic example"
+                    <ButtonGroup
+                        className="d-md-block d-none"
+                        aria-label="Basic example"
                     >
                         {editRadios.map((editRadio, num) => (
                             <Button
@@ -83,10 +81,10 @@ function EditTodoForm({ todo, proj, editTodo, setOpenEdit }) {
                             </Button>
                         ))}
                     </ButtonGroup>
-                    <ButtonGroup 
-                    vertical
-                    className="d-md-none d-block"
-                    aria-label="Basic example"
+                    <ButtonGroup
+                        vertical
+                        className="d-md-none d-block"
+                        aria-label="Basic example"
                     >
                         {editRadios.map((editRadio, num) => (
                             <Button
@@ -134,6 +132,15 @@ function EditTodoForm({ todo, proj, editTodo, setOpenEdit }) {
                     }}
                 >
                     Update todo
+                </Button>
+                <Button /*See if you can make closing this form reset everything to default*/
+                    className="ms-2 mt-3"
+                    variant="danger"
+                    onClick={() => {
+                        setOpenEdit(false)
+                    }}
+                >
+                    Close
                 </Button>
             </Form>
         </div>
