@@ -9,6 +9,10 @@
   margin-top: 79px;
   background-color: var(--dark-purple);
 }
+
+.Base-drop-container-interior{
+  background-color: red;
+}
   
 .Base-body {
   margin: auto;

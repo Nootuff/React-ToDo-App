@@ -7,7 +7,7 @@ import "../../styles/index.css";
 function Header({ setOpenNav, openNav, setProj }) {
   return (
     <Navbar className="Header navbar fixed-top d-block d-sm-none background-purple d-flex">
-      <div >
+      <div>
         <h1 className="Header-logo logo-text p-2 cursor-pointer"
           onClick={() => { setProj("1") }}
         >

@@ -40,7 +40,7 @@ function TodoListBase() {
       />
       <div className="Base-drop-container d-block d-sm-none">
         <Collapse in={openNav}>
-          <div>
+          <div className="Base-drop-container-interior">
             <Dropdown
               projects={todos.projects}
               proj={proj}
