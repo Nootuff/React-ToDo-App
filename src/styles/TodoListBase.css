@@ -7,6 +7,7 @@
 
 .Base-drop-container {
   margin-top: 79px;
+  background-color: var(--dark-purple);
 }
   
 .Base-body {

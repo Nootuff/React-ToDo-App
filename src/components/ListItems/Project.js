@@ -6,7 +6,6 @@ function Project({ setProj, proj, data }) {
   return (
     <li
       className={"Project mb-1 ps-3 p-2 cursor-pointer text-" + (proj === data.projId ? "danger" : "light")}
-      //style={{ color: proj === data.projId ? "var(--danger-red)" : "white" }}
       onClick={() => { setProj(data.projId) }}
     >
       <div className="Project-body d-flex">

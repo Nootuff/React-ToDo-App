@@ -9,7 +9,7 @@
 }
 
  .Project:hover {
-  background-color: rgb(56, 56, 56);
+  background-color: #363636;
 }
 
 .Project:hover .Project-title {

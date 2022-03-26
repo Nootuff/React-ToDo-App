@@ -4,6 +4,6 @@
 }
 
 .NewProjectButton:hover {
-  color: var(--primary-blue);
+  color: var(--danger-red);
   transform: scale(1.02);
 }

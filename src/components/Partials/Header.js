@@ -7,12 +7,12 @@ import "../../styles/index.css";
 function Header({ setOpenNav, openNav, setProj }) {
   return (
     <Navbar className="Header navbar fixed-top d-block d-sm-none background-purple d-flex">
-      <div className="Header-logo">
-        <h2 className="Header-logo p-2 cursor-pointer"
+      <div >
+        <h1 className="Header-logo logo-text p-2 cursor-pointer"
           onClick={() => { setProj("1") }}
         >
-          <span className="text-white">&lt;doThis </span><span className="text-danger">/</span><span className="text-white">&gt;</span>
-        </h2>
+          <span className="text-white">&lt;doThis </span><b><span className="text-danger">/</span></b><span className="text-white">&gt;</span>
+        </h1>
       </div>
       <div className="Header-button p-2 ms-auto">
         <h4
