@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
-export default viewing => {
+export default function Viewing() {
   const [proj, setProj] = useState("1");
 
   return [proj, setProj];

@@ -14,11 +14,12 @@ import useView from "../hooks/useView";
 import "../styles/TodoListBase.css";
 
 function TodoListBase() {
-  const [todoValues, setTodoValues, projData, setProjData, handleTodoChange, handleProjChange] = useInputState();
+  const [todoValues, setTodoValues, projValues, setProjValues, handleTodoChange, handleProjChange] = useInputState();
   const [todos, submitProject, deleteProject, editProject, submitTodo, deleteTodo, editTodo, toggleComplete, deleteComplete, restore] = useLocalStorage();
   const [proj, setProj] = useView();
   const [openNav, setOpenNav] = useState(false);
   const [showProjForm, setShowProjForm] = useState(false);
+  
   const handleFormClose = () => setShowProjForm(false);
   const handleFormShow = () => setShowProjForm(true);
 
@@ -51,8 +52,8 @@ function TodoListBase() {
       </div>
       <div className="Base-wrapper">
         <NewProjectForm
-          projData={projData}
-          setProjData={setProjData}
+          projValues={projValues}
+          setProjValues={setProjValues}
           handleProjChange={handleProjChange}
           submitProject={submitProject}
           setProj={setProj}

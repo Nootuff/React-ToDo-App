@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 const initialTodo = {
   taskBody: "",
@@ -12,10 +12,9 @@ const initialProject = {
   projNotes: "",
 };
 
-export default input => {
+export default function Input() {
   const [todoValues, setTodoValues] = useState(initialTodo);
-  const [projData, setProjData] = useState(initialProject);
-
+  const [projValues, setProjValues] = useState(initialProject);
 
   const handleTodoChange = (event) => {
     const { name, value } = event.target;
@@ -27,11 +26,11 @@ export default input => {
 
   const handleProjChange = (event) => {
     const { name, value } = event.target;
-    setProjData({
-      ...projData,
+    setProjValues({
+      ...projValues,
       [name]: value,
     });
   }
 
-  return [todoValues, setTodoValues, projData, setProjData, handleTodoChange, handleProjChange];
+  return [todoValues, setTodoValues, projValues, setProjValues, handleTodoChange, handleProjChange];
 }

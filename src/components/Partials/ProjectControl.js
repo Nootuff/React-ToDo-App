@@ -16,8 +16,8 @@ function ProjectControl({ proj, viewedProject, setProj, deleteComplete, editProj
   return (
     <div className="text-start">
       <section className="background-grey px-3 pt-2 pb-1 mb-2 rounded">
-        <h2>{viewedProject.projName}</h2>
-        <p>{viewedProject.projNotes}</p>
+        <h2 className="overflow-text">{viewedProject.projName}</h2>
+        <p className="overflow-text">{viewedProject.projNotes}</p>
       </section>
       {proj !== "3" &&
         <section>

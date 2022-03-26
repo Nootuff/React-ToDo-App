@@ -7,7 +7,7 @@ function Sidebar({ projects, proj, setProj, handleFormShow }) {
       <h2 className="cursor-pointer pt-4"
         onClick={() => { setProj("1") }}
       >
-        <span className="text-white">&lt;doThis </span><span className="text-primary">/</span><span className="text-white">&gt;</span>
+        <span className="text-white">&lt;doThis </span><span className="text-danger">/</span><span className="text-white">&gt;</span>
       </h2>
       <ProjectList
         projects={projects}

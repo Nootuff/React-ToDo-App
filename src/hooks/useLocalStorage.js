@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 const initialStorage = { //Placeholder data, used on initial load if nothing is detected in localStorage.
   projects: [
@@ -119,15 +119,15 @@ const initialStorage = { //Placeholder data, used on initial load if nothing is 
   darkMode: false
 };
 
-export default storage => {
-  const [todos, setTodos] = useState(JSON.parse(localStorage.getItem("hooksTodos")) || initialStorage);
+export default function Storage() {
+  const [todos, setTodos] = useState(JSON.parse(localStorage.getItem("doThisData")) || initialStorage);
 
   const submitProject = (data) => {
     let stateHolder = { ...todos };
     let dataholder = [...todos.projects, data]
     stateHolder.projects = dataholder;
     setTodos(stateHolder)
-    window.localStorage.setItem('hooksTodos', JSON.stringify(stateHolder))
+    window.localStorage.setItem("doThisData", JSON.stringify(stateHolder))
   }
 
   const deleteProject = (viewId) => {
@@ -135,7 +135,7 @@ export default storage => {
     let newTodos = stateHolder.projects.filter(project => project.projId !== viewId)
     stateHolder.projects = newTodos;
     setTodos(stateHolder)
-    window.localStorage.setItem('hooksTodos', JSON.stringify(stateHolder))
+    window.localStorage.setItem("doThisData", JSON.stringify(stateHolder))
   }
 
   const editProject = (data, viewId) => {
@@ -147,7 +147,7 @@ export default storage => {
       }
     }
     setTodos(stateHolder)
-    window.localStorage.setItem('hooksTodos', JSON.stringify(stateHolder))
+    window.localStorage.setItem("doThisData", JSON.stringify(stateHolder))
   }
 
   const submitTodo = (data, viewId) => {
@@ -158,7 +158,7 @@ export default storage => {
         stateHolder.projects[i].projTodos = dataholder
       }
       setTodos(stateHolder)
-      window.localStorage.setItem('hooksTodos', JSON.stringify(stateHolder));
+      window.localStorage.setItem("doThisData", JSON.stringify(stateHolder));
     }
   }
 
@@ -171,7 +171,7 @@ export default storage => {
       stateHolder.projects[2].projTodos = dataHolder
     }
     setTodos(stateHolder)
-    window.localStorage.setItem('hooksTodos', JSON.stringify(stateHolder));
+    window.localStorage.setItem("doThisData", JSON.stringify(stateHolder));
   }
 
   const deleteTodo = (data, viewId) => {
@@ -186,7 +186,7 @@ export default storage => {
       }
     }
     setTodos(stateHolder)
-    window.localStorage.setItem('hooksTodos', JSON.stringify(stateHolder)) //send the value of "state" to localstorage  
+    window.localStorage.setItem("doThisData", JSON.stringify(stateHolder)) //send the value of "state" to localstorage  
     if (viewId !== "3") { autoDelete() }
   }
 
@@ -202,7 +202,7 @@ export default storage => {
       }
     }
     setTodos(stateHolder)
-    window.localStorage.setItem('hooksTodos', JSON.stringify(stateHolder))
+    window.localStorage.setItem("doThisData", JSON.stringify(stateHolder))
   }
 
   const toggleComplete = (data, viewId) => {
@@ -217,7 +217,7 @@ export default storage => {
       }
     }
     setTodos(stateHolder)
-    window.localStorage.setItem('hooksTodos', JSON.stringify(stateHolder));
+    window.localStorage.setItem("doThisData", JSON.stringify(stateHolder));
   }
 
   const deleteComplete = (viewId) => {
@@ -235,7 +235,7 @@ export default storage => {
       }
     }
     setTodos(stateHolder)
-    window.localStorage.setItem('hooksTodos', JSON.stringify(stateHolder));
+    window.localStorage.setItem("doThisData", JSON.stringify(stateHolder));
     autoDelete()
   }
 
@@ -261,7 +261,7 @@ export default storage => {
     let deletedTodos = stateHolder.projects[2].projTodos.filter(todo => todo.id !== data.id); //Create a list of todos excluding the one that was just restored. 
     stateHolder.projects[2].projTodos = deletedTodos; //Set the todos list of deleted storage to this updated list. 
     setTodos(stateHolder)
-    window.localStorage.setItem('hooksTodos', JSON.stringify(stateHolder));
+    window.localStorage.setItem("doThisData", JSON.stringify(stateHolder));
   }
 
   return [todos, submitProject, deleteProject, editProject, submitTodo, deleteTodo, editTodo, toggleComplete, deleteComplete, restore];

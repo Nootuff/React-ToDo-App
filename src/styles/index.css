@@ -24,24 +24,48 @@ code {
     monospace;
 }
 
-.background-purple{
+.background-purple {
   background-color: var(--purple);
 }
 
-.background-grey{
+.background-grey {
   background-color: var(--light-grey);
 }
 
-.cursor-pointer{
+.cursor-pointer {
   cursor: pointer;
 }
 
-.Icon{
+.overflow-text{
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  -ms-word-break: break-all;
+  word-break: break-all;
+  word-break: break-word;
+  /* Adds a hyphen where the word breaks, if supported (No Blink) */
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
+button:focus,
+button:active,
+button:hover,
+.btn:active,
+.btn.active
+{
+  outline:0px !important;
+  -webkit-appearance:none;
+  box-shadow: none !important;
+}
+
+.Icon {
   position: relative;
   bottom: 2px;
 }
 
-.List{
+.List {
   padding-left: 0;
   list-style-type: none;
 }

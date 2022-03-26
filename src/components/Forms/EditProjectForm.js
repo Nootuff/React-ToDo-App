@@ -17,7 +17,7 @@ function EditProjectForm({ viewedProject, editProject, proj, setOpen, setProj, d
     setState(values);
   }, [viewedProject]);
 
-  const handleEditChangeFunc = (event) => { //can this be done with a hook? 
+  const handleEditChange = (event) => {
     const { name, value } = event.target;
     setState({
       ...state,
@@ -36,15 +36,18 @@ function EditProjectForm({ viewedProject, editProject, proj, setOpen, setProj, d
             id="projName"
             value={state.projName}
             maxLength="30"
-            onChange={handleEditChangeFunc}
+            onChange={handleEditChange}
           />
         </Form.Group>
         <Form.Group className="mb-2">
           <Form.Label><b>Edit details</b></Form.Label>
-          <Form.Control as="textarea" rows={3} id="projNotes"
+          <Form.Control
+            as="textarea"
+            rows={3}
+            id="projNotes"
             value={state.projNotes}
             name="projNotes"
-            onChange={handleEditChangeFunc} />
+            onChange={handleEditChange} />
         </Form.Group>
         <Button
           className="mb-2"
@@ -57,6 +60,17 @@ function EditProjectForm({ viewedProject, editProject, proj, setOpen, setProj, d
           }}
         >
           Update
+        </Button>
+        <Button
+          className="ms-2 mb-2"
+          variant="danger"
+          onClick={(event) => {
+            event.preventDefault();
+            setState(values);
+            setOpen(false)
+          }}
+        >
+          Close
         </Button>
       </Form>
       <DeleteProject

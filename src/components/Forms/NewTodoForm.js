@@ -98,7 +98,7 @@ function NewTodoForm({ handleTodoChange, submitTodo, todoValues, setTodoValues, 
             </Button>
           </Form.Group>
           <ButtonToolbar aria-label="Toolbar with button groups">
-            <ButtonGroup aria-label="Toolbar with button groups">
+            <ButtonGroup>
               <Button
                 className="me-2"
                 disabled={todoValues.taskBody === "" ? true : false}

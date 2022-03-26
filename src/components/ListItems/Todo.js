@@ -17,12 +17,12 @@ function Todo({ todo, deleteTodo, editTodo, toggleComplete, restore, proj }) {
     return new Date(deadline) > new Date(today)
   }
 
-  const deadlineDisplay = (todo.deadline) !== "" && <h5 style={{ color: isLater(todo.deadline, currDate()) ? null : "var(--danger-red)" }}>Deadline: {dateConverter(todo.deadline, "-", "/")}</h5>;
+  const deadlineDisplay = (todo.deadline) !== "" && <h5 className={"text-" + (isLater(todo.deadline, currDate()) ? "dark" : "danger")} >Deadline: {dateConverter(todo.deadline, "-", "/")}</h5>;
 
   return (
-    <Collapse in={open}>
+   <Collapse in={open}>
       <li
-        className="Todo container p-0 my-3"
+        className="Todo container p-0 mb-3"
         id={todo.id}
       >
         <div className="d-flex">
@@ -49,7 +49,7 @@ function Todo({ todo, deleteTodo, editTodo, toggleComplete, restore, proj }) {
               style={{ textDecoration: todo.completed && "line-through" }} >
               <div className="row" >
                 <h4
-                  className="cursor-pointer"
+                  className="overflow-text cursor-pointer"
                   onClick={() => {
                     proj !== "3" && toggleComplete(todo, proj)
                   }}
@@ -63,11 +63,11 @@ function Todo({ todo, deleteTodo, editTodo, toggleComplete, restore, proj }) {
             </section>
             <Collapse in={openDetails}>
               <section
-                className={" flex-row " + (todo.completed ? "opacity-50" : proj === "3" ? "opacity-50" : null)}
+                className={"flex-row " + (todo.completed ? "opacity-50" : proj === "3" ? "opacity-50" : null)}
                 style={{ textDecoration: todo.completed && "line-through" }}
               >
                 <hr />
-                {todo.taskNotes !== "" && <p className="Todo-details"><b>Details:</b> {todo.taskNotes}</p>}
+                {todo.taskNotes !== "" && <p className="overflow-text"><b>Details:</b> {todo.taskNotes}</p>}
                 <p><b>Priority:</b> {todo.priority}</p>
                 <p><b>Posted:</b> {dateConverter(todo.datePosted, "-", "/")}</p>
               </section>
@@ -83,7 +83,7 @@ function Todo({ todo, deleteTodo, editTodo, toggleComplete, restore, proj }) {
                       Details
                     </Button>
                   </div>
-                  <div className="cursor-pointer bd-highlight me-2">
+                  <div className="cursor-pointer bd-highlight me-1">
                     <FaEdit
                       className="Todo-edit"
                       onClick={() => setOpenEdit(!openEdit)}
@@ -109,7 +109,7 @@ function Todo({ todo, deleteTodo, editTodo, toggleComplete, restore, proj }) {
                     </Button>
                   </div>
                 }
-                <div className="cursor-pointer bd-highlight me-2">
+                <div className="cursor-pointer bd-highlight">
                   <FaTrashAlt
                     className="Todo-trash"
                     onClick={() => {
@@ -136,7 +136,7 @@ function Todo({ todo, deleteTodo, editTodo, toggleComplete, restore, proj }) {
           </div>
         </div>
       </li>
-    </Collapse>
+  </Collapse>
   );
 }
 
