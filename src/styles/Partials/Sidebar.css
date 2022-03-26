@@ -1,18 +1,18 @@
 .Sidebar {
-    margin:  0;
-    padding: 0;
-    width: 25% /*300px*/;
-    position: fixed;
-    height: 100%;
-    overflow-y: scroll;
-   border-right: 2px solid #ffffff;
-  }
+  margin: 0;
+  padding: 0;
+  width: 25%;
+  position: fixed;
+  height: 100%;
+  overflow-y: scroll;
+  border-right: 2px solid #ffffff;
+}
 
-  .Sidebar::-webkit-scrollbar {
-    display: none;
-  }
+.Sidebar::-webkit-scrollbar {
+  display: none;
+}
 
-  .Sidebar { /*Hide scrollbar on IE, Edge & Firefox*/
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
+.Sidebar { /*Hide scrollbar on IE, Edge & Firefox*/
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 import DeleteProject from "../Controls/DeleteProject";
-import '../../styles/index.css';
+import "../../styles/index.css";
 
 function EditProjectForm({ viewedProject, editProject, proj, setOpen, setProj, deleteProject }) {
 
@@ -17,7 +17,7 @@ function EditProjectForm({ viewedProject, editProject, proj, setOpen, setProj, d
     setState(values);
   }, [viewedProject]);
 
-  const handleEditChangeFunc = (event) => {
+  const handleEditChangeFunc = (event) => { //can this be done with a hook? 
     const { name, value } = event.target;
     setState({
       ...state,
@@ -28,7 +28,7 @@ function EditProjectForm({ viewedProject, editProject, proj, setOpen, setProj, d
   return (
     <div className="EditProjectForm p-3 rounded background-grey">
       <Form>
-        <Form.Group className="mb-2"  >
+        <Form.Group className="mb-2">
           <Form.Label><b>Edit Project Name</b></Form.Label>
           <Form.Control
             type="text"
@@ -39,7 +39,7 @@ function EditProjectForm({ viewedProject, editProject, proj, setOpen, setProj, d
             onChange={handleEditChangeFunc}
           />
         </Form.Group>
-        <Form.Group className="mb-2"  >
+        <Form.Group className="mb-2">
           <Form.Label><b>Edit details</b></Form.Label>
           <Form.Control as="textarea" rows={3} id="projNotes"
             value={state.projNotes}

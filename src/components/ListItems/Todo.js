@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import Button from 'react-bootstrap/Button';
-import Collapse from 'react-bootstrap/Collapse';
+import Button from "react-bootstrap/Button";
+import Collapse from "react-bootstrap/Collapse";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import useDate from "../../hooks/useDate";
 import EditTodoForm from "../Forms/EditTodoForm";
-import '../../styles/ListItems/Todo.css';
-import '../../styles/index.css';
+import "../../styles/ListItems/Todo.css";
+import "../../styles/index.css";
 
 function Todo({ todo, deleteTodo, editTodo, toggleComplete, restore, proj }) {
   const [open, setOpen] = useState(true);
@@ -13,7 +13,7 @@ function Todo({ todo, deleteTodo, editTodo, toggleComplete, restore, proj }) {
   const [openEdit, setOpenEdit] = useState(false);
   const [currDate, dateConverter] = useDate()
 
-  function isLater(deadline, today) { //Move this to a hook? where would it go? 
+  const isLater = (deadline, today) => {
     return new Date(deadline) > new Date(today)
   }
 
@@ -22,10 +22,10 @@ function Todo({ todo, deleteTodo, editTodo, toggleComplete, restore, proj }) {
   return (
     <Collapse in={open}>
       <li
-        className="Todo container p-0"
+        className="Todo container p-0 my-3"
         id={todo.id}
       >
-        <div className="d-flex" /*style={{border: "5px solid cyan"}}*/>
+        <div className="d-flex">
           <div
             className={"m-0 flex-shrink-1 rounded-start " + (todo.completed ? "opacity-50" : proj === "3" ? "opacity-50" : null)}
             style={{ backgroundColor: todo.priority === 'High' ? 'var(--danger-red)' : todo.priority === 'Medium' ? 'var(--primary-blue)' : 'var(--success-green)' }}
@@ -33,7 +33,7 @@ function Todo({ todo, deleteTodo, editTodo, toggleComplete, restore, proj }) {
             <table
               className="Todo-checkbox m-1 cursor-pointer"
               onClick={() => {
-                proj !== "3" && toggleComplete(todo, proj) /*User cannot click on header to toggle complete if the todo is in deletion storage.*/
+                proj !== "3" && toggleComplete(todo, proj) /*User cannot toggle complete if the todo is in deletion storage.*/
               }}
             >
               <tbody className="text-center">
@@ -44,12 +44,12 @@ function Todo({ todo, deleteTodo, editTodo, toggleComplete, restore, proj }) {
             </table>
           </div>
           <div className="p-3 w-100 text-start background-grey">
-            <div
+            <section
               className={todo.completed ? "opacity-50" : proj === "3" ? "opacity-50" : null}
               style={{ textDecoration: todo.completed && "line-through" }} >
               <div className="row" >
                 <h4
-                className="cursor-pointer"
+                  className="cursor-pointer"
                   onClick={() => {
                     proj !== "3" && toggleComplete(todo, proj)
                   }}
@@ -57,28 +57,27 @@ function Todo({ todo, deleteTodo, editTodo, toggleComplete, restore, proj }) {
                   {todo.taskBody}
                 </h4 >
               </div>
-              <div className="row">
+              <time className="row">
                 {deadlineDisplay}
-              </div>
-            </div>
+              </time>
+            </section>
             <Collapse in={openDetails}>
-              <div
+              <section
                 className={" flex-row " + (todo.completed ? "opacity-50" : proj === "3" ? "opacity-50" : null)}
                 style={{ textDecoration: todo.completed && "line-through" }}
               >
                 <hr />
-                {todo.taskNotes !== "" && <p style={{ wordWrap: "break-word" }} ><b> Details:</b> {todo.taskNotes}</p>}
+                {todo.taskNotes !== "" && <p className="Todo-details"><b>Details:</b> {todo.taskNotes}</p>}
                 <p><b>Priority:</b> {todo.priority}</p>
                 <p><b>Posted:</b> {dateConverter(todo.datePosted, "-", "/")}</p>
-              </div>
+              </section>
             </Collapse>
             <div className="m-0 d-flex flex-row bd-highlight">
               {proj !== "3" &&
-                <span className=" d-flex flex-row">
-                  <div className="  bd-highlight me-2">
+                <span className="d-flex flex-row">
+                  <div className="bd-highlight me-2">
                     <Button className="p-0 pe-1 ps-1"
                       onClick={() => setOpenDetails(!openDetails)}
-                      aria-controls="example-collapse-text"
                       aria-expanded={openDetails}
                     >
                       Details
@@ -86,17 +85,16 @@ function Todo({ todo, deleteTodo, editTodo, toggleComplete, restore, proj }) {
                   </div>
                   <div className="cursor-pointer bd-highlight me-2">
                     <FaEdit
-                    className="Todo-edit"
+                      className="Todo-edit"
                       onClick={() => setOpenEdit(!openEdit)}
-                      aria-controls="example-collapse-text"
                       aria-expanded={openEdit}
                     />
                   </div>
                 </span>
               }
-              <span className=" d-flex flex-row">
+              <span className="d-flex flex-row">
                 {proj === "3" &&
-                  <div className="cursor-pointer bd-highlight me-2" >
+                  <div className="cursor-pointer bd-highlight me-2">
                     <Button
                       className="p-0 pe-1 ps-1"
                       variant="success"
@@ -111,9 +109,9 @@ function Todo({ todo, deleteTodo, editTodo, toggleComplete, restore, proj }) {
                     </Button>
                   </div>
                 }
-                <div className="cursor-pointer bd-highlight me-2" >
+                <div className="cursor-pointer bd-highlight me-2">
                   <FaTrashAlt
-                    className= "Todo-trash"
+                    className="Todo-trash"
                     onClick={() => {
                       setOpen(false);
                       setTimeout(() => {

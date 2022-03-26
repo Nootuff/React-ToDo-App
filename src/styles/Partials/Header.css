@@ -1,18 +1,20 @@
-.Header{
+.Header {
   height: 80px;
 }
 
-.Header-logo{
+.Header-logo {
   font-size: 2rem;
+  position: relative;
+  top: 1px; 
 }
 
-.Header-button{
+.Header-button {
   margin: 6px;
 }
 
-.Header-button-icon{
+.Header-button-icon {
   position: relative;
-  bottom: 2px;
+  bottom: 3px;
   left: 0.5px;
 }
 

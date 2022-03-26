@@ -1,6 +1,7 @@
 import Todo from "../ListItems/Todo";
 
-function TodoList({ deleteTodo, editTodo, toggleComplete, deleteProject, editProject, restore, proj, viewedProject, setProj }) {
+function TodoList({ deleteTodo, editTodo, toggleComplete, restore, proj, viewedProject }) {
+
   const list = viewedProject.projTodos.slice(0).reverse().map((num) =>
     <Todo
       key={num.id}

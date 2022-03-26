@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Collapse from "react-bootstrap/Collapse";
 import NewTodoForm from "./Forms/NewTodoForm";
 import NewProjectForm from "./Forms/NewProjectForm";
 import TodoList from "./ListComponents/TodoList";
@@ -7,11 +8,10 @@ import Footer from "./Partials/Footer";
 import Sidebar from "./Partials/Sidebar";
 import Dropdown from "./Partials/Dropdown";
 import ProjectControl from "./Partials/ProjectControl";
-import Collapse from 'react-bootstrap/Collapse';
 import useInputState from "../hooks/useInputState";
 import useLocalStorage from "../hooks/useLocalStorage";
 import useView from "../hooks/useView";
-import '../styles/TodoListBase.css';
+import "../styles/TodoListBase.css";
 
 function TodoListBase() {
   const [todoValues, setTodoValues, projData, setProjData, handleTodoChange, handleProjChange] = useInputState();
@@ -25,7 +25,7 @@ function TodoListBase() {
   let viewedProject = todos.projects.filter(project => project.projId === proj)[0]; //Data of the currently viewed project. 
 
   return (
-    <div className="Todo-list">
+    <div>
       <Header
         openNav={openNav}
         setOpenNav={setOpenNav}
@@ -49,7 +49,7 @@ function TodoListBase() {
           </div>
         </Collapse>
       </div>
-      <div className="Wrapper">
+      <div className="Base-wrapper">
         <NewProjectForm
           projData={projData}
           setProjData={setProjData}
@@ -82,12 +82,9 @@ function TodoListBase() {
             deleteTodo={deleteTodo}
             editTodo={editTodo}
             toggleComplete={toggleComplete}
-            deleteProject={deleteProject}
-            editProject={editProject}
             restore={restore}
             proj={proj}
             viewedProject={viewedProject}
-            setProj={setProj}
           />
         </section>
       </div>

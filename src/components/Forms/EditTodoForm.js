@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import useDate from "../../hooks/useDate";
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import ButtonGroup from 'react-bootstrap/ButtonGroup';
-import '../../styles/index.css';
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import ButtonGroup from "react-bootstrap/ButtonGroup";
+import "../../styles/index.css";
 
 function EditTodoForm({ todo, proj, editTodo, setOpenEdit }) {
     //const [openEdit, setOpenEdit] = useState(false);

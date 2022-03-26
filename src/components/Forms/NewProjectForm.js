@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { v4 as uuidv4 } from 'uuid'; //Imports the uuid npm package. 
-import Collapse from 'react-bootstrap/Collapse';
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
-import Form from 'react-bootstrap/Form';
-import '../../styles/index.css';
+import { v4 as uuidv4 } from "uuid"; //Imports the uuid npm package. 
+import Collapse from "react-bootstrap/Collapse";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
+import Form from "react-bootstrap/Form";
+import "../../styles/index.css";
 
 function NewProjectForm({ projData, setProjData, handleProjChange, submitProject, setProj, showProjForm, handleFormClose }) {
 

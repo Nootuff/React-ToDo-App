@@ -1,21 +1,21 @@
 import React, { useState, useEffect } from "react";
 import DeleteComplete from "../Controls/DeleteComplete";
 import EditProjectForm from "../Forms/EditProjectForm";
-import Button from 'react-bootstrap/Button';
-import Collapse from 'react-bootstrap/Collapse';
-import '../../styles/index.css';
+import Button from "react-bootstrap/Button";
+import Collapse from "react-bootstrap/Collapse";
+import "../../styles/index.css";
 
 function ProjectControl({ proj, viewedProject, setProj, deleteComplete, editProject, deleteProject }) {
 
   const [open, setOpen] = useState(false);
 
-  useEffect(() => {
+  useEffect(() => { //Close the edit project form each time the project is changed. 
     setOpen(false);
   }, [proj])
 
   return (
     <div className="text-start">
-      <section className="background-grey px-3 pt-2 pb-1 mb-2 rounded ">
+      <section className="background-grey px-3 pt-2 pb-1 mb-2 rounded">
         <h2>{viewedProject.projName}</h2>
         <p>{viewedProject.projNotes}</p>
       </section>

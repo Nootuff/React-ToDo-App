@@ -1,28 +1,32 @@
-.Wrapper{
-    min-height: 85vh;
-    margin-left: 0;
-    padding-top: 20px;
-    border-top: 1px solid white;
-  }
+.Base-wrapper {
+  min-height: 85vh;
+  margin-left: 0;
+  padding-top: 20px;
+  border-top: 1px solid white;
+}
 
-  .Base-drop-container{
-    margin-top: 79px;
-  }
+.Base-drop-container {
+  margin-top: 79px;
+}
   
+.Base-body {
+  margin: auto;
+  width: 90%!important;
+}
+
+@media screen and (min-width: 576px) {
   .Base-body{
-    margin: auto;
-    width: 90%!important;
+    width: 80%!important;
   }
-  
-  @media screen and (min-width: 576px) {
-    .Base-body{
-      width: 65%!important;
-    }
-    .Wrapper {
+  .Base-wrapper {
     margin-left: 25%;
-    }
   }
+}
   
-  @media screen and (max-width: 400px) {
-   
+@media screen and (min-width: 768px) {
+  .Base-body{
+    width: 65%!important;
   }
+}
+  
+  

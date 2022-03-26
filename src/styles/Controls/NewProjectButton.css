@@ -1,9 +1,9 @@
-.NewProjectButton{
-    color: white;
-    transition: 0.3s;
+.NewProjectButton {
+  color: white;
+  transition: 0.3s;
 }
 
-.NewProjectButton:hover{
+.NewProjectButton:hover {
   color: var(--primary-blue);
   transform: scale(1.02);
 }

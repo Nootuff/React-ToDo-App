@@ -1,10 +1,10 @@
 import Project from "../ListItems/Project";
 import NewProjectButton from "../Controls/NewProjectButton";
-import '../../styles/ListComponents/ProjectList.css';
+import "../../styles/ListComponents/ProjectList.css";
 
 function ProjectList({ projects, proj, setProj, handleFormShow }) {
 
-  const list = projects.slice(3).reverse().map((num) =>
+  const list = projects.slice(3).reverse().map((num) => //List only renders projects appearing after the first 3 "core" projects.
     <Project
       key={num.projId}
       setProj={setProj}
@@ -25,7 +25,6 @@ function ProjectList({ projects, proj, setProj, handleFormShow }) {
         proj={proj}
         data={projects[2]}
       />
-
       <hr className="ProjectList-divider mx-auto my-4" />
       {projects.length > 3 && <h4 className="text-center text-white">My Projects</h4>}
       {list}

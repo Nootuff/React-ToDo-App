@@ -1,6 +1,6 @@
 .Footer {
   height: 100px; 
-  font-size: 14px;
+  font-size: 13px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -15,20 +15,23 @@
   text-decoration: underline!important;
 }
   
-nav table {
+footer table {
   margin: auto;
 }
   
-nav td {
+footer td {
   padding-left: 10px;
   padding-right: 10px;
 }
 
-
 @media only screen and (min-width: 576px) {
-    /* For desktop: */
-    .Footer {
-        font-size: 15px;
-        margin-left: 25%;
-      }
+  .Footer {
+    margin-left: 25%;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .Footer {
+    font-size: 15px;
+  }
 }

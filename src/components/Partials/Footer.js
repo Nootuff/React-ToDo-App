@@ -1,17 +1,16 @@
 import { FaRegCopyright } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
-import '../../styles/Partials/Footer.css';
-import '../../styles/index.css';
+import "../../styles/Partials/Footer.css";
+import "../../styles/index.css";
 
 function Footer() {
   return (
     <footer className="Footer background-purple">
-      <nav id="footerNav">
-        <table id="footerTable">
+        <table>
           <tbody>
             <tr>
               <td className="Footer-item text-white">
-                <FaRegCopyright className="Icon" /> Adam Walker 2022
+                <FaRegCopyright className="Icon"/> Adam Walker 2022
               </td>
               <td className="Footer-item">
                 <a className="Footer-link link-light text-decoration-none" href="https://nootuff.github.io/" rel="noreferrer" target="_blank">My portfolio</a>
@@ -22,7 +21,6 @@ function Footer() {
             </tr>
           </tbody>
         </table>
-      </nav>
     </footer>
   )
 }
