@@ -1,9 +1,9 @@
 import ProjectList from "../ListComponents/ProjectList";
-import "../../styles/Partials/Dropdown.css";
+import "../../styles/Partials/HeaderDropdown.css";
 
-function Dropdown({ projects, proj, setProj, handleFormShow }) {
+function HeaderDropdown({ projects, proj, setProj, handleFormShow }) {
   return (
-    <nav className="Dropdown pt-1 pb-4">
+    <nav className="HeaderDropdown pt-1 pb-4">
       <ProjectList
         projects={projects}
         proj={proj}
@@ -14,4 +14,4 @@ function Dropdown({ projects, proj, setProj, handleFormShow }) {
   )
 }
 
-export default Dropdown;
+export default HeaderDropdown;

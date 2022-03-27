@@ -1,0 +1,16 @@
+.HeaderNav-logo {
+  font-size: 2rem;
+  position: relative;
+  top: 10px;
+  left: 5px;
+}
+
+.HeaderNav-button {
+  margin: 6px;
+}
+
+.HeaderNav-button-icon {
+  position: relative;
+  bottom: 3px;
+  left: 0.5px;
+}

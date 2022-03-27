@@ -2,23 +2,6 @@
   height: 80px;
 }
 
-.Header-logo {
-  font-size: 2rem;
-  position: relative;
-  top: 10px;
-  left: 5px;
-}
-
-.Header-button {
-  margin: 6px;
-}
-
-.Header-button-icon {
-  position: relative;
-  bottom: 3px;
-  left: 0.5px;
-}
-
 @media screen and (min-width: 576px) {
   .Header{
     display: none;

@@ -1,13 +1,8 @@
 .Base-wrapper {
   min-height: 85vh;
   margin-left: 0;
-  padding-top: 100px;
+  padding-top: 20px;
   border-top: 1px solid white;
-}
-
-.Base-drop-container {
-  margin-top: 79px;
-  background-color: var(--dark-purple);
 }
 
 .Base-body {
@@ -16,9 +11,6 @@
 }
 
 @media screen and (min-width: 576px) {
-  .Base-wrapper {
-    padding-top: 20px
-  }
   .Base-body{
     width: 80%!important;
   }
