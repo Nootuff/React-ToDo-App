@@ -6,7 +6,8 @@ import "../../styles/index.css";
 
 function Header({ setOpenNav, openNav, setProj }) {
   return (
-    <Navbar className="Header navbar fixed-top d-block d-sm-none background-purple d-flex">
+    <div className="fixed-top"> {/*This is the container, maybe header nav can be its own compoennt */}
+    <Navbar className="Header navbar d-block d-sm-none background-purple d-flex">
       <div>
         <h1 className="Header-logo logo-text p-2 cursor-pointer"
           onClick={() => { setProj("1") }}
@@ -26,6 +27,10 @@ function Header({ setOpenNav, openNav, setProj }) {
         </h4>
       </div>
     </Navbar>
+    <div style={{/*marginTop: "80px"*/ height: "70px", backgroundColor: "yellow", padding: "5px" }}>
+    <p >Maybe dropdown can go in here, test this first befroe bringin in dropdown.</p>
+    </div>
+    </div>
   )
 }
 
