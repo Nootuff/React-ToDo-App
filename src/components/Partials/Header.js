@@ -12,7 +12,7 @@ function Header({ /*openNav, setOpenNav,*/ proj, setProj, projects, handleFormSh
   const [openNav, setOpenNav] = useState(false);
   
   return (
-    <div className="fixed-top d-block d-sm-none"> {/*This is the container, maybe header nav can be its own compoennt */}
+    <div className="d-block d-sm-none"> {/*This is the container, maybe header nav can be its own compoennt */}
     <Navbar className="Header navbar  background-purple d-flex">
       <div>
         <h1 className="Header-logo logo-text p-2 cursor-pointer"
@@ -33,7 +33,7 @@ function Header({ /*openNav, setOpenNav,*/ proj, setProj, projects, handleFormSh
         </h4>
       </div>
     </Navbar>
-    <div style={{/*marginTop: "80px"*/ }}>
+    <div>
     <Collapse in={openNav}>
           <div>
             <Dropdown

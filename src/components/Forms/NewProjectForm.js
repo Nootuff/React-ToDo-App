@@ -58,7 +58,6 @@ function NewProjectForm({ projValues, setProjValues, handleProjChange, submitPro
           </Collapse>
           <Button
             disabled={projValues.projName === "" ? true : false}
-            className="mb-2"
             onClick={(event) => {
               const idGen = uuidv4();
               event.preventDefault();
@@ -71,9 +70,8 @@ function NewProjectForm({ projValues, setProjValues, handleProjChange, submitPro
           >
             Start a new project
           </Button>
-          <br />
           <Button
-            className="text-wrap"
+            className="ms-2 text-wrap"
             variant="danger"
             onClick={() => {
               handleFormClose();

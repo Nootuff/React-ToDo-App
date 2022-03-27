@@ -12,3 +12,12 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+/*@media screen and (max-height: 500px) {
+  .Dropdown {
+    height: 200px;
+     
+  
+    }
+}*/
+
