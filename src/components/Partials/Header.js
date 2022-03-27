@@ -10,7 +10,7 @@ function Header({ proj, setProj, projects, handleFormShow }) {
   const [openNav, setOpenNav] = useState(false);
 
   return (
-    <div className="d-block d-sm-none"> {/*This is the container, maybe header nav can be its own compoennt */}
+    <div className="d-block d-sm-none">
       <HeaderNav
         setProj={setProj}
         openNav={openNav}
