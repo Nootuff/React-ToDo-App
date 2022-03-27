@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import Collapse from "react-bootstrap/Collapse";
+//import Collapse from "react-bootstrap/Collapse";
 import NewTodoForm from "./Forms/NewTodoForm";
 import NewProjectForm from "./Forms/NewProjectForm";
 import TodoList from "./ListComponents/TodoList";
 import Header from "./Partials/Header";
 import Footer from "./Partials/Footer";
 import Sidebar from "./Partials/Sidebar";
-import Dropdown from "./Partials/Dropdown";
+//import Dropdown from "./Partials/Dropdown";
 import ProjectControl from "./Partials/ProjectControl";
 import useInputState from "../hooks/useInputState";
 import useLocalStorage from "../hooks/useLocalStorage";
@@ -17,7 +17,7 @@ function TodoListBase() {
   const [todoValues, setTodoValues, projValues, setProjValues, handleTodoChange, handleProjChange] = useInputState();
   const [todos, submitProject, deleteProject, editProject, submitTodo, deleteTodo, editTodo, toggleComplete, deleteComplete, restore] = useLocalStorage();
   const [proj, setProj] = useView();
-  const [openNav, setOpenNav] = useState(false);
+//  const [openNav, setOpenNav] = useState(false);
   const [showProjForm, setShowProjForm] = useState(false);
   
   const handleFormClose = () => setShowProjForm(false);
@@ -28,9 +28,12 @@ function TodoListBase() {
   return (
     <div>
       <Header
-        openNav={openNav}
-        setOpenNav={setOpenNav}
+        //openNav={openNav}
+        //setOpenNav={setOpenNav}
+        proj={proj}
         setProj={setProj}
+        projects={todos.projects}
+        handleFormShow={handleFormShow}
       />
       <Sidebar
         projects={todos.projects}
@@ -38,7 +41,7 @@ function TodoListBase() {
         setProj={setProj}
         handleFormShow={handleFormShow}
       />
-      <div className="Base-drop-container d-block d-sm-none">
+     {/* <div className="Base-drop-container d-block d-sm-none">
         <Collapse in={openNav}>
           <div>
             <Dropdown
@@ -49,7 +52,7 @@ function TodoListBase() {
             />
           </div>
         </Collapse>
-      </div>
+  </div>*/}
       <div className="Base-wrapper">
         <NewProjectForm
           projValues={projValues}
